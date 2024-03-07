@@ -26,6 +26,7 @@ canvas {
 }
 
 header {
+  margin-top: 2.5rem;
   margin-left: auto;
   margin-right: auto;
   position: relative;
@@ -37,6 +38,7 @@ h1 {
 }
 
 h2 {
+  margin: 2rem 0;
   font-size: 3rem;
   font-weight: 500;
 }
@@ -53,12 +55,12 @@ h4 {
 }
 
 
-main {
+.index-content {
   position: absolute;
   width: 100vw;
   height: 100vh;
-  padding: 0 17.5%;
-  overflow: hidden;
+  padding: 0 5%;
+  /* overflow: hidden; */
   display: grid;
   grid-template-columns: 0.6fr 1fr 0.6fr;
   grid-template-rows: 1fr;
@@ -69,6 +71,7 @@ section {
   color: white;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
 section img {
@@ -131,6 +134,34 @@ button:active {
 
 /* OTHERS */
 
+.linkedin-button,
+.github-button {
+  position: fixed;
+  width: 4.5rem;
+  height: 4.5rem;
+  top: 2.5rem;
+  transition: 0.2s;
+  z-index: 5;
+}
+
+.linkedin-button {
+  left: 2.5rem;
+}
+
+.github-button {
+  right: 2.5rem;
+}
+
+.linkedin-button img,
+.github-button img {
+  width: 4.5rem;
+}
+
+.linkedin-button:hover,
+.github-button:hover {
+  transform: scale(1.1);
+}
+
 .one {
   grid-area: one;
 }
@@ -138,7 +169,7 @@ button:active {
 .two {
   grid-area: two;
   margin: 0 2rem;
-  justify-content: center;
+  /* justify-content: center; */
 }
 
 .three {
@@ -152,7 +183,7 @@ button:active {
 
 .hover-card {
   height: calc(25vh - 2rem);
-  margin: 1rem 0;
+  margin: 5rem 0;
   display: flex;
   justify-content: center;
   position: relative;
@@ -166,6 +197,17 @@ button:active {
   margin: auto 0;
   transition: all 0.2s linear 0s;
   transform: rotateY(0deg) rotateX(0deg);
+}
+
+.icon-link {
+  display: flex;
+  align-items: center;
+}
+
+.icon-link img {
+  height: 70px;
+  width: 70px;
+  margin-right: 10px;
 }
 
 .form-box {
@@ -218,3 +260,22 @@ video {
   opacity: 0;
   transition: opacity 2s ease-in-out;
 } */
+
+
+@media only screen and (max-width: 1400px) {
+  :root {
+    font-size: 12px;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  :root {
+    font-size: 10px;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  header {
+    width: 400px;
+  }
+}
