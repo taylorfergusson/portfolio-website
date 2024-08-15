@@ -1,0 +1,335 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  font-size: 16px;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: #000000;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-size: 1.2rem;
+  color: white;
+}
+
+canvas {
+  display: block;
+}
+
+header {
+  padding-top: 2.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0;
+  position: relative;
+}
+
+h1 {
+  font-size: 4.5rem;
+  font-weight: 400;
+  cursor: default;
+}
+
+h2 {
+  margin: 3rem 0;
+  font-size: 3rem;
+  font-weight: 400;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+h4 {
+  font-size: 2.5rem;
+  font-weight: 400;
+  text-decoration: underline;
+  text-underline-offset: 0.7rem;
+  margin-bottom: 1.5rem;
+}
+
+h5 {
+  font-size: 1rem;
+  cursor: default;
+  transition: 0.2s;
+}
+
+.required-text {
+  font-size: 0.8rem;
+  cursor: default;
+  opacity: 0.7;
+  margin: 0 0.3rem;
+}
+
+.index-content {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  padding: 0 300px;
+  display: flex;
+  justify-content: space-between;
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 0.5rem 20rem;
+  margin-bottom: 4rem;
+}
+
+nav a {
+  padding: 0 3rem;
+}
+
+nav a:hover {
+  opacity: 0.5;
+}
+
+section {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+section img {
+  width: 100%;
+}
+
+p {
+  font-size: 20px;
+  white-space: pre-line;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+}
+
+a h5:hover{
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+a:visited {
+  color: white;
+}
+
+input {
+  display: block;
+  width: 100%;
+  margin: 1rem 0;
+  padding: 0.5rem 0;
+  background: none;
+  color: white;
+  font-size: 1rem;
+  border: none;
+  border-bottom: 1px solid #000;
+  outline: none;
+}
+
+input::placeholder {
+  color: white;
+  font-size: 1rem;
+}
+
+button {
+  background-color: black;
+  color: white;
+  font-size: 1.2rem;
+  width: 100%;
+  margin: 0.5rem 0;
+  padding: 1rem 1rem;
+  border: 1px solid #000;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  opacity: 0.7;
+}
+
+button:active {
+  opacity: 0.4;
+}
+
+/* OTHERS */
+
+.linkedin-button,
+.github-button {
+  position: fixed;
+  width: 4.5rem;
+  height: 4.5rem;
+  top: 2.5rem;
+  transition: 0.2s;
+  z-index: 5;
+}
+
+.linkedin-button {
+  left: 2.5rem;
+}
+
+.github-button {
+  right: 2.5rem;
+}
+
+.linkedin-button img,
+.github-button img {
+  width: 4.5rem;
+}
+
+.linkedin-button:hover,
+.github-button:hover {
+  transform: scale(1.1);
+}
+
+.learn-more-button {
+  background-color: white;
+  color: black;
+  font-size: 16px;
+  width: 140px;
+  margin: 16px 0 0 0;
+  padding: 12px;
+}
+
+.hover-card {
+  height: calc(25vh - 2rem);
+  margin: 100px 0;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.hover-card :hover {
+  opacity: 0.5;
+}
+
+.home-logo {
+  height: 100vh;
+  text-align: center;
+}
+
+.name-logo {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+}
+
+.name-logo :hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.warp {
+  margin: auto 0;
+  transition: all 0.2s linear 0s;
+  transform: rotateY(0deg) rotateX(0deg);
+}
+
+.icon-link {
+  display: flex;
+  align-items: center;
+}
+
+.icon-link img {
+  height: 70px;
+  width: 70px;
+  margin-right: 10px;
+}
+
+.form-box {
+  background-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 2rem black;
+  border: 2px solid #000;
+  border-radius: 1rem;
+  padding: 2rem;
+}
+
+.line-divisor {
+  align-items: center;
+  border-bottom: 1px solid black;
+  display: flex;
+  margin: 0 0.5rem;
+  text-align: center;
+}
+
+.video-container {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.video-container video {
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1.2);
+  opacity: 0.3;
+}
+
+#logo {
+  opacity: 0;
+  transform: scale(1.2);
+  transition: opacity 2s ease-in-out, transform 2s ease-in-out;
+}
+
+#one, #three {
+  opacity: 0;
+  transition: opacity 2s ease-in-out;
+}
+
+#selected {
+  text-decoration: underline;
+  text-underline-offset: 0.3rem;
+  text-decoration-color: rgb(0, 212, 255);
+}
+
+@media only screen and (max-width: 1400px) {
+  :root {
+    font-size: 12px;
+  }
+
+  .index-content {
+    padding: 0 150px;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  :root {
+    font-size: 10px;
+  }
+
+  .index-content {
+    padding: 0 100px;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  header {
+    width: 400px;
+  }
+
+  .index-content {
+    padding: 0 50px;
+  }
+}
