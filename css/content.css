@@ -20,6 +20,15 @@
   max-width: 400px;
 }
 
+.headshot-container img {
+  border-radius: 50%;
+  transition: 0.3s ease;
+}
+
+.headshot-container:hover img {
+  opacity: 0.7;
+}
+
 .media-container {
   max-height: 400px;
   max-width: 700px;
@@ -87,7 +96,7 @@
   background-color: white;
   border-radius: 50%;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Optional: Adds a shadow */
-  transition: 0.2s;
+  transition: 0.3s ease;
 }
 
 .circle img {
@@ -102,7 +111,7 @@ a .circle:hover{
 }
 
 .form-container {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.1);
   text-align: left;
   padding: 2rem;
   border-radius: 0.3rem;
