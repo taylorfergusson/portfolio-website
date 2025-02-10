@@ -199,11 +199,26 @@ button:active {
 
 .learn-more-button {
   background-color: white;
+  display: inline-block;
+  padding: 12px 28px;
+  margin: 14px 0 0 0;
+  border: 1px solid #000;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.learn-more-button:hover {
+  opacity: 0.7;
+}
+
+.learn-more-button:active {
+  opacity: 0.4;
+}
+
+.learn-more-button span{
   color: black;
   font-size: 16px;
-  width: 140px;
-  margin: 16px 0 0 0;
-  padding: 12px;
 }
 
 .hover-card {
