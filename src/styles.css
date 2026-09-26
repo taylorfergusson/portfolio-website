@@ -1,0 +1,359 @@
+/* =========================================================
+   Colours, fonts, sizes and timing: change these to restyle the site
+   ========================================================= */
+:root {
+  --ink: #1d1d1f;        /* headings + dark sections */
+  --paper: #ffffff;      /* page background */
+  --soft: #f5f5f7;       /* card backgrounds */
+  --line: #d2d2d7;       /* borders */
+  --muted: #6e6e73;      /* short body text + secondary text */
+  --body: #424245;       /* long-read text (case studies) */
+  --muted-dark: #a1a1a6; /* body text on dark sections */
+  --accent: #be3a30;     /* red accent: small details only */
+
+  --font: 'Figtree Variable', system-ui, sans-serif;
+  --h1: 80px;
+  --h2: 48px;
+  --h3: 28px;
+  --h4: 21px;
+  --text: 18px;
+
+  --radius: 20px;        /* images */
+  --radius-sm: 16px;     /* cards */
+  --gutter: 40px;        /* space at the sides of the page */
+  --space: 150px;        /* space between sections */
+
+  /* One shared timing for every hover and animation */
+  --ease: cubic-bezier(0.25, 1, 0.5, 1);
+  --fast: 0.3s;
+  --slow: 0.9s;
+}
+
+/* Phones */
+@media (max-width: 800px) {
+  :root { --h1: 44px; --h2: 32px; --h3: 24px; --h4: 19px; --text: 17px; --gutter: 20px; --space: 88px; }
+}
+
+/* =========================================================
+   Basics
+   ========================================================= */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+body { overflow-x: clip; font-family: var(--font); font-size: var(--text); line-height: 1.6; color: var(--ink); background: var(--paper); -webkit-font-smoothing: antialiased; }
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; text-decoration: none; }
+ul, ol { list-style: none; }
+p { color: var(--muted); }
+.dark p { color: var(--muted-dark); }
+
+h1 { font-size: var(--h1); line-height: 1.05; font-weight: 600; letter-spacing: -0.035em; }
+h2 { font-size: var(--h2); line-height: 1.12; font-weight: 600; letter-spacing: -0.03em; }
+h3 { font-size: var(--h3); line-height: 1.25; font-weight: 600; letter-spacing: -0.02em; }
+
+.container { max-width: 1280px; margin: 0 auto; padding: 0 var(--gutter); }
+.dark { background: var(--ink); color: var(--paper); }
+.center { text-align: center; }
+section { padding: var(--space) 0; }
+section.container { padding-top: var(--space); padding-bottom: var(--space); }
+
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.skip-link { position: absolute; left: 16px; top: -50px; background: var(--ink); color: var(--paper); padding: 8px 14px; border-radius: 999px; z-index: 200; }
+.skip-link:focus { top: 12px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* =========================================================
+   Fade-up animation (used by class="reveal")
+   Items that appear together fade in one after another.
+   ========================================================= */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity var(--slow) var(--ease), transform var(--slow) var(--ease); }
+.reveal.visible { opacity: 1; transform: none; }
+
+/* =========================================================
+   Buttons and links
+   ========================================================= */
+/* Main action: a pill-shaped button */
+.btn { display: inline-block; padding: 12px 24px; border-radius: 999px; background: var(--ink); color: var(--paper); font-size: 16px; font-weight: 600; transition: background-color var(--fast) var(--ease), transform var(--fast) var(--ease); }
+.btn:hover { background: #3a3a3c; transform: scale(1.03); }
+.dark .btn { background: var(--paper); color: var(--ink); }
+.dark .btn:hover { background: #e8e8ed; }
+
+/* Secondary action: a text link with a chevron, e.g. "View all projects ›" */
+.text-link { display: inline-flex; align-items: center; gap: 4px; font-size: 18px; font-weight: 600; color: var(--ink); }
+.dark .text-link { color: var(--paper); }
+.text-link .chevron { transition: transform var(--fast) var(--ease); }
+.text-link:hover { text-decoration: underline; text-underline-offset: 4px; }
+.text-link:hover .chevron { transform: translateX(3px); }
+.text-link.back:hover .chevron { transform: translateX(-3px); }
+
+/* Cards that lift slightly on hover */
+.lift { transition: transform var(--fast) var(--ease), box-shadow var(--fast) var(--ease); }
+.lift:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06); }
+
+/* =========================================================
+   Header + phone menu
+   ========================================================= */
+.site-header { position: sticky; top: 0; z-index: 100; background: rgba(255, 255, 255, 0.8); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px); transition: box-shadow var(--fast) var(--ease), background-color var(--fast) var(--ease); }
+.site-header.scrolled { box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08); }  /* thin line once you scroll */
+/* At the very top of the page the header is see-through, so the home page's colour background shows behind it */
+.site-header:not(.scrolled):not(.menu-open) { background: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; }
+.header-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+.logo { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 600; }
+.site-header nav { display: flex; gap: 32px; font-size: 15px; font-weight: 500; }
+/* Underline that slides in from the left on hover (and stays on the current page) */
+.site-header nav a { position: relative; }
+.site-header nav a::after { content: ''; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform var(--fast) var(--ease); }
+.site-header nav a:hover::after, .site-header nav a.active::after { transform: scaleX(1); }
+
+.menu-button { display: none; background: none; border: 0; width: 40px; height: 40px; position: relative; cursor: pointer; }
+.burger, .burger::before, .burger::after { position: absolute; left: 10px; width: 20px; height: 2px; background: var(--ink); transition: transform var(--fast) var(--ease); }
+.burger { top: 19px; }
+.burger::before, .burger::after { content: ''; left: 0; }
+.burger::before { top: -6px; }
+.burger::after { top: 6px; }
+.menu-open .burger { background: transparent; }
+.menu-open .burger::before { transform: translateY(6px) rotate(45deg); }
+.menu-open .burger::after { transform: translateY(-6px) rotate(-45deg); }
+
+@media (max-width: 800px) {
+  .menu-button { display: block; }
+  .site-header nav { display: none; position: absolute; top: 72px; left: 0; right: 0; flex-direction: column; gap: 20px; padding: 20px var(--gutter) 28px; background: var(--paper); border-bottom: 1px solid var(--line); font-size: 20px; }
+  .menu-open nav { display: flex; }
+}
+
+/* =========================================================
+   Home page
+   ========================================================= */
+/* Hero: fills the first screen, text block centred on the page */
+.hero { position: relative; isolation: isolate; min-height: calc(100svh - 72px); display: flex; align-items: center; padding-top: 40px; padding-bottom: 80px; }
+.hero-inner { font-size: var(--h1); max-width: 13em; margin-left: auto; margin-right: auto; }
+.eyebrow { font-size: 19px; font-weight: 600; color: var(--muted); margin-bottom: 20px; }
+/* Each line starts with an indent, like the original Framer design */
+.hero-text { font-size: var(--h1); line-height: 1.05; font-weight: 600; letter-spacing: -0.035em; color: var(--ink); text-indent: 1.2em; }
+.hero-line { display: block; text-indent: 1.2em; }
+.hero-word { display: inline-block; text-indent: 0; animation: word-in 0.5s var(--ease); }
+@keyframes word-in { from { opacity: 0; transform: translateY(0.3em); } }
+
+/* Hero background: soft colour blobs that drift slowly and lean toward the mouse, with film grain on top.
+   Colours and positions are set at the top of src/components/HeroBackground.jsx. */
+.hero-bg {
+  position: absolute; top: -72px; bottom: 0; left: 50%; width: 100vw; translate: -50% 0; z-index: -1; overflow: hidden;   /* top: -72px extends it up behind the header */
+  background: #f7f5f0;   /* warm off-white base, like the photo */
+  -webkit-mask-image: linear-gradient(to bottom, #000 80%, transparent);   /* fades into the page at the bottom */
+  mask-image: linear-gradient(to bottom, #000 80%, transparent);
+}
+.hero-blob { position: absolute; aspect-ratio: 1; translate: -50% -50%; will-change: transform; }
+.hero-blob > span { display: block; width: 100%; height: 100%; border-radius: 50%; opacity: var(--blob-opacity, 0.45); background: radial-gradient(circle, var(--color) 0%, color-mix(in srgb, var(--color) 55%, transparent) 38%, transparent 70%); }
+@keyframes drift-a { from { transform: translate(-12%, 8%) scale(0.95); } to { transform: translate(14%, -12%) scale(1.25); } }
+@keyframes drift-b { from { transform: translate(10%, -10%) scale(1.15); } to { transform: translate(-14%, 12%) scale(0.88); } }
+@keyframes drift-c { from { transform: translate(-4%, 12%) scale(0.9); } to { transform: translate(12%, -8%) scale(1.2); } }
+.hero-grain {
+  position: absolute; inset: 0; opacity: 0.3; mix-blend-mode: multiply; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.intro { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.intro-left { position: sticky; top: 110px; display: flex; flex-direction: column; align-items: center; gap: 36px; min-width: 0; }
+.headshot { width: 100%; max-width: 360px; aspect-ratio: 1; object-fit: cover; border-radius: 50%; }
+.photo-wrap { width: 100%; display: flex; justify-content: center; }
+.photo-wrap .headshot { cursor: grab; }
+.headshot.flung { position: relative; z-index: 60; }  /* keeps a thrown photo above other content */
+.intro-left:has(.flung) { z-index: 60; }
+.intro-right { display: flex; flex-direction: column; align-items: flex-start; gap: 28px; }
+.intro-right p { max-width: 65ch; }
+.info-cards { display: grid; gap: 12px; width: 100%; }
+.info-cards li { display: flex; align-items: center; gap: 16px; padding: 18px 22px; background: var(--soft); border-radius: var(--radius-sm); }
+.info-cards img { width: 24px; height: 24px; }
+.info-cards div { display: flex; flex-direction: column; }
+.info-cards span { font-size: 15px; color: var(--muted); }
+
+/* Scrolling tools strip */
+.marquee { width: 100%; overflow: hidden; cursor: grab; touch-action: pan-y; user-select: none; }
+.marquee:active { cursor: grabbing; }
+.marquee-track { display: flex; gap: 10px; padding-right: 10px; width: max-content; }
+.tool-icon { width: 48px; height: 48px; }
+
+.callout { display: flex; align-items: center; justify-content: space-between; gap: 48px; }
+.callout h2 { max-width: 16em; }
+
+/* =========================================================
+   Project cards (home + projects page)
+   ========================================================= */
+.projects h1, .projects h2 { margin-bottom: 64px; }
+.project-card { display: grid; grid-template-columns: 1.4fr 1fr; gap: 56px; align-items: center; margin-bottom: 96px; }
+.project-frame { border-radius: var(--radius); overflow: hidden; }  /* scales up gently as it scrolls into view */
+.project-thumb { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; transition: transform var(--slow) var(--ease); }
+.project-card:hover .project-thumb { transform: scale(1.03); }
+.project-meta { display: flex; justify-content: space-between; padding-bottom: 12px; margin-bottom: 16px; border-bottom: 1px solid rgba(255, 255, 255, 0.2); font-size: 14px; color: #86868b; transition: border-color var(--fast) var(--ease); }
+.project-card:hover .project-meta { border-color: var(--accent); }
+.project-title { display: flex; justify-content: space-between; margin-bottom: 10px; }
+.project-title .chevron { transition: transform var(--fast) var(--ease); }
+.project-card:hover .project-title .chevron { transform: translateX(4px); }
+
+/* =========================================================
+   Case study pages (the Markdown content is inside .prose)
+   Everything sits in one 720px column; image galleries scroll sideways.
+   ========================================================= */
+.case-study { padding-top: 80px; padding-bottom: var(--space); }
+.cs-main { max-width: 720px; margin: 0 auto; }
+.cs-main > h1 { font-size: calc(var(--h1) * 0.8); }
+
+/* Side menu of sections: sticks to the left while you scroll (wide screens only) */
+.cs-nav { display: none; }
+@media (min-width: 1200px) {
+  .case-study { display: grid; grid-template-columns: 1fr minmax(0, 720px) 1fr; column-gap: 48px; }
+  .cs-main { grid-column: 2; margin: 0; }
+  .cs-nav { display: block; grid-column: 1; grid-row: 1; justify-self: end; align-self: start; position: sticky; top: 120px; width: min(180px, 100%); }
+}
+.cs-nav a { display: block; padding: 6px 0 6px 14px; border-left: 2px solid var(--line); font-size: 14px; color: var(--muted); transition: color var(--fast) var(--ease), border-color var(--fast) var(--ease); }
+.cs-nav a:hover { color: var(--ink); }
+.cs-nav a.current { color: var(--ink); font-weight: 600; border-color: var(--accent); }
+
+/* The Role / Timeline / Tools row under the title */
+.details { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 24px; margin-top: 32px; margin-bottom: 56px; padding-top: 24px; border-top: 1px solid var(--line); }
+.details dt { font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+.details dd { font-size: 17px; font-weight: 500; }
+.banner { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: top; border-radius: var(--radius); margin-bottom: 40px; }
+
+.prose { margin-bottom: 80px; }
+.prose > * + * { margin-top: 20px; }
+.prose h2 { scroll-margin-top: 100px; margin-top: 100px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+.prose h3 { font-size: calc(var(--h2) * 0.85); line-height: 1.15; margin-top: 8px; }
+.prose h4 { margin-top: 40px; font-size: var(--h4); font-weight: 600; letter-spacing: -0.015em; }
+.prose p, .prose li { color: var(--body); }
+.prose strong { color: var(--ink); }
+.prose ul { list-style: disc; padding-left: 1.3em; }
+.prose ol { list-style: decimal; padding-left: 1.3em; }
+.prose li + li { margin-top: 6px; }
+.prose li::marker { color: var(--accent); }
+.prose img { width: 100%; border-radius: var(--radius); }
+/* A single image sits in a soft grey frame */
+.prose > p > img:only-child { padding: 24px; background: var(--soft); }
+
+/* Galleries: images on back-to-back lines become a row of equal tiles you can swipe sideways.
+   Each tile's caption is the image's alt text; clicking a tile opens it full size.
+   The row stays inside the text column and fades out at whichever edge has more to see. */
+@property --fade-left { syntax: '<length>'; inherits: false; initial-value: 0px; }
+@property --fade-right { syntax: '<length>'; inherits: false; initial-value: 0px; }
+.prose .gallery {
+  display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 var(--fade-left), #000 calc(100% - var(--fade-right)), transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, #000 var(--fade-left), #000 calc(100% - var(--fade-right)), transparent 100%);
+  transition: --fade-left var(--fast) var(--ease), --fade-right var(--fast) var(--ease);
+}
+.prose .gallery.more-left { --fade-left: 80px; }   /* width of the fade: change these to taste */
+.prose .gallery.more-right { --fade-right: 80px; }
+.prose .gallery::-webkit-scrollbar { display: none; }
+.tile { flex: none; width: 340px; margin: 0; scroll-snap-align: start; }
+.gallery.portrait .tile { width: 230px; }  /* tall tiles for phone screens */
+.tile-button { display: block; width: 100%; aspect-ratio: 4 / 3; padding: 20px; border: 0; border-radius: 18px; background: var(--soft); cursor: zoom-in; transition: background-color var(--fast) var(--ease); }
+.gallery.portrait .tile-button { aspect-ratio: 5 / 8; }
+.tile-button:hover { background: #ececf0; }
+.prose .tile-button img { width: 100%; height: 100%; object-fit: contain; border-radius: 4px; padding: 0; background: none; }
+.tile figcaption { margin-top: 12px; font-size: 14px; line-height: 1.4; color: var(--muted); }
+.gallery-controls { display: flex; justify-content: flex-end; gap: 10px; margin-top: 14px; }
+.gallery-button { width: 36px; height: 36px; border: 0; border-radius: 50%; background: #e8e8ed; color: var(--ink); font-size: 22px; line-height: 1; cursor: pointer; transition: background-color var(--fast) var(--ease); }
+.gallery-button:hover { background: #d2d2d7; }
+
+/* Full-size image viewer */
+html:has(.viewer[open]) { overflow: hidden; }  /* stop the page scrolling behind it */
+.viewer { max-width: none; max-height: none; width: 100vw; height: 100vh; margin: 0; padding: 60px 80px; border: 0; background: rgba(18, 18, 20, 0.94); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); color: #fff; }
+.viewer[open] { display: flex; align-items: center; justify-content: center; }
+.viewer::backdrop { background: transparent; }
+.viewer-figure { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 16px; max-width: 100%; max-height: 100%; }
+.viewer-figure img { max-width: 100%; max-height: calc(100vh - 180px); object-fit: contain; border-radius: 8px; background: #fff; }
+.viewer-figure figcaption { font-size: 15px; color: #d2d2d7; text-align: center; }
+.viewer-close, .viewer-prev, .viewer-next { position: fixed; width: 44px; height: 44px; border: 0; border-radius: 50%; background: rgba(255, 255, 255, 0.14); color: #fff; font-size: 26px; line-height: 1; cursor: pointer; transition: background-color var(--fast) var(--ease); }
+.viewer-close:hover, .viewer-prev:hover, .viewer-next:hover { background: rgba(255, 255, 255, 0.28); }
+.viewer-close { top: 20px; right: 20px; }
+.viewer-prev { left: 20px; top: 50%; transform: translateY(-50%); }
+.viewer-next { right: 20px; top: 50%; transform: translateY(-50%); }
+.viewer-count { position: fixed; bottom: 20px; left: 0; right: 0; text-align: center; font-size: 13px; color: #a1a1a6; }
+
+/* Before / after pair (see the MAYDAY section in yumgo.md) */
+.prose .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 480px; }
+.prose .compare figcaption { margin-bottom: 8px; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.prose .compare img { padding: 16px; background: var(--soft); }
+
+/* Captions: a line in *italics* on its own, right under an image or gallery */
+.prose em { color: var(--muted); }
+.prose p:has(> em:only-child) { font-size: 14px; line-height: 1.5; margin-top: 12px; }
+
+/* Cards, Apple style: a bullet list where each item starts with **bold text** (or an icon).
+   Two per row inside the text column; icon on the left, bold title on its own line, grey description below. */
+.prose ul:has(> li > strong:first-child), .prose ul:has(> li > img:first-child) {
+  list-style: none; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;
+}
+.prose ul:has(> li > strong:first-child) > li, .prose ul:has(> li > img:first-child) > li {
+  position: relative; margin: 0; padding: 24px 28px; background: var(--soft); border-radius: 18px; font-size: 16px; line-height: 1.5;
+}
+.prose ul:has(> li > img:first-child) > li:has(> img:first-child) { padding-left: 72px; }  /* room for the icon on the left */
+.prose li > img:first-child { position: absolute; left: 28px; top: 24px; width: 28px; height: 28px; border-radius: 0; opacity: 0.55; }  /* every icon the same size and a muted grey */
+.prose li > strong { display: block; margin-bottom: 2px; font-size: 17px; font-weight: 600; }  /* title on its own line */
+
+/* Side-by-side columns: wrap content in <div class="columns"> ... </div> in the Markdown.
+   Each column is a #### heading followed by its text. */
+.prose .columns { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; grid-auto-flow: column; column-gap: 40px; row-gap: 8px; }
+.prose .columns h4 { margin-top: 0; }
+.prose blockquote { padding: 28px 32px; background: var(--soft); border-left: 3px solid var(--accent); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+.prose blockquote p { color: var(--ink); font-size: 19px; line-height: 1.5; }
+.prose blockquote strong:first-child { display: block; margin-bottom: 8px; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+.prose blockquote p + p { margin-top: 12px; }
+
+/* =========================================================
+   About page
+   ========================================================= */
+.about-intro { display: grid; grid-template-columns: 1.3fr 1fr; gap: 80px; align-items: center; }
+.about-intro .headshot { justify-self: center; }
+.lead { margin-top: 24px; font-size: 24px; line-height: 1.45; max-width: 30ch; }
+.about h2 { margin-bottom: 48px; }
+.timeline li { display: grid; grid-template-columns: 180px 1fr; column-gap: 32px; padding: 32px 0; border-top: 1px solid var(--line); }
+.timeline .when { grid-row: span 2; font-weight: 600; color: var(--accent); }
+.timeline h3 { font-size: var(--h4); }
+.timeline p { max-width: 65ch; margin-top: 6px; }
+.interests { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.interests li { padding: 30px; border-radius: var(--radius-sm); background: rgba(255, 255, 255, 0.07); }
+.interests h3 { font-size: var(--h4); }
+.interests p { margin-top: 8px; font-size: 16px; }
+
+/* =========================================================
+   Footer
+   ========================================================= */
+.site-footer { padding: var(--space) 0 48px; }
+.footer-small { color: #86868b; font-size: var(--h4); font-weight: 600; }
+.footer-email { display: inline-block; margin-top: 8px; font-size: min(var(--h2), 7vw); font-weight: 600; letter-spacing: -0.03em; transition: color var(--fast) var(--ease); }
+.footer-email:hover { color: var(--line); }
+.footer-links { display: flex; gap: 28px; margin-top: 80px; padding-top: 24px; border-top: 1px solid rgba(255, 255, 255, 0.15); font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+.footer-links a { color: var(--paper); transition: color var(--fast) var(--ease); }
+.footer-links a:hover { color: var(--accent); }
+
+.not-found { display: flex; flex-direction: column; align-items: flex-start; gap: 20px; }
+
+/* =========================================================
+   Phone layout
+   ========================================================= */
+@media (max-width: 800px) {
+  .hero { min-height: auto; padding-top: 48px; padding-bottom: 48px; }
+  .intro, .project-card, .about-intro { grid-template-columns: 1fr; gap: 32px; }
+  .intro-left { position: static; }
+  .headshot { max-width: 240px; }
+  .project-card { margin-bottom: 64px; }
+  .callout { flex-direction: column; align-items: flex-start; }
+  .timeline li { grid-template-columns: 1fr; }
+  .tile { width: 260px; }
+  .prose .gallery.more-left { --fade-left: 40px; }
+  .prose .gallery.more-right { --fade-right: 40px; }
+  .gallery.portrait .tile { width: 180px; }
+  .viewer { padding: 60px 12px; }
+  .viewer-prev, .viewer-next { top: auto; bottom: 12px; transform: none; }
+  .prose > p > img:only-child { padding: 14px; }
+  .prose ul:has(> li > strong:first-child), .prose ul:has(> li > img:first-child) { grid-template-columns: 1fr; gap: 12px; }
+  .prose .columns { grid-template-columns: 1fr; grid-template-rows: none; grid-auto-flow: row; }
+  .prose .columns h4:not(:first-child) { margin-top: 24px; }
+}
+
+/* Turn animations off for people who ask their device for less motion */
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .hero-word, .hero-blob > span { animation: none !important; }
+  html { scroll-behavior: auto; }
+}
