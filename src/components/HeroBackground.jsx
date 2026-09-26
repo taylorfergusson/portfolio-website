@@ -7,20 +7,19 @@ import { useEffect, useRef } from 'react'
 //   drift:   which drifting animation it uses (drift-a, drift-b or drift-c in styles.css)
 //   seconds: how long one drift takes (bigger = slower)
 const BLOBS = [
-  { color: '#f2301d', size: 55, x: 58, y: 95, drift: 'drift-a', seconds: 20 }, // red
-  { color: '#f5842a', size: 38, x: 32, y: 88, drift: 'drift-b', seconds: 16 }, // orange
-  { color: '#0f6a52', size: 42, x: 92, y: 30, drift: 'drift-c', seconds: 18 }, // green
-  { color: '#2a36b0', size: 46, x: 96, y: 88, drift: 'drift-a', seconds: 22 }, // blue
-  { color: '#8a2ec4', size: 36, x: 4, y: 12, drift: 'drift-c', seconds: 17 },  // purple
+  { color: '#BE3A30', size: 55, x: 85, y: 85, drift: 'drift-a', seconds: 20 }, // red
+  { color: '#C06234', size: 38, x: 60, y: 90, drift: 'drift-b', seconds: 16 }, // orange
+  { color: '#20665F', size: 42, x: 92, y: 30, drift: 'drift-c', seconds: 18 }, // green
+  { color: '#6D5699', size: 36, x: 4, y: 12, drift: 'drift-c', seconds: 17 },  // purple
 ]
 
 // How strong the colours are (0 = invisible, 1 = full). Keep it low so the black text stays easy to read.
-const OPACITY = 0.45
+const OPACITY = 0.5
 
 // How the colours move out of the way of the mouse
 const PUSH = 220     // how far a blob is pushed (pixels) when the mouse is right on it
-const RADIUS = 0.4   // how close the mouse has to be to push a blob, as a fraction of the hero's width
-const EASE = 0.06    // how quickly blobs move away and drift back (smaller = floatier)
+const RADIUS = 0.3   // how close the mouse has to be to push a blob, as a fraction of the hero's width
+const EASE = 0.05    // how quickly blobs move away and drift back (smaller = floatier)
 
 export default function HeroBackground() {
   const rootRef = useRef(null)
@@ -95,7 +94,6 @@ export default function HeroBackground() {
           <span style={{ '--color': blob.color, animation: `${blob.drift} ${blob.seconds}s ease-in-out infinite alternate` }} />
         </div>
       ))}
-      <div className="hero-grain" />
     </div>
   )
 }

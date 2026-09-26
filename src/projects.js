@@ -32,6 +32,6 @@ export const projects = [
     date: 'In progress',
     summary: 'A Shazam-style audio recognition tool built for SoundCloud: DJ edits, bootlegs, and songs buried inside hour-long mixes',
     thumbnail: '/images/foundcloud/thumbnail.svg',
-    details: { Role: 'Designer & Developer', Team: 'Solo', Tools: 'Python / FastAPI / Postgres / JavaScript / AWS', Status: 'In progress' },
+    details: { Role: 'Designer & Developer', Team: 'Solo', Tools: 'Python / FastAPI / Postgres / JavaScript / AWS', Status: 'Live, in progress' },
   },
 ]

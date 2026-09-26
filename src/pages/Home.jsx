@@ -27,12 +27,17 @@ export default function Home() {
         <HeroBackground />
         <div className="hero-inner">
           <h1 className="hero-text reveal">
-            Hi! I'm Taylor, a <span className="hero-word" key={wordIndex}>{heroWords[wordIndex]}</span>
+            Hi! I'm Taylor, a
           </h1>
-          <p className="hero-text reveal">
+          <h1 className="reveal">
+            <span className="hero-word" key={wordIndex}>{heroWords[wordIndex]}</span>
+          </h1>
+          <h1 className="hero-text reveal">
             exploring how people listen, learn, and understand their world.
-            <span className="hero-line">Currently based in Toronto, Ontario.</span>
-          </p>
+          </h1>
+          <h1 className="hero-text hero-line reveal">
+            Currently based in Toronto, Ontario.
+          </h1>
         </div>
       </section>
 

@@ -1,5 +1,7 @@
-> **Work in progress**
-> A personal project I built before studying UX. Now I'm redesigning it as a designer, and this page grows as I go.
+> **Live now: try it yourself**
+> Play a song from a DJ mix, hold up your phone, and see if FoundCloud can find it. It's a personal project I built before studying UX, and I'm now redesigning it as a designer.
+
+<p><a class="btn" href="https://foundcloud.taylorfergusson.com/" target="_blank" rel="noreferrer">Try FoundCloud ↗</a></p>
 
 ## Overview
 
@@ -61,3 +63,5 @@ The best tracks in DJ mixes often have no tracklist, no lyrics online, and title
 ### I can design the fix, and build it
 
 FoundCloud started with a problem I felt myself, long before I studied UX. Building the whole system solo taught me what's possible under the hood, so I don't stop at saying what a product should do differently. I can make it happen.
+
+<p><a class="btn" href="https://foundcloud.taylorfergusson.com/" target="_blank" rel="noreferrer">Try FoundCloud ↗</a></p>
