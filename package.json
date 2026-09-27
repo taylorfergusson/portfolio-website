@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build && cp dist/index.html dist/404.html",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "songs": "node scripts/fetch-songs.mjs"
   },
   "dependencies": {
     "@fontsource-variable/figtree": "^5.3.0",

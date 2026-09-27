@@ -17,7 +17,7 @@ export default function Home() {
   // Switch to the next hero word every 2 seconds
   const [wordIndex, setWordIndex] = useState(0)
   useEffect(() => {
-    const timer = setInterval(() => setWordIndex((i) => (i + 1) % heroWords.length), 2000)
+    const timer = setInterval(() => setWordIndex((i) => (i + 1) % heroWords.length), 1500)
     return () => clearInterval(timer)
   }, [])
 
@@ -55,21 +55,7 @@ export default function Home() {
             With my background in computer science and psychology, I tackle design problems from
             the inside out, bringing this human-centred and systems expertise to my work.
           </p>
-          <ul className="info-cards">
-            <li className="reveal lift">
-              <img src="/images/icon-school.png" alt="" />
-              <div><strong>UXD Master's Program</strong><span>University of Toronto</span></div>
-            </li>
-            <li className="reveal lift">
-              <img src="/images/icon-teaching.png" alt="" />
-              <div><strong>Coding Instruction</strong><span>Tensor Learning</span></div>
-            </li>
-            <li className="reveal lift">
-              <img src="/images/icon-projects.png" alt="" />
-              <div><strong>Audio & Design Projects</strong><span>Me</span></div>
-            </li>
-          </ul>
-          <a href={linkedin} target="_blank" rel="noreferrer" className="btn reveal">Visit LinkedIn ↗</a>
+          <a href='/about' target="_blank" rel="noreferrer" className="btn reveal">Learn More</a>
         </div>
       </section>
 

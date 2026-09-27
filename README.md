@@ -32,6 +32,7 @@ src/
     HeroBackground.jsx moving colour blobs behind the home hero (colours + speed at the top)
     ToolStrip.jsx      draggable scrolling strip of tool icons
     FlingPhoto.jsx     the headshot you can fling around
+    CoverFlow.jsx      iPod-style album browser on the About page
   styles.css         all the styling; colours, sizes and timing are at the top
 public/images/       all images, one folder per project
 ```
@@ -98,6 +99,8 @@ Before / after images:
 ```
 
 **Add a project:** add an entry to `src/projects.js`, then create `src/case-studies/<slug>.md` (the file name must match the slug) and put its images in `public/images/<slug>/`.
+
+**Change the Cover Flow songs (About page):** edit the list in `src/songs.js`, then run `npm run songs`. It looks each song up on Apple Music and saves the album art and 30-second preview into `src/songs-data.json` (commit that file too). If it picks the wrong version of a song, add that song's Apple Music `id` (see the note at the top of `songs.js`).
 
 **Change colours/fonts/sizes/timing:** edit the variables at the top of `src/styles.css`. `--fast` and `--slow` control every hover and animation.
 

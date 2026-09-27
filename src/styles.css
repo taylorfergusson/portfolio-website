@@ -92,7 +92,10 @@ section.container { padding-top: var(--space); padding-bottom: var(--space); }
 /* =========================================================
    Header + phone menu
    ========================================================= */
-.site-header { position: sticky; top: 0; z-index: 100; background: rgba(255, 255, 255, 0.8); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px); transition: box-shadow var(--fast) var(--ease), background-color var(--fast) var(--ease); }
+/* The header floats over the page: it slides away when you scroll down and comes back when you scroll up */
+.site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255, 255, 255, 0.8); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px); transition: box-shadow var(--fast) var(--ease), background-color var(--fast) var(--ease), transform 0.4s var(--ease); }
+.site-header.hidden:not(:focus-within) { transform: translateY(-100%); }
+main { padding-top: 72px; }   /* room for the header on every page */
 .site-header.scrolled { box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08); }  /* thin line once you scroll */
 /* At the very top of the page the header is see-through, so the home page's colour background shows behind it */
 .site-header:not(.scrolled):not(.menu-open) { background: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; }
@@ -114,17 +117,27 @@ section.container { padding-top: var(--space); padding-bottom: var(--space); }
 .menu-open .burger::before { transform: translateY(6px) rotate(45deg); }
 .menu-open .burger::after { transform: translateY(-6px) rotate(-45deg); }
 
+/* Phones: the menu lives inside the header, so the header's frosted glass covers both as one piece.
+   Opening the menu smoothly grows the header downward. */
 @media (max-width: 800px) {
   .menu-button { display: block; }
-  .site-header nav { display: none; position: absolute; top: 72px; left: 0; right: 0; flex-direction: column; gap: 20px; padding: 20px var(--gutter) 28px; background: var(--paper); border-bottom: 1px solid var(--line); font-size: 20px; }
-  .menu-open nav { display: flex; }
+  .header-inner { flex-wrap: wrap; height: auto; }
+  .header-inner .logo { height: 72px; }   /* keeps the top row 72px tall */
+  .site-header nav {
+    width: 100%; flex-direction: column; gap: 20px; font-size: 20px;
+    max-height: 0; padding: 0; overflow: hidden; opacity: 0; visibility: hidden;
+    transition: max-height 0.4s var(--ease), padding 0.4s var(--ease), opacity var(--fast) var(--ease), visibility 0s 0.4s;
+  }
+  .menu-open nav { max-height: 320px; padding: 4px 0 28px; opacity: 1; visibility: visible; transition-delay: 0s; }
 }
 
 /* =========================================================
    Home page
    ========================================================= */
 /* Hero: fills the first screen, text block centred on the page */
-.hero { position: relative; isolation: isolate; min-height: calc(100svh - 72px); display: flex; align-items: center;}
+/* The hero fills the whole screen, tucked up under the see-through header, so the intro sits in the true middle.
+   Change padding-bottom to nudge the text up (bigger number) or down. */
+section.hero { position: relative; isolation: isolate; margin-top: -72px; min-height: 100svh; display: flex; align-items: center; padding-top: 72px; padding-bottom: 72px; }
 .hero-inner { font-size: var(--h1); max-width: 13em; margin-left: auto; margin-right: auto; }
 .eyebrow { font-size: 19px; font-weight: 600; color: var(--muted); margin-bottom: 20px; }
 /* Each line starts with an indent, like the original Framer design */
@@ -136,7 +149,7 @@ section.container { padding-top: var(--space); padding-bottom: var(--space); }
 /* Hero background: soft colour blobs that drift slowly and lean toward the mouse, with film grain on top.
    Colours and positions are set at the top of src/components/HeroBackground.jsx. */
 .hero-bg {
-  position: absolute; top: -72px; bottom: 0; left: 50%; width: 100vw; translate: -50% 0; z-index: -1; overflow: hidden;   /* top: -72px extends it up behind the header */
+  position: absolute; top: 0; bottom: 0; left: 50%; width: 100vw; translate: -50% 0; z-index: -1; overflow: hidden;
   -webkit-mask-image: linear-gradient(to bottom, #FFF 80%, transparent);   /* fades into the page at the bottom */
   mask-image: linear-gradient(to bottom, #FFF 80%, transparent);
 }
@@ -310,6 +323,50 @@ html:has(.viewer[open]) { overflow: hidden; }  /* stop the page scrolling behind
 .interests h3 { font-size: var(--h4); }
 .interests p { margin-top: 8px; font-size: 16px; }
 
+/* Cover Flow (About page). Songs are in src/songs.js */
+.coverflow-intro { margin-top: 120px; text-align: center; }
+.about .coverflow-intro h2 { margin-bottom: 8px; }
+.coverflow { --size: clamp(150px, 20vw, 240px); margin-top: 56px; text-align: center; }
+.coverflow-stage {
+  position: relative; height: calc(var(--size) + 36px); padding-top: 12px; perspective: 1400px; outline: none; touch-action: pan-y; user-select: none;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 18%, #000 82%, transparent);   /* soft fade at both ends */
+  mask-image: linear-gradient(to right, transparent, #000 18%, #000 82%, transparent);
+}
+.cover {
+  position: absolute; top: 12px; left: 50%; width: var(--size); aspect-ratio: 1; margin-left: calc(var(--size) / -2);
+  padding: 0; border: 0; background: #000; cursor: pointer;
+  /* Side albums: pushed out to the side, back, and turned away. Change 0.35 / 0.22 for spacing and 65deg for the angle */
+  transform:
+    translateX(calc(var(--side) * (min(var(--distance), 1) * var(--size) * 0.35 + var(--distance) * var(--size) * 0.22)))
+    translateZ(calc(min(var(--distance), 1) * var(--size) * -0.5))
+    rotateY(calc(var(--side) * min(var(--distance), 1) * -65deg));
+  transition: transform 0.55s var(--ease);
+  will-change: transform;
+}
+/* Side albums are dimmed by a dark layer on top (cheaper to animate than a filter). 0.3 = how dark */
+.cover::after { content: ''; position: absolute; inset: 0; background: #000; pointer-events: none; opacity: calc(min(var(--distance), 1) * 0.3); transition: opacity 0.55s var(--ease); }
+.cover img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
+.cover-placeholder {
+  display: flex; align-items: flex-end; width: 100%; height: 100%; padding: 16px; text-align: left; font-size: 15px; font-weight: 600; color: #fff;
+  background: linear-gradient(135deg, hsl(var(--hue) 45% 45%), hsl(calc(var(--hue) + 40) 50% 22%));
+}
+.cover-play {
+  position: absolute; inset: 0; margin: auto; width: 64px; height: 64px; display: grid; place-items: center; border-radius: 50%;
+  background: rgba(0, 0, 0, 0.65); color: #fff; font-size: 20px;
+  opacity: 0; transition: opacity var(--fast) var(--ease);
+}
+.cover.is-current:hover .cover-play, .cover.is-playing .cover-play, .coverflow-stage:focus-visible .cover-play { opacity: 1; }
+.coverflow-stage:focus-visible .cover.is-current { outline: 3px solid var(--paper); outline-offset: 4px; }
+.coverflow-caption { min-height: 88px; }
+.coverflow-title { color: var(--paper) !important; font-size: var(--h4); font-weight: 600; }
+.coverflow-title a { text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 4px; transition: text-decoration-color var(--fast) var(--ease); }
+.coverflow-title a:hover { text-decoration-color: currentColor; }
+.coverflow-artist { margin-top: 2px; }
+.coverflow-controls { display: flex; justify-content: center; gap: 12px; margin-top: 20px; }
+.coverflow-arrow { width: 40px; height: 40px; border: 0; border-radius: 50%; background: rgba(255, 255, 255, 0.12); color: var(--paper); font-size: 24px; line-height: 1; cursor: pointer; transition: background-color var(--fast) var(--ease); }
+.coverflow-arrow:hover:not(:disabled) { background: rgba(255, 255, 255, 0.22); }
+.coverflow-arrow:disabled { opacity: 0.3; cursor: default; }
+
 /* =========================================================
    Footer
    ========================================================= */
@@ -327,7 +384,7 @@ html:has(.viewer[open]) { overflow: hidden; }  /* stop the page scrolling behind
    Phone layout
    ========================================================= */
 @media (max-width: 800px) {
-  .hero { min-height: auto; padding-top: 48px; padding-bottom: 48px; }
+  section.hero { min-height: auto; padding-top: 120px; padding-bottom: 48px; }
   .intro, .project-card, .about-intro { grid-template-columns: 1fr; gap: 32px; }
   .intro-left { position: static; }
   .headshot { max-width: 240px; }
@@ -350,5 +407,6 @@ html:has(.viewer[open]) { overflow: hidden; }  /* stop the page scrolling behind
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
   .hero-word, .hero-blob > span { animation: none !important; }
+  .cover, .cover::after { transition: none; }
   html { scroll-behavior: auto; }
 }

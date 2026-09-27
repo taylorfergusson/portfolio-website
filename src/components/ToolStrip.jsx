@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import { motion, useMotionValue, useAnimationFrame, useReducedMotion } from 'motion/react'
 
 // How fast the strip scrolls on its own (pixels per second)
-const SPEED = 40
+const SPEED = 60
 // How quickly a fling slows back down to the normal speed (higher = slows faster)
 const FRICTION = 2
 

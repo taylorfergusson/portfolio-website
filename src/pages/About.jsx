@@ -1,4 +1,5 @@
 import { email } from '../site.js'
+import CoverFlow from '../components/CoverFlow.jsx'
 
 // The About page. Edit the text right here, like HTML.
 export default function About() {
@@ -49,7 +50,13 @@ export default function About() {
             <li className="reveal lift"><h3>Cycling</h3><p>I ride a vintage bike and take it everywhere, as long as there's no snow on the ground. When something breaks, I fix it myself, which has taught me a lot about how things are put together.</p></li>
             <li className="reveal lift"><h3>Thrifting</h3><p>Thrift stores and online ads are my happy place. I'm always hunting for vintage clothing and home goods with some history to them, and it's fed a real love of interior design.</p></li>
           </ul>
+
+          <div className="coverflow-intro">
+            <h2 className="reveal">My faves!</h2>
+            <p className="reveal">Click around to hear some previews</p>
+          </div>
         </div>
+        <CoverFlow />
       </section>
 
       <section className="callout container">
