@@ -13,7 +13,7 @@ export default function ProjectCard({ project }) {
   return (
     <Link to={`/case-study/${project.slug}`} className="project-card reveal">
       <motion.div ref={frameRef} className="project-frame" style={{ scale: reduceMotion ? 1 : scale }}>
-        <img src={project.thumbnail} alt="" className="project-thumb" />
+        <img src={project.thumbnail} alt={project.thumbnailAlt || project.title} className="project-thumb" />
       </motion.div>
       <div>
         <p className="project-meta">

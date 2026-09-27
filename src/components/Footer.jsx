@@ -1,4 +1,5 @@
-import { email, linkedin, resume } from '../site.js'
+import { Link } from 'react-router-dom'
+import { email, linkedin } from '../site.js'
 
 export default function Footer() {
   return (
@@ -8,7 +9,7 @@ export default function Footer() {
         <a className="footer-email" href={`mailto:${email}`}>{email}</a>
         <p className="footer-links">
           <a href={`mailto:${email}`}>Email</a>
-          <a href={resume} target="_blank" rel="noreferrer">Resume</a>
+          <Link to="/resume">Resume</Link>
           <a href={linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
         </p>
       </div>

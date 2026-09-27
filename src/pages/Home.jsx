@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { projects } from '../projects.js'
-import { linkedin, resume } from '../site.js'
+import { linkedin } from '../site.js'
 import ProjectCard from '../components/ProjectCard.jsx'
 import ToolStrip from '../components/ToolStrip.jsx'
 import FlingPhoto from '../components/FlingPhoto.jsx'
@@ -11,13 +11,27 @@ import HeroBackground from '../components/HeroBackground.jsx'
 const heroWords = ['designer', 'researcher', 'developer', 'leader', 'friend']
 
 // The app icons in the scrolling strip under the photo (files are in public/images/tools/)
-const tools = ['figma', 'miro', 'ableton', 'photoshop', 'blender', 'html', 'css', 'javascript', 'python', 'java', 'linux', 'aws']
+//   file: the icon's file name (without .svg)   name: shown when hovering, and read out by screen readers
+const tools = [
+  { file: 'figma', name: 'Figma' },
+  { file: 'miro', name: 'Miro' },
+  { file: 'ableton', name: 'Ableton Live' },
+  { file: 'photoshop', name: 'Adobe Photoshop' },
+  { file: 'blender', name: 'Blender' },
+  { file: 'html', name: 'HTML' },
+  { file: 'css', name: 'CSS' },
+  { file: 'javascript', name: 'JavaScript' },
+  { file: 'python', name: 'Python' },
+  { file: 'java', name: 'Java' },
+  { file: 'linux', name: 'Linux' },
+  { file: 'aws', name: 'Amazon Web Services' },
+]
 
 export default function Home() {
   // Switch to the next hero word every 2 seconds
   const [wordIndex, setWordIndex] = useState(0)
   useEffect(() => {
-    const timer = setInterval(() => setWordIndex((i) => (i + 1) % heroWords.length), 1500)
+    const timer = setInterval(() => setWordIndex((i) => (i + 1) % heroWords.length), 1250)
     return () => clearInterval(timer)
   }, [])
 
@@ -74,7 +88,7 @@ export default function Home() {
           Currently seeking co-ops in UX research/design, with a particular interest in digital
           media and education technology. I'd be happy to connect!
         </h2>
-        <a href={resume} target="_blank" rel="noreferrer" className="btn reveal">View Resume ↗</a>
+        <Link to="/resume" className="btn reveal">View Resume</Link>
       </section>
     </>
   )

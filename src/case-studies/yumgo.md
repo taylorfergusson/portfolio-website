@@ -37,10 +37,10 @@ We thought tourists wanted food ASAP so that they can move along to other sights
 
 #### What we discovered
 
-- ![](/images/yumgo/icon-missing-info.png) **Missing information** Incomplete business and menu info
-- ![](/images/yumgo/icon-weak-discovery.png) **Weak discovery & booking** Apps did not support the full journey
-- ![](/images/yumgo/icon-irrelevant.png) **Irrelevant content** Platforms full of noise and undesired results
-- ![](/images/yumgo/icon-authenticity.png) **Desire for authenticity!** Tourists valued localized, quality meals
+- ![](/images/yumgo/icon-missing-info.png) **!Missing information** Incomplete business and menu info
+- ![](/images/yumgo/icon-weak-discovery.png) **!Weak discovery & booking** Apps did not support the full journey
+- ![](/images/yumgo/icon-irrelevant.png) **!Irrelevant content** Platforms full of noise and undesired results
+- ![](/images/yumgo/icon-authenticity.png) **+Desire for authenticity!** Tourists valued localized, quality meals
 
 I convinced my team to shift the focus onto authentic and high-value experiences instead of wait times, since this was found to be most important (yet was weakly supported by current restaurant apps).
 
@@ -80,8 +80,8 @@ For the wireframe, I constructed the main restaurant page, including the busines
 
 #### What we discovered
 
-- ![](/images/yumgo/icon-less-is-more.png) **Less is more!** Minimize features, support a full journey
-- ![](/images/yumgo/icon-familiarity.png) **Familiarity is the way** Model off popular apps for intuitive use
+- ![](/images/yumgo/icon-less-is-more.png) **+Less is more!** Minimize features, support a full journey
+- ![](/images/yumgo/icon-familiarity.png) **+Familiarity is the way** Model off popular apps for intuitive use
 
 This process should be simplified, and we could leverage familiarity to help support the entire discovery to visit flow.
 
@@ -94,10 +94,13 @@ We studied 8 participant interactions with our Figma prototype, analyzing them t
 1. Booking a reservation at a restaurant that is dog-friendly with vegan and gluten-free options
 2. Writing a review afterwards
 
-> **MAYDAY**
-> After the first two interviews, I noticed that task 1 encouraged participants to use the search filters, but the toggle interactions were broken and users got stuck trying to make it work. OH NO!
->
-> I wanted to avoid unnecessary friction in future tests, and also wanted to make room for unique, novel, and valuable insights (instead of something I already knew). So, I scurried to solve this problem in the couple hours before the next user test.
+<div class="callout-box">
+
+**MAYDAY**
+
+After the first two interviews, I noticed that task 1 encouraged participants to use the search filters, but the toggle interactions were broken and users got stuck trying to make it work. OH NO!
+
+I wanted to avoid unnecessary friction in future tests, and also wanted to make room for unique, novel, and valuable insights (instead of something I already knew). So, I scurried to solve this problem in the couple hours before the next user test.
 
 <div class="compare">
 <figure>
@@ -114,10 +117,12 @@ We studied 8 participant interactions with our Figma prototype, analyzing them t
 
 In the nick of time, I solved the problem and toggling now worked better than ever. Also, all future participants did indeed use this function, which made me feel like a superhero. Phew!
 
+</div>
+
 #### What we discovered
 
-- ![](/images/yumgo/icon-filters.png) **Filters were unclear** While interactions were fixed, participants still didn't understand what the icons meant
-- ![](/images/yumgo/icon-key-info.png) **Key information was easy to miss** Text overload was visual noise, burying important info
+- ![](/images/yumgo/icon-filters.png) **!Filters were unclear** While interactions were fixed, participants still didn't understand what the icons meant
+- ![](/images/yumgo/icon-key-info.png) **!Key information was easy to miss** Text overload was visual noise, burying important info
 
 Analyzing all tests, it was clear that content density was overloading users and causing confusion, so we needed to remove unneeded text and filler content wherever possible. Adding clarity to filter icons wouldn't hurt either.
 
@@ -127,10 +132,39 @@ Analyzing all tests, it was clear that content density was overloading users and
 
 My individual vision of the final prototype was to reflect the fun of travelling, while providing the comfort of popular restaurant apps and real-world photos to help ground tourists.
 
-I wanted to make this design convey an experience that was familiar, welcoming, complete, exciting, and reliable.
+I wanted to make this design convey an experience that was familiar, welcoming, complete, exciting, and reliable. Try it yourself:
 
-![Discover, filters and restaurant screens](/images/yumgo/final-1.png)
-![Menu, reviews, directions and Toronto tips screens](/images/yumgo/final-2.png)
+<div class="prototype" data-device="phone"
+  data-src="https://embed.figma.com/proto/X8Lj3tw4SuO8GV3fsCCiKU/YumGo-Final-Prototype?node-id=2131-13299&starting-point-node-id=2131%3A13299&page-id=2131%3A13129&scaling=scale-down&content-scaling=fixed&hide-ui=1&embed-host=share"
+  data-link="https://www.figma.com/proto/X8Lj3tw4SuO8GV3fsCCiKU/YumGo-Final-Prototype?node-id=2131-13299&starting-point-node-id=2131%3A13299&page-id=2131%3A13129&scaling=min-zoom&content-scaling=fixed"
+  data-poster="/images/yumgo/final-home.jpg"></div>
+
+#### Fixing what testing found
+
+<div class="compare">
+<figure>
+<figcaption>Tested</figcaption>
+<img src="/images/yumgo/toggle-after.jpg" alt="Filters as tested: icon-only buttons">
+</figure>
+<figure>
+<figcaption>Final</figcaption>
+<img src="/images/yumgo/final-filters.jpg" alt="Final filters: every icon has a label, plus price and distance sliders">
+</figure>
+</div>
+
+*Participants didn't understand the icon-only filters, so every icon now has a label.*
+
+#### The full journey, from discovering to dining
+
+![Search results: photos, ratings, distance, price and dietary icons at a glance](/images/yumgo/final-results.jpg)
+![Restaurant info: real photos, hours, price, and what the restaurant offers](/images/yumgo/final-restaurant.jpg)
+![Menu: dishes matching your filters are pinned to the top](/images/yumgo/final-menu.jpg)
+![Reviews: the most relevant first, with photos](/images/yumgo/final-reviews.jpg)
+![Booking: reserve a table without leaving the app](/images/yumgo/final-booking.jpg)
+![Directions: route and arrival time to the restaurant](/images/yumgo/final-directions.jpg)
+![Wishlist: save places for this trip or the next](/images/yumgo/final-wishlist.jpg)
+![Group voting: share a link so everyone can vote on where to eat](/images/yumgo/final-voting.jpg)
+![Discover Toronto: dining tips, tipping, and local foods to try](/images/yumgo/final-discover.jpg)
 
 ## Reflection
 

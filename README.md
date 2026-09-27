@@ -56,6 +56,20 @@ public/images/       all images, one folder per project
 | 2+ images on back-to-back lines | A swipeable gallery. The text in `[ ]` becomes each caption, and clicking opens a full-screen viewer |
 | A bullet list where every item starts with `**bold**` | Cards, two per row. The bold part is the card title, the rest is the description |
 | `- ![](/images/icon.png) **Title** text` | A card with an icon on the left |
+| `- **!Title** text` | A **problem** card, tinted brand orange |
+| `- **+Title** text` | An **opportunity** card, tinted brand green |
+
+A bigger callout that holds a whole story (text, images, before/after) as one box. Leave the blank lines in:
+
+```md
+<div class="callout-box">
+
+**Mayday**
+
+Text, images, a before/after…
+
+</div>
+```
 
 Two lists back to back merge into one. To keep them separate, put a comment between them:
 

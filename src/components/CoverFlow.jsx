@@ -126,8 +126,13 @@ export default function CoverFlow() {
               hidden={distance > VISIBLE}
             >
               {song.artwork
-                ? <img src={song.artwork} alt="" draggable="false" loading={distance > 2 ? 'lazy' : 'eager'} decoding="async" />
-                : <span className="cover-placeholder" style={{ '--hue': (i * 47) % 360 }}>{song.title}</span>}
+              ? <>
+                  <img src={song.artwork} alt={`Album art for ${song.title} by ${song.artist}`} draggable="false" loading={distance > 2 ? 'lazy' : 'eager'} decoding="async" />
+                  <span className="cover-reflection" aria-hidden="true">
+                    <img src={song.artwork} alt="" draggable="false" loading="lazy" decoding="async" />
+                  </span>
+                </>
+              : <span className="cover-placeholder" style={{ '--hue': (i * 47) % 360 }}>{song.title}</span>}
               {i === index && song.preview && (
                 <span className="cover-play" aria-hidden="true">{playing ? '❚❚' : '▶'}</span>
               )}

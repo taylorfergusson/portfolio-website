@@ -7,6 +7,61 @@ import NotFound from './NotFound.jsx'
 // Loads every .md file in src/case-studies/ as text
 const caseStudies = import.meta.glob('../case-studies/*.md', { query: '?raw', import: 'default', eager: true })
 
+// Turns <div class="prototype" data-src="..." data-link="..." data-poster="..."></div> in a case study
+// into a click-to-load Figma prototype. The heavy Figma player only loads when someone clicks.
+//   data-src:    Figma's embed link   data-link: normal prototype link (used on phones and "Open in Figma")
+//   data-poster: screenshot shown before it loads
+//   data-device="phone": for mobile app prototypes (a phone-shaped frame, and it works on phones too)
+function makePrototype(box) {
+  if (box.dataset.ready) return
+  box.dataset.ready = 'true'
+  const { src, link, poster, device } = box.dataset
+  const phone = device === 'phone'
+  if (phone) box.classList.add('phone')
+  box.innerHTML = `
+    <div class="prototype-bar" aria-hidden="true"><span></span><span></span><span></span></div>
+    <div class="prototype-screen">
+      <img src="${poster}" alt="Home page of the prototype" />
+      <button type="button" class="prototype-play"><span aria-hidden="true">▶</span> Try the prototype</button>
+    </div>
+    <p class="prototype-links">
+      <a href="${link}" target="_blank" rel="noreferrer">Open in Figma ↗</a>
+      <button type="button" class="prototype-full" hidden>Full screen ⤢</button>
+    </p>`
+  const screen = box.querySelector('.prototype-screen')
+  const full = box.querySelector('.prototype-full')
+  box.querySelector('.prototype-play').addEventListener('click', () => {
+    // Phones are too small for a desktop prototype, so open it in Figma instead
+    if (!phone && window.matchMedia('(max-width: 800px)').matches) return window.open(link, '_blank', 'noopener')
+    const frame = document.createElement('iframe')
+    frame.src = src
+    frame.title = 'Interactive Figma prototype'
+    frame.allow = 'fullscreen'
+    screen.replaceChildren(frame)
+    screen.classList.add('loading')
+    frame.addEventListener('load', () => screen.classList.remove('loading'))
+    full.hidden = false
+    frame.focus()
+  })
+  full.addEventListener('click', () => screen.requestFullscreen?.())
+}
+
+// Card types: a card whose bold title starts with ! is a problem, with + an opportunity.
+// The symbol is removed, the card is tinted, and a label is added for screen readers only.
+const CARD_TYPES = { '!': 'Problem', '+': 'Opportunity' }
+function markCardType(strong) {
+  const label = CARD_TYPES[strong.textContent.trim()[0]]
+  if (!label) return
+  const first = [...strong.childNodes].find((n) => n.nodeType === Node.TEXT_NODE && n.textContent.trim())
+  if (!first) return
+  first.textContent = first.textContent.replace(/^\s*[!+]\s*/, '')
+  strong.parentElement.classList.add('card', `card-${label.toLowerCase()}`)
+  const tag = document.createElement('span')
+  tag.className = 'visually-hidden'
+  tag.textContent = `${label}: `
+  strong.prepend(tag)
+}
+
 // Turns a paragraph of back-to-back images into a swipeable row of equal tiles.
 // Each tile shows the image's alt text as a caption and opens the viewer when clicked.
 function makeGallery(p, openViewer) {
@@ -95,6 +150,8 @@ export default function CaseStudy() {
         makeGallery(p, (images, index) => setViewer({ images, index }))
       }
     })
+    prose.querySelectorAll('.prototype').forEach(makePrototype)
+    prose.querySelectorAll('li > strong').forEach(markCardType)
   }, [slug])
 
   // Highlight the section you're currently reading in the side menu
@@ -158,7 +215,7 @@ export default function CaseStudy() {
             </div>
           ))}
         </dl>
-        <img src={project.thumbnail} alt="" className="banner reveal" />
+        <img src={project.thumbnail} alt={project.thumbnailAlt || project.title} className="banner reveal" />
 
         {/* The case study itself, written in Markdown */}
         <div className="prose" ref={proseRef} dangerouslySetInnerHTML={{ __html: marked.parse(markdown) }} />

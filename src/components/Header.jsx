@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
-import { resume } from '../site.js'
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -41,8 +40,7 @@ export default function Header() {
         <nav>
           <NavLink to="/about" onClick={close}>About</NavLink>
           <NavLink to="/case-study" onClick={close}>Projects</NavLink>
-          <a href={resume} target="_blank" rel="noreferrer" onClick={close}>Resume</a>
-          <Link to="/#contact" onClick={close}>Contact</Link>
+          <NavLink to="/resume" onClick={close}>Resume</NavLink>
         </nav>
       </div>
     </header>

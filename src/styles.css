@@ -10,6 +10,8 @@
   --body: #424245;       /* long-read text (case studies) */
   --muted-dark: #a1a1a6; /* body text on dark sections */
   --accent: #be3a30;     /* red accent: small details only */
+  --caution: #C06234;    /* brand orange: problem cards */
+  --positive: #20665F;   /* brand green: opportunity cards */
 
   --font: 'Figtree Variable', system-ui, sans-serif;
   --h1: 80px;
@@ -107,6 +109,7 @@ main { padding-top: 72px; }   /* room for the header on every page */
 .site-header nav a::after { content: ''; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform var(--fast) var(--ease); }
 .site-header nav a:hover::after, .site-header nav a.active::after { transform: scaleX(1); }
 
+
 .menu-button { display: none; background: none; border: 0; width: 40px; height: 40px; position: relative; cursor: pointer; }
 .burger, .burger::before, .burger::after { position: absolute; left: 10px; width: 20px; height: 2px; background: var(--ink); transition: transform var(--fast) var(--ease); }
 .burger { top: 19px; }
@@ -146,7 +149,7 @@ section.hero { position: relative; isolation: isolate; margin-top: -72px; min-he
 .hero-word { display: inline-block; text-indent: 0; animation: word-in 0.5s var(--ease); }
 @keyframes word-in { from { opacity: 0; transform: translateY(0.3em); } }
 
-/* Hero background: soft colour blobs that drift slowly and lean toward the mouse, with film grain on top.
+/* Hero background: soft colour blobs that wander, change shape and wobble away from the mouse.
    Colours and positions are set at the top of src/components/HeroBackground.jsx. */
 .hero-bg {
   position: absolute; top: 0; bottom: 0; left: 50%; width: 100vw; translate: -50% 0; z-index: -1; overflow: hidden;
@@ -154,10 +157,34 @@ section.hero { position: relative; isolation: isolate; margin-top: -72px; min-he
   mask-image: linear-gradient(to bottom, #FFF 80%, transparent);
 }
 .hero-blob { position: absolute; aspect-ratio: 1; translate: -50% -50%; will-change: transform; }
-.hero-blob > span { display: block; width: 100%; height: 100%; border-radius: 50%; opacity: var(--blob-opacity, 0.45); background: radial-gradient(circle, var(--color) 0%, color-mix(in srgb, var(--color) 55%, transparent) 38%, transparent 70%); }
-@keyframes drift-a { from { transform: translate(-12%, 8%) scale(0.95); } to { transform: translate(14%, -12%) scale(1.25); } }
-@keyframes drift-b { from { transform: translate(10%, -10%) scale(1.15); } to { transform: translate(-14%, 12%) scale(0.88); } }
-@keyframes drift-c { from { transform: translate(-4%, 12%) scale(0.9); } to { transform: translate(12%, -8%) scale(1.2); } }
+.hero-drift { display: block; width: 100%; height: 100%; will-change: transform; }
+.hero-shape { display: block; width: 100%; height: 100%; border-radius: 50%; opacity: var(--blob-opacity, 0.45); will-change: transform; background: radial-gradient(circle, var(--color) 0%, color-mix(in srgb, var(--color) 55%, transparent) 38%, transparent 70%); }
+/* Wandering paths: each is a loop through several points, so the blobs never just slide back and forth */
+@keyframes flow-a {
+  0%, 100% { transform: translate(-12%, 8%) scale(1); }
+  25% { transform: translate(6%, -10%) scale(1.2); }
+  50% { transform: translate(16%, 4%) scale(0.95); }
+  75% { transform: translate(-2%, 14%) scale(1.12); }
+}
+@keyframes flow-b {
+  0%, 100% { transform: translate(10%, -8%) scale(1.1); }
+  20% { transform: translate(-6%, -14%) scale(0.92); }
+  45% { transform: translate(-16%, 6%) scale(1.18); }
+  70% { transform: translate(4%, 14%) scale(0.98); }
+}
+@keyframes flow-c {
+  0%, 100% { transform: translate(-4%, 12%) scale(0.95); }
+  30% { transform: translate(12%, 2%) scale(1.22); }
+  55% { transform: translate(6%, -14%) scale(1.02); }
+  80% { transform: translate(-12%, -4%) scale(1.14); }
+}
+/* Shape-shifting: an oval that slowly turns and stretches, like ink in water */
+@keyframes morph {
+  0% { transform: rotate(0deg) scale(1.35, 0.8); }
+  33% { transform: rotate(120deg) scale(0.9, 1.2); }
+  66% { transform: rotate(240deg) scale(1.25, 0.9); }
+  100% { transform: rotate(360deg) scale(1.35, 0.8); }
+}
 
 .intro { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
 .intro-left { position: sticky; top: 110px; display: flex; flex-direction: column; align-items: center; gap: 36px; min-width: 0; }
@@ -178,7 +205,20 @@ section.hero { position: relative; isolation: isolate; margin-top: -72px; min-he
 .marquee { width: 100%; overflow: hidden; cursor: grab; touch-action: pan-y; user-select: none; }
 .marquee:active { cursor: grabbing; }
 .marquee-track { display: flex; gap: 10px; padding-right: 10px; width: max-content; }
-.tool-icon { width: 48px; height: 48px; }
+/* Icons sit faded until hovered; hovering one brings it to full strength and shows its name underneath.
+   0.45 = how faded the icons are */
+.marquee { padding-top: 8px; padding-bottom: 28px; padding-bottom: 28px; margin-bottom: -28px; }   /* room for the names without changing the layout */
+.tool { position: relative; display: block; flex: none; }
+.tool-icon { width: 48px; height: 48px; display: block; opacity: 0.70; transition: opacity var(--fast) var(--ease), transform var(--fast) var(--ease); }
+.tool-name {
+  position: absolute; top: calc(100% + 6px); left: 50%; translate: -50% 4px; white-space: nowrap;
+  font-size: 12px; font-weight: 600; color: var(--ink); opacity: 0; pointer-events: none;
+  transition: opacity var(--fast) var(--ease), translate var(--fast) var(--ease);
+}
+@media (hover: hover) {
+  .tool:hover .tool-icon { opacity: 1; transform: scale(1.08); }
+  .tool:hover .tool-name { opacity: 1; translate: -50% 0; }
+}
 
 .callout { display: flex; align-items: center; justify-content: space-between; gap: 48px; }
 .callout h2 { max-width: 16em; }
@@ -189,7 +229,7 @@ section.hero { position: relative; isolation: isolate; margin-top: -72px; min-he
 .projects h1, .projects h2 { margin-bottom: 64px; }
 .project-card { display: grid; grid-template-columns: 1.4fr 1fr; gap: 56px; align-items: center; margin-bottom: 96px; }
 .project-frame { border-radius: var(--radius); overflow: hidden; }  /* scales up gently as it scrolls into view */
-.project-thumb { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; transition: transform var(--slow) var(--ease); }
+.project-thumb { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; transition: transform var(--slow) var(--ease); }
 .project-card:hover .project-thumb { transform: scale(1.03); }
 .project-meta { display: flex; justify-content: space-between; padding-bottom: 12px; margin-bottom: 16px; border-bottom: 1px solid rgba(255, 255, 255, 0.2); font-size: 14px; color: #86868b; transition: border-color var(--fast) var(--ease); }
 .project-card:hover .project-meta { border-color: var(--accent); }
@@ -219,7 +259,7 @@ section.hero { position: relative; isolation: isolate; margin-top: -72px; min-he
 /* The Role / Timeline / Tools row under the title */
 .details { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 24px; margin-top: 32px; margin-bottom: 56px; padding-top: 24px; border-top: 1px solid var(--line); }
 .details dt { font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
-.details dd { font-size: 17px; font-weight: 500; }
+.details dd { font-size: 17px; font-weight: 500; white-space: pre-line; }
 .banner { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: top; border-radius: var(--radius); margin-bottom: 40px; }
 
 .prose { margin-bottom: 80px; }
@@ -281,6 +321,34 @@ html:has(.viewer[open]) { overflow: hidden; }  /* stop the page scrolling behind
 .prose .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 480px; }
 .prose .compare figcaption { margin-bottom: 8px; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
 .prose .compare img { padding: 16px; background: var(--soft); }
+/* Click-to-load Figma prototype, framed like a browser window: <div class="prototype" ...> in a case study */
+.prose .prototype { margin-top: 32px; }
+.prototype-bar { display: flex; gap: 6px; padding: 12px 14px; border: 1px solid var(--line); border-bottom: 0; border-radius: var(--radius-sm) var(--radius-sm) 0 0; background: var(--soft); }
+.prototype-bar span { width: 10px; height: 10px; border-radius: 50%; background: var(--line); }
+.prototype-screen { position: relative; aspect-ratio: 1512 / 982; overflow: hidden; border: 1px solid var(--line); border-radius: 0 0 var(--radius-sm) var(--radius-sm); background: var(--soft); }
+.prose .prototype-screen img { width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 0; padding: 0; background: none; }
+.prototype-screen iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: #fff; }
+.prototype-screen.loading::before { content: 'Loading prototype…'; position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted); font-size: 15px; }
+.prototype-screen:fullscreen { border: 0; border-radius: 0; }
+/* Phone prototypes (data-device="phone"): a phone-shaped frame instead of a browser window */
+.prototype.phone { max-width: 340px; margin-left: auto; margin-right: auto; }
+.prototype.phone .prototype-bar { display: none; }
+.prototype.phone .prototype-screen { aspect-ratio: 440 / 956; border: 8px solid var(--ink); border-radius: 40px; }
+.prototype.phone .prototype-play { white-space: nowrap; }
+.prototype-play {
+  position: absolute; left: 50%; top: 50%; translate: -50% -50%; display: inline-flex; align-items: center; gap: 10px;
+  padding: 14px 26px; border: 0; border-radius: 999px; background: var(--ink); color: var(--paper); font: inherit; font-size: 17px; font-weight: 600; cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25); transition: transform var(--fast) var(--ease), background-color var(--fast) var(--ease);
+}
+.prototype-play:hover { background: #3a3a3c; transform: scale(1.04); }
+.prose .prototype-links { display: flex; justify-content: space-between; margin-top: 10px; font-size: 14px; }
+.prototype-links a, .prototype-full { color: var(--muted); font-weight: 600; transition: color var(--fast) var(--ease); }
+.prototype-full { border: 0; background: none; font: inherit; cursor: pointer; }
+.prototype-links a:hover, .prototype-full:hover { color: var(--ink); }
+
+/* Wider before/after, for full web pages: <div class="compare wide"> */
+.prose .compare.wide { max-width: none; align-items: start; }
+.prose .compare.wide img { padding: 10px; }
 
 /* Captions: a line in *italics* on its own, right under an image or gallery */
 .prose em { color: var(--muted); }
@@ -297,6 +365,11 @@ html:has(.viewer[open]) { overflow: hidden; }  /* stop the page scrolling behind
 .prose ul:has(> li > img:first-child) > li:has(> img:first-child) { padding-left: 72px; }  /* room for the icon on the left */
 .prose li > img:first-child { position: absolute; left: 28px; top: 24px; width: 28px; height: 28px; border-radius: 0; opacity: 0.55; }  /* every icon the same size and a muted grey */
 .prose li > strong { display: block; margin-bottom: 2px; font-size: 17px; font-weight: 600; }  /* title on its own line */
+/* Card types: start a card's bold title with ! (problem) or + (opportunity) in the Markdown.
+   They get a light tint of the brand colour; cards without a symbol stay grey.
+   The % is how strong the tint is. The "Problem"/"Opportunity" label is only read out by screen readers. */
+.prose .card.card-problem { background: color-mix(in srgb, var(--caution) 10%, white); }
+.prose .card.card-opportunity { background: color-mix(in srgb, var(--positive) 10%, white); }
 
 /* Side-by-side columns: wrap content in <div class="columns"> ... </div> in the Markdown.
    Each column is a #### heading followed by its text. */
@@ -306,6 +379,15 @@ html:has(.viewer[open]) { overflow: hidden; }  /* stop the page scrolling behind
 .prose blockquote p { color: var(--ink); font-size: 19px; line-height: 1.5; }
 .prose blockquote strong:first-child { display: block; margin-bottom: 8px; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
 .prose blockquote p + p { margin-top: 12px; }
+/* A bigger callout that can hold anything (text, images, before/after): wrap it in <div class="callout-box"> with blank lines inside.
+   Its first line in **bold** becomes the red label, like a > callout. */
+.prose .callout-box { margin-top: 40px; padding: 32px 36px; background: var(--soft); border-left: 3px solid var(--accent); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+.prose .callout-box > :first-child { margin-top: 0; }
+.prose .callout-box > * + * { margin-top: 20px; }
+.prose .callout-box > p:first-child + * { margin-top: 8px; }   /* label sits close to the text */
+.prose .callout-box > p:has(> em:only-child) { margin-top: 12px; }   /* caption hugs its images */
+.prose .callout-box > p:first-child strong:only-child { display: block; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+.prose .callout-box .compare img { background: var(--paper); }
 
 /* =========================================================
    About page
@@ -315,9 +397,22 @@ html:has(.viewer[open]) { overflow: hidden; }  /* stop the page scrolling behind
 .lead { margin-top: 24px; font-size: 24px; line-height: 1.45; max-width: 30ch; }
 .about h2 { margin-bottom: 48px; }
 .timeline li { display: grid; grid-template-columns: 180px 1fr; column-gap: 32px; padding: 32px 0; border-top: 1px solid var(--line); }
-.timeline .when { grid-row: span 2; font-weight: 600; color: var(--accent); }
+.timeline .when { grid-row: span 3; font-weight: 600; color: var(--accent); }
 .timeline h3 { font-size: var(--h4); }
 .timeline p { max-width: 65ch; margin-top: 6px; }
+/* A photo or video under a timeline entry */
+.timeline-photo { display: block; height: 300px; width: auto; max-width: 100%; margin-top: 20px; border-radius: var(--radius-sm); object-fit: cover; background: var(--soft); }
+.timeline-figure figcaption { margin-top: 8px; font-size: 14px; color: var(--muted); }
+/* Polaroid snapshots at the top of "Outside of work". The rotate values give the scattered look */
+.snapshots { display: flex; justify-content: center; gap: 28px; margin-bottom: 64px; }
+.snapshots figure { width: 220px; padding: 10px 10px 0; background: #fff; border-radius: 4px; box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35); transition: transform var(--fast) var(--ease); }
+.snapshots img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+/* The caption sits in the polaroid's thick bottom strip */
+.snapshots figcaption { padding: 10px 2px 12px; font-size: 13px; font-weight: 500; line-height: 1.3; color: var(--ink); text-align: center; }
+.snapshots figure:nth-child(1) { transform: rotate(-4deg); }
+.snapshots figure:nth-child(2) { transform: rotate(2deg) translateY(-10px); }
+.snapshots figure:nth-child(3) { transform: rotate(-1.5deg); }
+.snapshots figure:hover { transform: rotate(0) scale(1.05); }
 .interests { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
 .interests li { padding: 30px; border-radius: var(--radius-sm); background: rgba(255, 255, 255, 0.07); }
 .interests h3 { font-size: var(--h4); }
@@ -328,7 +423,7 @@ html:has(.viewer[open]) { overflow: hidden; }  /* stop the page scrolling behind
 .about .coverflow-intro h2 { margin-bottom: 8px; }
 .coverflow { --size: clamp(150px, 20vw, 240px); margin-top: 56px; text-align: center; }
 .coverflow-stage {
-  position: relative; height: calc(var(--size) + 36px); padding-top: 12px; perspective: 1400px; outline: none; touch-action: pan-y; user-select: none;
+  position: relative; height: calc(var(--size) * 1.5); padding-top: 12px; perspective: 1400px; outline: none; touch-action: pan-y; user-select: none;
   -webkit-mask-image: linear-gradient(to right, transparent, #000 18%, #000 82%, transparent);   /* soft fade at both ends */
   mask-image: linear-gradient(to right, transparent, #000 18%, #000 82%, transparent);
 }
@@ -350,6 +445,16 @@ html:has(.viewer[open]) { overflow: hidden; }  /* stop the page scrolling behind
   display: flex; align-items: flex-end; width: 100%; height: 100%; padding: 16px; text-align: left; font-size: 15px; font-weight: 600; color: #fff;
   background: linear-gradient(135deg, hsl(var(--hue) 45% 45%), hsl(calc(var(--hue) + 40) 50% 22%));
 }
+/* Reflection: a flipped copy of the cover under it, faded out with a solid gradient (cheap, no masks or filters).
+   height = how much reflection shows; the first rgba's last number = how faint it starts (higher = fainter) */
+.cover-reflection { position: absolute; top: calc(100% + 2px); left: 0; right: 0; height: 50%; overflow: hidden; pointer-events: none; }
+.cover-reflection::after {
+  content: ''; position: absolute; inset: 0;
+  /* eased fade: drops off quickly, then trails away gently */
+  background: linear-gradient(rgba(29, 29, 31, 0.6) 0%, rgba(29, 29, 31, 0.82) 25%, rgba(29, 29, 31, 0.94) 55%, var(--ink) 85%);
+}
+.cover .cover-reflection img { height: var(--size); transform: scaleY(-1); }
+
 .cover-play {
   position: absolute; inset: 0; margin: auto; width: 64px; height: 64px; display: grid; place-items: center; border-radius: 50%;
   background: rgba(0, 0, 0, 0.65); color: #fff; font-size: 20px;
@@ -366,6 +471,17 @@ html:has(.viewer[open]) { overflow: hidden; }  /* stop the page scrolling behind
 .coverflow-arrow { width: 40px; height: 40px; border: 0; border-radius: 50%; background: rgba(255, 255, 255, 0.12); color: var(--paper); font-size: 24px; line-height: 1; cursor: pointer; transition: background-color var(--fast) var(--ease); }
 .coverflow-arrow:hover:not(:disabled) { background: rgba(255, 255, 255, 0.22); }
 .coverflow-arrow:disabled { opacity: 0.3; cursor: default; }
+
+/* =========================================================
+   Resume page
+   ========================================================= */
+.resume-top, .resume-viewer { max-width: 880px; margin-left: auto; margin-right: auto; }
+.resume-top { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px; }
+.resume-actions { display: flex; align-items: center; gap: 24px; }
+.resume-actions .text-link { font-size: 16px; }
+/* The PDF, shaped like a letter-size page */
+.resume-viewer { display: block; width: 100%; aspect-ratio: 8.5 / 11; margin-top: 48px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--soft); overflow: hidden; }
+.resume-fallback { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; height: 100%; padding: 24px; text-align: center; color: var(--muted); }
 
 /* =========================================================
    Footer
@@ -391,6 +507,10 @@ html:has(.viewer[open]) { overflow: hidden; }  /* stop the page scrolling behind
   .project-card { margin-bottom: 64px; }
   .callout { flex-direction: column; align-items: flex-start; }
   .timeline li { grid-template-columns: 1fr; }
+  .timeline-photo { height: 240px; }
+  .snapshots { gap: 12px; }
+  .snapshots figure { width: 31%; padding: 5px 5px 0; }
+  .snapshots figcaption { padding: 6px 0 8px; font-size: 10px; }
   .tile { width: 260px; }
   .prose .gallery.more-left { --fade-left: 40px; }
   .prose .gallery.more-right { --fade-right: 40px; }
@@ -406,7 +526,7 @@ html:has(.viewer[open]) { overflow: hidden; }  /* stop the page scrolling behind
 /* Turn animations off for people who ask their device for less motion */
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
-  .hero-word, .hero-blob > span { animation: none !important; }
+  .hero-word, .hero-drift, .hero-shape { animation: none !important; }
   .cover, .cover::after { transition: none; }
   html { scroll-behavior: auto; }
 }
