@@ -100,7 +100,7 @@ section.container { padding-top: var(--space); padding-bottom: var(--space); }
    Buttons and links
    ========================================================= */
 /* Main action: a pill-shaped button */
-.btn { display: inline-block; padding: 12px 24px; border-radius: 999px; background: var(--ink); color: var(--paper); font-size: var(--fs-base); font-weight: 600; transition: background-color var(--fast) var(--ease), transform var(--fast) var(--ease); }
+.btn { display: inline-block; padding: 12px 24px; border-radius: 999px; background: var(--ink); color: var(--paper); font-size: var(--fs-base); font-weight: 600; text-wrap: nowrap; transition: background-color var(--fast) var(--ease), transform var(--fast) var(--ease); }
 .btn:hover { background: #3a3a3c; transform: scale(1.03); }
 .dark .btn { background: var(--paper); color: var(--ink); }
 .dark .btn:hover { background: #e8e8ed; }
@@ -541,6 +541,7 @@ html:has(.viewer[open]) { overflow: hidden; }  /* stop the page scrolling behind
   .headshot { max-width: 240px; }
   .project-card { margin-bottom: 64px; }
   .callout { flex-direction: column; align-items: flex-start; }
+  .intro-right .btn, .callout .btn { align-self: center; }   /* buttons sit in the middle on phones */
   .timeline li { grid-template-columns: 1fr; }
   .timeline-photo { height: 240px; }
   .snapshots { gap: 12px; }
