@@ -66,8 +66,7 @@ export default function Home() {
         <div className="intro-right">
           <h2 className="reveal">I design it. Then I build it.</h2>
           <p className="reveal">
-            I follow the rules, feel things out, and actually build what I design. I love the whole
-            journey, from the first interview to the last line of code.
+            I like to follow the rules, then break them when necessary, taking design projects to the next level with technical solutions or a full build. I love the whole journey, from the first interview to the last line of code.
           </p>
           <Link to="/about" className="btn reveal">More about me</Link>
         </div>
@@ -85,8 +84,7 @@ export default function Home() {
 
       <section className="callout container">
         <h2 className="reveal">
-          Need a designer, a researcher, or someone who does both? I can find the fun in anything,
-          so let's talk!
+          Need a designer, researcher, developer, or somebody who does all three? I can find the fun in anything. Let's connect!
         </h2>
         <Link to="/resume" className="btn reveal">View Resume</Link>
       </section>
