@@ -112,11 +112,68 @@ Before / after images:
 </div>
 ```
 
+**Case study layout.** Every case study follows the same order, so they feel like a set:
+Overview (summary cards) → Result (prototype + "What came out of it") → **the process section** (black, full width) → Reflection.
+
+Summary cards, three across. `!` makes a problem card, `+` an opportunity card:
+
+```md
+<div class="summary">
+
+- **!The problem** ...
+- **Why it matters** ...
+- **+The solution** ...
+
+</div>
+```
+
+Big numbered list (outcomes, fixes, lessons). Each item is a bold title, then its text:
+
+```md
+<div class="numbered">
+
+1. **Title** Text...
+2. **Title** Text...
+
+</div>
+```
+
+The process section. Everything between the two `div` lines gets a full-width black background (like the dark sections on the home page), and its sections are indented in the side menu. Its colours are set at the top of the "Process section" part of `styles.css`. Start it with `## The process`, and link each step to a section below (the link is the section's `##` name in lowercase, with dashes for spaces):
+
+```md
+<div class="process">
+
+## The process
+
+### How I got there
+
+<div class="steps">
+
+1. [Problem](#problem)
+2. [Audit](#audit)
+
+</div>
+
+## Problem
+...
+
+</div>
+```
+
+Small extras:
+
+| Write this | You get |
+| --- | --- |
+| `<p class="kicker">Fix 2 · Add context</p>` above a `####` | A small green label over the heading |
+| A plain bullet list inside `<div class="chips">` ... `</div>` | Small grey pills |
+
 **Add a project:** add an entry to `src/projects.js`, then create `src/case-studies/<slug>.md` (the file name must match the slug) and put its images in `public/images/<slug>/`.
 
 **Change the Cover Flow songs (About page):** edit the list in `src/songs.js`, then run `npm run songs`. It looks each song up on Apple Music and saves the album art and 30-second preview into `src/songs-data.json` (commit that file too). If it picks the wrong version of a song, add that song's Apple Music `id` (see the note at the top of `songs.js`).
 
-**Change colours/fonts/sizes/timing:** edit the variables at the top of `src/styles.css`. `--fast` and `--slow` control every hover and animation.
+**Change spacing inside case study sections:** at the top of `src/styles.css`, `--flow` is the space between paragraphs, `--block-gap` is the space around blocks (card groups, callouts, images, galleries, before/afters, prototypes, numbered lists), and `--heading-gap` is the space under a big section heading. Phone values are in the "Phones" block just after.
+
+**Change colours/fonts/sizes/timing:** edit the variables at the top of `src/styles.css`. Text sizes follow the Major Third scale (each size is 1.25× the one below it): change `--base` to scale everything together, or change which step a kind of text uses (`--h1`, `--h2`, `--h-page`, `--h-section`…) right below it. Phone sizes are in the "Phones" block just after. `--fast` and `--slow` control every hover and animation.
 
 **Animations:** add `className="reveal"` to anything to make it fade up as it scrolls into view. Every block in a case study does this automatically.
 

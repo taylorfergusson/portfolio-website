@@ -4,10 +4,62 @@
 
 YumGo is a food discovery app for tourists. When you're somewhere new, with dietary needs or a certain vibe in mind, it helps you find a place that feels right.
 
-- **Team of 4** I led it, from research to prototype
-- **8 interviews** With people who'd recently travelled
-- **8 usability tests** On our Figma prototype
-- **Discover to dine** One app for the whole journey
+<div class="summary">
+
+- **!The problem** Finding somewhere to eat on a trip means bouncing between apps, with missing menus and info you can't trust.
+- **Why it matters** Being somewhere new is half the fun of travelling, until you're tired, juggling a group, and hunger hits.
+- **+The solution** One app for the whole journey, from discovering to dining, so you know what to expect before you walk in.
+
+</div>
+
+## Result
+
+### YumGo (Taylor's Version)
+
+My own take on the final design: the fun of travelling, the comfort of apps you already know, and real photos to ground you. Try it yourself!
+
+<div class="prototype" data-device="phone"
+  data-src="https://embed.figma.com/proto/X8Lj3tw4SuO8GV3fsCCiKU/YumGo-Final-Prototype?node-id=2131-13299&starting-point-node-id=2131%3A13299&page-id=2131%3A13129&scaling=scale-down&content-scaling=fixed&hide-ui=1&embed-host=share"
+  data-link="https://www.figma.com/proto/X8Lj3tw4SuO8GV3fsCCiKU/YumGo-Final-Prototype?node-id=2131-13299&starting-point-node-id=2131%3A13299&page-id=2131%3A13129&scaling=min-zoom&content-scaling=fixed"
+  data-poster="/images/yumgo/final-home.jpg"></div>
+
+#### The full journey, from discovering to dining
+
+![Search results: photos, ratings, distance, price and dietary icons at a glance](/images/yumgo/final-results.jpg)
+![Restaurant info: real photos, hours, price, and what the restaurant offers](/images/yumgo/final-restaurant.jpg)
+![Menu: dishes matching your filters are pinned to the top](/images/yumgo/final-menu.jpg)
+![Reviews: the most relevant first, with photos](/images/yumgo/final-reviews.jpg)
+![Booking: reserve a table without leaving the app](/images/yumgo/final-booking.jpg)
+![Directions: route and arrival time to the restaurant](/images/yumgo/final-directions.jpg)
+![Wishlist: save places for this trip or the next](/images/yumgo/final-wishlist.jpg)
+![Group voting: share a link so everyone can vote on where to eat](/images/yumgo/final-voting.jpg)
+![Discover Toronto: dining tips, tipping, and local foods to try](/images/yumgo/final-discover.jpg)
+
+#### What came out of it
+
+<div class="numbered">
+
+1. **One app, discover to dine** Search, menus, reviews, booking, and directions, all in one place.
+2. **Built on real people** 8 interviews and 8 usability tests shaped what made it in.
+3. **Four designers, one app** I led a team of 4 from research to prototype, and kept it feeling like one app.
+
+</div>
+
+<div class="process">
+
+## The process
+
+### How we got there
+
+<div class="steps">
+
+1. [Problem](#problem)
+2. [Secondary research](#secondary-research)
+3. [Interviews](#interviews)
+4. [Prototyping](#prototyping)
+5. [Testing](#testing)
+
+</div>
 
 ## Problem
 
@@ -20,7 +72,7 @@ Now you're bouncing between apps to find the info you actually care about. Where
 > **Problem Statement**
 > Tourists need one personalized place to discover and book restaurants, so that eating somewhere new feels easy and memorable.
 
-## Research: Secondary
+## Secondary research
 
 ### We (wrongfully) assumed it was all about time
 
@@ -31,15 +83,14 @@ We thought tourists wanted food ASAP so they could get back to sightseeing. Earl
 - ![](/images/yumgo/icon-irrelevant.png) **!Irrelevant content** Full of noise and unwanted results
 - ![](/images/yumgo/icon-authenticity.png) **+Desire for authenticity!** Tourists wanted local, quality meals
 
-So I convinced my team to pivot: less about speed, more about authentic experiences that current apps weren't supporting.
+> **The takeaway**
+> So I convinced my team to pivot: less about speed, more about authentic experiences that current apps weren't supporting.
 
-## Research: Primary
+## Interviews
 
 ### Travellers wanted to dine with certainty
 
 We ran eight interviews with recent tourists about travel, food, and the apps they use for it. I moderated two and took notes on two more.
-
-People wanted to feel like they'd been somewhere before they walked in the door. So we focused on cultural connection and seeing the menu ahead of time.
 
 ![Affinity map from our interviews](/images/yumgo/research-1.jpg)
 ![Interview synthesis table](/images/yumgo/research-2.png)
@@ -48,7 +99,10 @@ People wanted to feel like they'd been somewhere before they walked in the door.
 ![User flow](/images/yumgo/research-5.png)
 ![Early sketches](/images/yumgo/research-6.jpg)
 
-## Planning & Prototyping
+> **The takeaway**
+> People wanted to feel like they'd been somewhere before they walked in the door. So we focused on cultural connection and seeing the menu ahead of time.
+
+## Prototyping
 
 ### So… what do we make?
 
@@ -63,10 +117,16 @@ We got a little too excited about features, so I defined our main user path earl
 ![Learn About Toronto](/images/yumgo/wireframe-7.png)
 ![Wishlist](/images/yumgo/wireframe-8.png)
 
-- ![](/images/yumgo/icon-less-is-more.png) **+Less is more!** Fewer features, one complete journey
-- ![](/images/yumgo/icon-familiarity.png) **+Familiarity is the way** Borrow from apps people already know
+#### Our two rules
 
-## User Testing
+<div class="numbered">
+
+1. **Less is more!** Fewer features, one complete journey
+2. **Familiarity is the way** Borrow from apps people already know
+
+</div>
+
+## Testing
 
 ### Clarity had to be improved… a lot
 
@@ -105,20 +165,9 @@ In the nick of time, I solved the problem and toggling now worked better than ev
 - ![](/images/yumgo/icon-filters.png) **!Filters were unclear** People still didn't know what the icons meant
 - ![](/images/yumgo/icon-key-info.png) **!Key info was easy to miss** Too much text buried what mattered
 
-Time to cut the clutter and give those icons some labels.
+<p class="kicker">The fix · Labels for every icon</p>
 
-## Final Prototype
-
-### YumGo (Taylor's Version)
-
-My own take on the final design: the fun of travelling, the comfort of apps you already know, and real photos to ground you. Try it yourself!
-
-<div class="prototype" data-device="phone"
-  data-src="https://embed.figma.com/proto/X8Lj3tw4SuO8GV3fsCCiKU/YumGo-Final-Prototype?node-id=2131-13299&starting-point-node-id=2131%3A13299&page-id=2131%3A13129&scaling=scale-down&content-scaling=fixed&hide-ui=1&embed-host=share"
-  data-link="https://www.figma.com/proto/X8Lj3tw4SuO8GV3fsCCiKU/YumGo-Final-Prototype?node-id=2131-13299&starting-point-node-id=2131%3A13299&page-id=2131%3A13129&scaling=min-zoom&content-scaling=fixed"
-  data-poster="/images/yumgo/final-home.jpg"></div>
-
-#### Fixing what testing found
+#### From tested to final
 
 <div class="compare">
 <figure>
@@ -133,26 +182,15 @@ My own take on the final design: the fun of travelling, the comfort of apps you 
 
 *Participants didn't understand the icon-only filters, so every icon now has a label.*
 
-#### The full journey, from discovering to dining
-
-![Search results: photos, ratings, distance, price and dietary icons at a glance](/images/yumgo/final-results.jpg)
-![Restaurant info: real photos, hours, price, and what the restaurant offers](/images/yumgo/final-restaurant.jpg)
-![Menu: dishes matching your filters are pinned to the top](/images/yumgo/final-menu.jpg)
-![Reviews: the most relevant first, with photos](/images/yumgo/final-reviews.jpg)
-![Booking: reserve a table without leaving the app](/images/yumgo/final-booking.jpg)
-![Directions: route and arrival time to the restaurant](/images/yumgo/final-directions.jpg)
-![Wishlist: save places for this trip or the next](/images/yumgo/final-wishlist.jpg)
-![Group voting: share a link so everyone can vote on where to eat](/images/yumgo/final-voting.jpg)
-![Discover Toronto: dining tips, tipping, and local foods to try](/images/yumgo/final-discover.jpg)
+</div>
 
 ## Reflection
 
-### Keeping four people's work feeling like one app
+### What I learned
 
-As team lead, I was invested enough to see where things weren't connecting. Everyone used Figma and components a little differently, so there was a lot of reorganizing to do.
+<div class="numbered">
 
-I'm proudest that I could spot when we were drifting off course, rally the team, and get everyone's ideas flowing together, instead of ending up with a bunch of disjointed pieces.
+1. **Keeping four people's work feeling like one app** Everyone used Figma and components a little differently, so there was a lot of reorganizing to do. I'm proudest that I could spot when we were drifting off course, rally the team, and get everyone's ideas flowing together, instead of ending up with a bunch of disjointed pieces.
+2. **Moving in reverse is still moving** Backpedalling (like on wait times) was hard, but I learned to hold ideas loosely and see pivots for what they REALLY are: improvements!
 
-#### Moving in reverse is still moving
-
-Backpedalling (like on wait times) was hard, but I learned to hold ideas loosely and see pivots for what they REALLY are: improvements!
+</div>

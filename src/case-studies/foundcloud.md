@@ -9,12 +9,46 @@
 
 FoundCloud finds the edits, bootlegs, and secret tracks that DJs love to gatekeep. I built it because I was tired of falling in love with songs I could never find again.
 
-- **10,000 tracks** Downloaded and fingerprinted, all by me
-- **Built solo** Crawler, algorithm, server, and site
-- **Based on how Shazam works** My own version, built from scratch
-- **Live on AWS** A working proof of concept
+<div class="summary">
 
-## The Problem
+- **!The problem** Shazam only knows official releases, so songs that only live on SoundCloud are impossible to ID.
+- **Why it matters** No ID means no full track, no way to credit the artist, and nothing to share with friends.
+- **+The solution** My own audio-fingerprinting app, built from scratch, that matches what's playing against 10,000 SoundCloud tracks.
+
+</div>
+
+## Result
+
+### Hold up your phone, get the track
+
+![Listening: 5 seconds of whatever's playing](/images/foundcloud/listening.png)
+![Match: the original track, with a confidence score](/images/foundcloud/result.png)
+
+#### What came out of it
+
+<div class="numbered">
+
+1. **10,000 tracks** Downloaded and fingerprinted, all by me
+2. **Built solo** Crawler, algorithm, server, and site
+3. **Live on AWS** A working proof of concept you can try right now
+
+</div>
+
+<div class="process">
+
+## The process
+
+### How I got there
+
+<div class="steps">
+
+1. [Problem](#problem)
+2. [How it works](#how-it-works)
+3. [The hard part](#the-hard-part)
+
+</div>
+
+## Problem
 
 ### I'd hear a song for one minute, then never again
 
@@ -41,20 +75,19 @@ A playground of edits and bootlegs, with nothing to search it.
 
 ![How FoundCloud works: it crawls SoundCloud, collects 10,000 songs and fingerprints them into a database. When you listen, your recording is fingerprinted the same way and matched against the database, with a confidence score.](/images/foundcloud/how-it-works.svg)
 
-![Listening: 5 seconds of whatever's playing](/images/foundcloud/listening.png)
-![Match: the original track, with a confidence score](/images/foundcloud/result.png)
-
 ## The Hard Part
 
 ### A matching algorithm from nothing
 
-The hardest part, and the part I'm proudest of. I started with nothing but 10,000 songs and a lot of reading about how audio fingerprinting actually works.
+The hardest part, and the part I'm proudest of. I started with nothing but 10,000 songs and a lot of reading about how audio fingerprinting actually works, starting with how Shazam does it.
 
 The trick was figuring out what stays the same when a song plays somewhere else. Low frequencies are easy to map, for example, but you can't always trust them coming out of a speaker in a loud room.
 
 ![A song's spectrogram: the loudest peaks become its fingerprint](/images/foundcloud/spectrogram.jpg)
 
 *A song's spectrogram. The loudest peaks become its fingerprint.*
+
+</div>
 
 ## Next Steps
 
@@ -73,8 +106,11 @@ I don't want it to turn into this whole big thing, though. I just want it to hel
 
 ### Why this one matters to me
 
-There's so much good music out there, and so little to help you find it all. So many missing connections! FoundCloud makes discovery a bit more democratic, so people can enjoy more music, share it, and give love to the creators who made it.
+<div class="numbered">
 
-It's also the project where both halves of my brain finally got to work together. I found the problem as a listener, then built the fix myself.
+1. **So many missing connections!** There's so much good music out there, and so little to help you find it all. FoundCloud makes discovery a bit more democratic, so people can enjoy more music, share it, and give love to the creators who made it.
+2. **Both halves of my brain** This is the project where both halves of my brain finally got to work together. I found the problem as a listener, then built the fix myself.
+
+</div>
 
 <p><a class="btn" href="https://foundcloud.taylorfergusson.com/" target="_blank" rel="noreferrer">Try FoundCloud ↗</a></p>

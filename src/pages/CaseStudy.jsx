@@ -131,6 +131,7 @@ export default function CaseStudy() {
   const markdown = caseStudies[`../case-studies/${slug}.md`]
   const proseRef = useRef(null)
   const viewerRef = useRef(null)
+  const navRef = useRef(null)
   const [sections, setSections] = useState([])
   const [active, setActive] = useState('')
   const [viewer, setViewer] = useState(null) // { images, index } while an image is enlarged
@@ -142,7 +143,9 @@ export default function CaseStudy() {
     if (!prose) return
     const found = [...prose.querySelectorAll('h2')].map((h) => {
       h.id = h.textContent.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
-      return { id: h.id, label: h.textContent }
+      // Sections inside the process band (except its "The process" heading) are indented in the side menu
+      const band = h.closest('.process')
+      return { id: h.id, label: h.textContent, nested: Boolean(band) && band.querySelector('h2') !== h }
     })
     setSections(found)
     prose.querySelectorAll('p').forEach((p) => {
@@ -163,10 +166,21 @@ export default function CaseStudy() {
         if (heading && heading.getBoundingClientRect().top < window.innerHeight * 0.4) current = s.id
       }
       setActive(current)
+      // Each side menu link turns light while it's over the black process section
+      const band = proseRef.current?.querySelector('.process')?.getBoundingClientRect()
+      navRef.current?.querySelectorAll('a').forEach((link) => {
+        const r = link.getBoundingClientRect()
+        const middle = r.top + r.height / 2
+        link.toggleAttribute('data-on-dark', Boolean(band) && band.top < middle && band.bottom > middle)
+      })
     }
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    window.addEventListener('resize', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+    }
   }, [sections])
 
   // Image viewer: open it, and let the arrow keys step through the images
@@ -194,10 +208,10 @@ export default function CaseStudy() {
     <article className="case-study container">
       {/* Side menu of sections (desktop only) */}
       {sections.length > 0 && (
-        <nav className="cs-nav" aria-label="Case study sections">
+        <nav ref={navRef} className="cs-nav" aria-label="Case study sections">
           <ul>
             {sections.map((s) => (
-              <li key={s.id}>
+              <li key={s.id} className={s.nested ? 'nested' : undefined}>
                 <a href={`#${s.id}`} className={s.id === active ? 'current' : ''}>{s.label}</a>
               </li>
             ))}
