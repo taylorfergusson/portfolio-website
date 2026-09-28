@@ -1,64 +1,80 @@
-> **Live now: try it yourself**
-> Play a song from a DJ mix, hold up your phone, and see if FoundCloud can find it. It's a personal project I built before studying UX, and I'm now redesigning it as a designer.
+> **Live now!**
+> Put on a DJ mix, hold up your phone, and see if FoundCloud can find the track.
 
 <p><a class="btn" href="https://foundcloud.taylorfergusson.com/" target="_blank" rel="noreferrer">Try FoundCloud ↗</a></p>
 
 ## Overview
 
-### Shazam, built for SoundCloud
+### Shazam, but for SoundCloud
 
-Record a few seconds of a song from a DJ mix, and FoundCloud finds the original SoundCloud upload, including the edits and bootlegs that Shazam can't.
+FoundCloud finds the edits, bootlegs, and secret tracks that DJs love to gatekeep. I built it because I was tired of falling in love with songs I could never find again.
 
-- **10,000 tracks** A library I built myself by crawling SoundCloud
-- **Solo, end to end** Research, algorithm, server, and interface
-- **From scratch** Based on Shazam's published fingerprinting method
-- **Deliberately scoped** A working proof of concept on AWS's free tier
+- **10,000 tracks** Downloaded and fingerprinted, all by me
+- **Built solo** Crawler, algorithm, server, and site
+- **Based on how Shazam works** My own version, built from scratch
+- **Live on AWS** A working proof of concept
 
 ## The Problem
 
-### A great song, and no way to find it
+### I'd hear a song for one minute, then never again
 
-The best tracks in DJ mixes often have no tracklist, no lyrics online, and titles that don't match the original song. Mainstream apps only know licensed music, so they come up empty.
+When I was DJing, I'd fall in love with a track that played for a minute in someone's mix, and then… nothing. No tracklist, no full song, no way to credit the artist or share it with friends. A whole side of listening was closed off, for me and for everyone else.
+
+<div class="columns">
+
+#### Shazam
+
+Only knows music that went through official distribution.
+
+#### SoundCloud
+
+A playground of edits and bootlegs, with nothing to search it.
+
+</div>
 
 > **Problem Statement**
-> No identification tool was built for SoundCloud's underground. So I built one.
+> Listeners need a way to identify songs that only exist on SoundCloud, so they can find the full track, credit the artist, and share it.
 
 ## How It Works
 
-### Four steps from a song to a match
+### How it finds your song
 
-- **1. Discover** A crawler follows SoundCloud's recommendations to grow the library
-- **2. Collect** Tracks are downloaded, filtered, and checked for quality
-- **3. Fingerprint** Each song becomes a set of hashes that survive background noise
-- **4. Match** A phone recording is fingerprinted the same way and scored for confidence
+![How FoundCloud works: it crawls SoundCloud, collects 10,000 songs and fingerprints them into a database. When you listen, your recording is fingerprinted the same way and matched against the database, with a confidence score.](/images/foundcloud/how-it-works.svg)
 
-![Fingerprinting: each song becomes a spectrogram, and its loudest peaks become its fingerprint](/images/foundcloud/spectrogram.jpg)
-![Listening: FoundCloud records 5 seconds of whatever's playing](/images/foundcloud/listening.png)
-![Match: the original track, with a confidence score and a link to it](/images/foundcloud/result.png)
+![Listening: 5 seconds of whatever's playing](/images/foundcloud/listening.png)
+![Match: the original track, with a confidence score](/images/foundcloud/result.png)
 
-## Tradeoffs
+## The Hard Part
 
-### Every technical choice was a user experience choice
+### A matching algorithm from nothing
 
-- **Accuracy vs. speed** More detail per song meant better matches but slower results, so I tuned for fast enough to use in the moment
-- **An honest answer** A confidence score instead of a yes/no, so people know how much to trust a match
-- **Tested like it's used** Clean files first, then phone recordings in noisy rooms, the way people actually use it
-- **!Know the limits** Repetitive dance tracks are hardest to identify, and they're exactly what shows up in DJ mixes
+The hardest part, and the part I'm proudest of. I started with nothing but 10,000 songs and a lot of reading about how audio fingerprinting actually works.
+
+The trick was figuring out what stays the same when a song plays somewhere else. Low frequencies are easy to map, for example, but you can't always trust them coming out of a speaker in a loud room.
+
+![A song's spectrogram: the loudest peaks become its fingerprint](/images/foundcloud/spectrogram.jpg)
+
+*A song's spectrogram. The loudest peaks become its fingerprint.*
 
 ## Next Steps
 
-### Designing what comes next
+### Where I want to take it
 
-- **+Live waveform** Show the mic is picking up sound while recording
-- **+Clearer errors** "Mic blocked" and "server down" need different fixes
-- **+Onboarding** Explain why it needs the mic before asking
-- **+Mobile first** It's a phone-in-the-air tool, so design for that first
+So far, this has mostly been me building on my own. Next, I want to hear from the people who'd actually use it: real research, and interviews with friends who care about finding music as much as I do. Then I'll let that guide ideas like:
 
+- **+Match from a link** Pick a section of a mix, like minutes 13 to 15
+- **+Right on SoundCloud** A browser plugin that works on the page
+- **+A bigger library** More songs, more matches
+- **+Meet the artist** Dig into who made the track
+
+I don't want it to turn into this whole big thing, though. I just want it to help people find the songs they don't have an ID for, and do that really well.
 
 ## Reflection
 
-### I can design the fix, and build it
+### Why this one matters to me
 
-FoundCloud started with a problem I felt myself, long before I studied UX. Building the whole system solo taught me what's possible under the hood, so I don't stop at saying what a product should do differently. I can make it happen.
+There's so much good music out there, and so little to help you find it all. So many missing connections! FoundCloud makes discovery a bit more democratic, so people can enjoy more music, share it, and give love to the creators who made it.
+
+It's also the project where both halves of my brain finally got to work together. I found the problem as a listener, then built the fix myself.
 
 <p><a class="btn" href="https://foundcloud.taylorfergusson.com/" target="_blank" rel="noreferrer">Try FoundCloud ↗</a></p>

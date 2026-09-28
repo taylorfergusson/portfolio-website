@@ -1,18 +1,18 @@
 ## Overview
 
-### Making a university radio station's website a reliable digital hub
+### Showing off a station with a good heart
 
-CIUT 89.5 FM is the University of Toronto's campus and community radio station, with a website that had trouble connecting listeners, volunteers, and students to the station.
+CIUT 89.5 FM is U of T's campus and community radio station. It has a good heart, but its website wasn't showing it. I found the technical reasons why, then redesigned the site around the people who love it.
 
 <div class="columns">
 
 #### The Challenge
 
-Identify the problems within CIUT's website content and structure that prevent listeners, students, and community members from meaningfully connecting with the station.
+Figure out what was keeping listeners, students, and volunteers from connecting with CIUT online.
 
 #### The Outcome
 
-A content audit, a new information architecture, and a 12-page Figma prototype that turns CIUT's website into a hub for listening, discovering shows, attending events, donating, and volunteering, while keeping the fun, uninhibited personality of community radio.
+A content audit, a new site structure, and a 12-page Figma prototype that feels like CIUT.
 
 </div>
 
@@ -21,27 +21,27 @@ A content audit, a new information architecture, and a 12-page Figma prototype t
 - **155 URLs crawled** Every page, image, and file on the site
 - **74 show pages** 10 audited in depth as representative samples
 - **3 stations compared** CJTM, CKUT, and n10.as
-- **12 pages redesigned** A full prototype, not just a few screens
+- **12 pages redesigned** All clickable in Figma
 
 ## Problem
 
 ### I wanted to volunteer… but how?
 
-CIUT is a volunteer-powered, student-and-listener-supported campus radio station. So I was surprised that when I went looking to volunteer, their website had very little volunteer information.
+CIUT runs on volunteers, so I was surprised that when I went looking to volunteer, the website barely mentioned it.
 
-It didn't stop there. Information about the station, what it does, and how to get involved was often missing, misplaced, or buried under noise. For a nonprofit that runs on donations and volunteers, the website needs to make those things easy.
+It didn't stop there. Info about the station and how to get involved was often missing, misplaced, or buried. For a nonprofit that runs on donations and volunteers, that's a big deal!
 
 > **Problem Statement**
-> CIUT listeners and community members need a clear and reliable way to discover the station's information, media, and opportunities so that they can easily connect with and support the station.
+> CIUT's listeners and community need a clear way to find the station's shows, events, and ways to help, so they can connect with it and support it.
 
 ## Audit
 
-### Rating every page, from metadata to meaning
+### Every page, rated
 
-This started as a content audit assignment, but I chose CIUT because I had real stakes in it, and took the work well past the assignment's scope.
+This started as a school assignment, but I picked CIUT because I actually care about it, and I took it way past what was asked.
 
-- ![](/images/ciut/icon-seo-crawl.png) **Phase 1: SEO crawl** I ran the site through Screaming Frog to extract every page, file, image, link, and piece of metadata, which mapped the site and surfaced hidden technical issues.
-- ![](/images/ciut/icon-manual-audit.png) **Phase 2: Manual content audit** I rated each piece of content from 1–5 on whether it was:
+- ![](/images/ciut/icon-seo-crawl.png) **Phase 1: SEO crawl** Screaming Frog pulled every page, image, link, and bit of metadata, and surfaced hidden technical issues.
+- ![](/images/ciut/icon-manual-audit.png) **Phase 2: Manual content audit** I rated every piece of content from 1 to 5 on whether it was:
 
 <!-- This comment keeps the two groups of cards separate -->
 
@@ -58,7 +58,7 @@ This started as a content audit assignment, but I chose CIUT because I had real 
 - ![](/images/ciut/icon-stale.png) **!Stale content** Most shows had active social media that the site rarely linked to, and the events CIUT runs were barely mentioned
 - ![](/images/ciut/icon-structure.png) **!Messy information** 70 pages with no meta description, 76 sharing "Just another WordPress site", and headings out of order
 
-The website failed to act as a hub for what the station offers. Visitors had to work to find information and piece it together, and search engines struggled too.
+Visitors had to work way too hard to piece things together, and so did search engines.
 
 ![About page: a board list with inconsistent formatting and missing information](/images/ciut/audit-1.png)
 ![Home page: donate button next to an unexplained hat and shirt](/images/ciut/audit-2.png)
@@ -67,7 +67,7 @@ The website failed to act as a hub for what the station offers. Visitors had to 
 
 ## Recommendations
 
-### Five fixes, in order of impact
+### Five fixes, most important first
 
 - **+1. Fix what's broken or missing** Every show and podcast gets its own page with a photo, description, and contact info
 - **+2. Add context and clarity** Every section and call to action explains what it is and why it matters
@@ -79,7 +79,7 @@ The website failed to act as a hub for what the station offers. Visitors had to 
 
 ### How do other stations do it?
 
-I compared three campus and community stations with similar missions but more polished websites: CJTM (TMU), CKUT (McGill), and n10.as (Montreal). They shared a few patterns:
+I looked at three stations with similar missions and more polished sites: CJTM (TMU), CKUT (McGill), and n10.as (Montreal). Here's what they had in common:
 
 - **+Always-there actions** "Listen Live" and "Donate" live in a fixed header
 - **+Schedules vs. shows** Calendar-style schedules, and separate photo grids of shows with filters
@@ -105,16 +105,16 @@ I compared three campus and community stations with similar missions but more po
 
 ## Redesign
 
-### CIUT.fm, rebuilt page by page
+### CIUT.fm, redesigned
 
-Every recommendation became something visible in a 12-page Figma prototype. Try it yourself:
+I prototyped all 12 pages in Figma, so you can click around yourself:
 
 <div class="prototype"
   data-src="https://embed.figma.com/proto/CVXtM5bAcmKy8SH2V2zSpn/CIUT-Prototype-Revised?node-id=3014-12187&starting-point-node-id=3014%3A12187&page-id=3002%3A7008&scaling=scale-down-width&content-scaling=fixed&hide-ui=1&embed-host=share"
   data-link="https://www.figma.com/proto/CVXtM5bAcmKy8SH2V2zSpn/CIUT-Prototype-Revised?node-id=3014-12187&starting-point-node-id=3014%3A12187&page-id=3002%3A7008&scaling=scale-down&content-scaling=fixed"
   data-poster="/images/ciut/redesign-home.jpg"></div>
 
-#### Donating, with a reason why
+#### The mystery hat and T-shirt, explained
 
 <div class="compare wide">
 <figure>
@@ -129,7 +129,7 @@ Every recommendation became something visible in a 12-page Figma prototype. Try 
 
 *The hat and shirt are now clearly rewards ("free with a donation over $50"), and the page explains where donations go.*
 
-#### Show pages that work like show pages
+#### Every show gets a real page
 
 <div class="compare wide">
 <figure>
@@ -144,7 +144,7 @@ Every recommendation became something visible in a 12-page Figma prototype. Try 
 
 *A consistent layout for every show: time slot, genres, hosts, social links, and past episodes to play.*
 
-#### Contacts you can actually contact
+#### Finally, who to email
 
 <div class="compare wide">
 <figure>
@@ -169,10 +169,8 @@ Every recommendation became something visible in a 12-page Figma prototype. Try 
 
 ## Reflection
 
-### At first, I knew the site felt difficult, but not why
+### The work that matters most might be right in front of you
 
-The audit turned a vague feeling into specific, fixable problems: missing structure, missing context, and inconsistent content.
+We often dream about redesigning giant platforms. But sometimes what needs the most help is a small, community thing close to home.
 
-A peer review pushed me further. My reviewer suggested adding a comparative analysis and wireframes, so I combined them into a competitor-informed prototype. She recommended keeping it to wireframes to save time, but I prototyped every page instead. It was more work than the assignment asked for, but it let me show my recommendations instead of just describing them.
-
-It also taught me that good content design serves two audiences at once: the people skimming for what they need, and the search engines helping them find it.
+CIUT runs on volunteers, with limited funding and not enough hands to catch everything. It felt so good to turn a school project into real fixes on their site, and help people connect with an organization that's truly lovable.

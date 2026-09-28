@@ -11,14 +11,13 @@ export const songs = [
   { artist: 'Britney Spears', title: 'Heaven on Earth' },
   { artist: 'Miss Kittin & The Hacker', title: 'Stock Exchange' },
   { artist: 'M.I.A.', title: 'XR2' },
-  { artist: 'Nadia Oh', title: 'My Egyptian Lover' },
   { artist: 'Kylie Minogue', title: 'Come into My World (Fischerspooner Mix)' },
-  { artist: 'Madonna', title: 'Impressive Instant' },
+  { artist: 'Madonna', title: 'Future Lovers' },
   { artist: 'Björk', title: 'Hunter' },
   { artist: 'Arthur Russell', title: 'Habit of You' },
   { artist: 'Chaka Khan', title: 'I Feel for You' },
-  { artist: 'Donna Summer', title: 'Take Me' },
-  { artist: 'Fleetwood Mac', title: 'Silver Springs' },
+  { artist: 'Donna Summer', title: 'I Feel Love' },
+  { artist: 'Fleetwood Mac', title: 'Rhiannon' },
   { artist: 'Nelly Furtado', title: 'Do It' },
   { artist: 'Jai Paul', title: 'Genevieve' },
   { artist: 'Mr Twin Sister', title: 'Rude Boy', id: '905957636' },
@@ -26,6 +25,7 @@ export const songs = [
   { artist: 'Joni Mitchell', title: 'Free Man in Paris' },
   { artist: 'Justice', title: 'D.A.N.C.E.' },
   { artist: 'Beach House', title: 'Lover of Mine' },
+  { artist: 'Elliott Smith', title: 'L.A.' },
 ]
 
 // Used to match each song to its saved Apple Music info

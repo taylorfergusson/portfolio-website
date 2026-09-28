@@ -64,12 +64,12 @@ export default function Home() {
         </div>
 
         <div className="intro-right">
-          <h2 className="reveal">Building things, studying people, having fun in the process</h2>
+          <h2 className="reveal">I design it. Then I build it.</h2>
           <p className="reveal">
-            With my background in computer science and psychology, I tackle design problems from
-            the inside out, bringing this human-centred and systems expertise to my work.
+            I follow the rules, feel things out, and actually build what I design. I love the whole
+            journey, from the first interview to the last line of code.
           </p>
-          <a href='/about' target="_blank" rel="noreferrer" className="btn reveal">Learn More</a>
+          <Link to="/about" className="btn reveal">More about me</Link>
         </div>
       </section>
 
@@ -85,8 +85,8 @@ export default function Home() {
 
       <section className="callout container">
         <h2 className="reveal">
-          Currently seeking co-ops in UX research/design, with a particular interest in digital
-          media and education technology. I'd be happy to connect!
+          Need a designer, a researcher, or someone who does both? I can find the fun in anything,
+          so let's talk!
         </h2>
         <Link to="/resume" className="btn reveal">View Resume</Link>
       </section>

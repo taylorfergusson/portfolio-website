@@ -395,6 +395,10 @@ html:has(.viewer[open]) { overflow: hidden; }  /* stop the page scrolling behind
 .about-intro { display: grid; grid-template-columns: 1.3fr 1fr; gap: 80px; align-items: center; }
 .about-intro .headshot { justify-self: center; }
 .lead { margin-top: 24px; font-size: 24px; line-height: 1.45; max-width: 30ch; }
+/* Tag rows under the About intro */
+.tag-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 24px; }
+.tag-label { margin-right: 4px; font-size: 15px; font-weight: 600; color: var(--ink); }
+.tag { padding: 6px 14px; border-radius: 999px; background: var(--soft); font-size: 15px; font-weight: 500; color: var(--ink); }
 .about h2 { margin-bottom: 48px; }
 .timeline li { display: grid; grid-template-columns: 180px 1fr; column-gap: 32px; padding: 32px 0; border-top: 1px solid var(--line); }
 .timeline .when { grid-row: span 3; font-weight: 600; color: var(--accent); }

@@ -1,58 +1,45 @@
 ## Overview
 
-### Better travel experiences overall, through food
+### Comfort in the unfamiliar
 
-YumGo was a semester-long case study focused on using tourist meals as a vessel for higher-value trips abroad, without compromising on personal needs.
+YumGo is a food discovery app for tourists. When you're somewhere new, with dietary needs or a certain vibe in mind, it helps you find a place that feels right.
 
-<div class="columns">
-
-#### The Challenge
-
-As the designated leader of my team of 4, I led our full process of researching tourist experiences and designing a mobile app that supports what they actually need in a dining platform.
-
-#### The Outcome
-
-A comprehensive mobile prototype, informed by real tourist needs during the entire process of discovering and visiting a restaurant.
-
-</div>
+- **Team of 4** I led it, from research to prototype
+- **8 interviews** With people who'd recently travelled
+- **8 usability tests** On our Figma prototype
+- **Discover to dine** One app for the whole journey
 
 ## Problem
 
 ### Eating while travelling should be good and easy. No ifs, ands, or buts.
 
-Unfamiliarity is often what gives tourists novel and exciting experiences. It's all fun and games, until they have to balance factors like fatigue, time constraints, and group needs…
+Being somewhere unfamiliar is half the fun of travelling. It's all fun and games, until you're tired, short on time, juggling a group… and then hunger hits.
 
-…and then hunger hits.
-
-Now, they need to bounce between different apps to try to find the information they care about, but where can they start if they can't even think straight?
+Now you're bouncing between apps to find the info you actually care about. Where do you even start?
 
 > **Problem Statement**
-> Tourists need a personalized and centralized way to discover and book restaurants, so that their travel experiences can be memorable, culturally-immersive, high-value, and easy.
+> Tourists need one personalized place to discover and book restaurants, so that eating somewhere new feels easy and memorable.
 
 ## Research: Secondary
 
-### We (wrongfully) assumed the importance of time
+### We (wrongfully) assumed it was all about time
 
-We thought tourists wanted food ASAP so that they can move along to other sights, but to our surprise, early research showed little evidence of wait times or delays being a significant obstacle.
-
-#### What we discovered
+We thought tourists wanted food ASAP so they could get back to sightseeing. Early research said otherwise: wait times barely came up.
 
 - ![](/images/yumgo/icon-missing-info.png) **!Missing information** Incomplete business and menu info
-- ![](/images/yumgo/icon-weak-discovery.png) **!Weak discovery & booking** Apps did not support the full journey
-- ![](/images/yumgo/icon-irrelevant.png) **!Irrelevant content** Platforms full of noise and undesired results
-- ![](/images/yumgo/icon-authenticity.png) **+Desire for authenticity!** Tourists valued localized, quality meals
+- ![](/images/yumgo/icon-weak-discovery.png) **!Weak discovery & booking** Apps didn't support the full journey
+- ![](/images/yumgo/icon-irrelevant.png) **!Irrelevant content** Full of noise and unwanted results
+- ![](/images/yumgo/icon-authenticity.png) **+Desire for authenticity!** Tourists wanted local, quality meals
 
-I convinced my team to shift the focus onto authentic and high-value experiences instead of wait times, since this was found to be most important (yet was weakly supported by current restaurant apps).
+So I convinced my team to pivot: less about speed, more about authentic experiences that current apps weren't supporting.
 
 ## Research: Primary
 
 ### Travellers wanted to dine with certainty
 
-I moderated two of the eight semi-structured interview sessions (and took notes on two others), where we asked recent tourists questions about their relationships with travel, food, and the apps they use for travel food.
+We ran eight interviews with recent tourists about travel, food, and the apps they use for it. I moderated two and took notes on two more.
 
-#### What we discovered
-
-Since participants wanted to feel like they had been to a place before, it was clear that we needed to reduce uncertainty before tourists walk in the door. So, I convinced my team to focus on cultural connection and menu availability as we moved forward through ideation and planning.
+People wanted to feel like they'd been somewhere before they walked in the door. So we focused on cultural connection and seeing the menu ahead of time.
 
 ![Affinity map from our interviews](/images/yumgo/research-1.jpg)
 ![Interview synthesis table](/images/yumgo/research-2.png)
@@ -65,9 +52,7 @@ Since participants wanted to feel like they had been to a place before, it was c
 
 ### So… what do we make?
 
-We got a little too excited about the different features we could include, so I defined our main user path early on to narrow our focus.
-
-For the wireframe, I constructed the main restaurant page, including the business info, menu, and reviews tabs.
+We got a little too excited about features, so I defined our main user path early to keep us focused. I built the main restaurant page for the wireframe: info, menu, and reviews.
 
 ![Home map](/images/yumgo/wireframe-1.png)
 ![Restaurant info](/images/yumgo/wireframe-2.png)
@@ -78,21 +63,17 @@ For the wireframe, I constructed the main restaurant page, including the busines
 ![Learn About Toronto](/images/yumgo/wireframe-7.png)
 ![Wishlist](/images/yumgo/wireframe-8.png)
 
-#### What we discovered
-
-- ![](/images/yumgo/icon-less-is-more.png) **+Less is more!** Minimize features, support a full journey
-- ![](/images/yumgo/icon-familiarity.png) **+Familiarity is the way** Model off popular apps for intuitive use
-
-This process should be simplified, and we could leverage familiarity to help support the entire discovery to visit flow.
+- ![](/images/yumgo/icon-less-is-more.png) **+Less is more!** Fewer features, one complete journey
+- ![](/images/yumgo/icon-familiarity.png) **+Familiarity is the way** Borrow from apps people already know
 
 ## User Testing
 
 ### Clarity had to be improved… a lot
 
-We studied 8 participant interactions with our Figma prototype, analyzing them through 2 tasks:
+Eight participants tried two tasks in our Figma prototype:
 
-1. Booking a reservation at a restaurant that is dog-friendly with vegan and gluten-free options
-2. Writing a review afterwards
+1. Book a table somewhere dog-friendly with vegan and gluten-free options
+2. Write a review afterwards
 
 <div class="callout-box">
 
@@ -121,18 +102,16 @@ In the nick of time, I solved the problem and toggling now worked better than ev
 
 #### What we discovered
 
-- ![](/images/yumgo/icon-filters.png) **!Filters were unclear** While interactions were fixed, participants still didn't understand what the icons meant
-- ![](/images/yumgo/icon-key-info.png) **!Key information was easy to miss** Text overload was visual noise, burying important info
+- ![](/images/yumgo/icon-filters.png) **!Filters were unclear** People still didn't know what the icons meant
+- ![](/images/yumgo/icon-key-info.png) **!Key info was easy to miss** Too much text buried what mattered
 
-Analyzing all tests, it was clear that content density was overloading users and causing confusion, so we needed to remove unneeded text and filler content wherever possible. Adding clarity to filter icons wouldn't hurt either.
+Time to cut the clutter and give those icons some labels.
 
 ## Final Prototype
 
 ### YumGo (Taylor's Version)
 
-My individual vision of the final prototype was to reflect the fun of travelling, while providing the comfort of popular restaurant apps and real-world photos to help ground tourists.
-
-I wanted to make this design convey an experience that was familiar, welcoming, complete, exciting, and reliable. Try it yourself:
+My own take on the final design: the fun of travelling, the comfort of apps you already know, and real photos to ground you. Try it yourself!
 
 <div class="prototype" data-device="phone"
   data-src="https://embed.figma.com/proto/X8Lj3tw4SuO8GV3fsCCiKU/YumGo-Final-Prototype?node-id=2131-13299&starting-point-node-id=2131%3A13299&page-id=2131%3A13129&scaling=scale-down&content-scaling=fixed&hide-ui=1&embed-host=share"
@@ -168,16 +147,12 @@ I wanted to make this design convey an experience that was familiar, welcoming, 
 
 ## Reflection
 
-### What about the leadership role?
+### Keeping four people's work feeling like one app
 
-#### Too much responsibility?
+As team lead, I was invested enough to see where things weren't connecting. Everyone used Figma and components a little differently, so there was a lot of reorganizing to do.
 
-As team leader, I happily took on extra responsibilities, until the group project almost became a Taylor project (which wasn't good for anybody). I learned to ask for help when needed and made sure I was giving all group members a voice.
+I'm proudest that I could spot when we were drifting off course, rally the team, and get everyone's ideas flowing together, instead of ending up with a bunch of disjointed pieces.
 
 #### Moving in reverse is still moving
 
-When I found out we were going in the wrong direction (like with wait times and authenticity), it was difficult to backpedal, but I learned this is a crucial part of the process. I made sure to hold ideas loosely and be open to different outcomes so I could accept these pivots for what they REALLY are: improvements!
-
-#### Overall…
-
-I found that a good team lead allocates responsibilities in a fair and logical way, admits when they are wrong, and works toward building a better project despite all challenges. I'm excited to continue working towards creating comfortable, happy, uninhibited, and productive team dynamics, whether leader or not! :)
+Backpedalling (like on wait times) was hard, but I learned to hold ideas loosely and see pivots for what they REALLY are: improvements!
