@@ -482,11 +482,12 @@ html:has(.viewer[open]) { overflow: hidden; }  /* stop the page scrolling behind
     translateX(calc(var(--side) * (min(var(--distance), 1) * var(--size) * var(--near) + var(--distance) * var(--size) * var(--step))))
     translateZ(calc(min(var(--distance), 1) * var(--size) * -0.5))
     rotateY(calc(var(--side) * min(var(--distance), 1) * var(--angle) * -1));
-  transition: transform 0.55s var(--ease);
+  transition: transform var(--glide, 0.55s) var(--ease);
   will-change: transform;
 }
 /* Side albums are dimmed by a dark layer on top (cheaper to animate than a filter). 0.3 = how dark */
-.cover::after { content: ''; position: absolute; inset: 0; background: #000; pointer-events: none; opacity: calc(min(var(--distance), 1) * 0.3); transition: opacity 0.55s var(--ease); }
+.cover::after { content: ''; position: absolute; inset: 0; background: #000; pointer-events: none; opacity: calc(min(var(--distance), 1) * 0.3); transition: opacity var(--glide, 0.55s) var(--ease); }
+.coverflow-stage.is-dragging .cover, .coverflow-stage.is-dragging .cover::after { transition: none; }   /* follow the finger exactly while dragging */
 .cover img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
 .cover-placeholder {
   display: flex; align-items: flex-end; width: 100%; height: 100%; padding: 16px; text-align: left; font-size: var(--fs-sm); font-weight: 600; color: #fff;
