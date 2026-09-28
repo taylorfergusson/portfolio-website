@@ -2,10 +2,18 @@ import { useEffect } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import Header from './Header.jsx'
 import Footer from './Footer.jsx'
+import { pageMeta } from '../meta.js'
 
 // Wraps every page with the header and footer.
 export default function Layout() {
   const { pathname, hash } = useLocation()
+
+  // On page change: update the browser tab title and description (set in src/site.js and src/projects.js)
+  useEffect(() => {
+    const meta = pageMeta(pathname)
+    document.title = meta.title
+    document.querySelector('meta[name="description"]')?.setAttribute('content', meta.description)
+  }, [pathname])
 
   // On page change: jump to the top (or to a #section like /#contact)
   useEffect(() => {
