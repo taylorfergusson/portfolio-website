@@ -228,7 +228,7 @@ section.hero { position: relative; isolation: isolate; margin-top: -72px; min-he
 .info-cards span { font-size: var(--fs-sm); color: var(--muted); }
 
 /* Scrolling tools strip */
-.marquee { width: 100%; overflow: hidden; cursor: grab; touch-action: pan-y; user-select: none; }
+.marquee { width: 100%; overflow: hidden; cursor: grab; touch-action: pan-y; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
 .marquee:active { cursor: grabbing; }
 .marquee-track { display: flex; gap: 10px; padding-right: 10px; width: max-content; }
 /* Icons sit faded until hovered; hovering one brings it to full strength and shows its name underneath.
@@ -244,6 +244,16 @@ section.hero { position: relative; isolation: isolate; margin-top: -72px; min-he
 @media (hover: hover) {
   .tool:hover .tool-icon { opacity: 1; transform: scale(1.08); }
   .tool:hover .tool-name { opacity: 1; translate: -50% 0; }
+}
+/* Phones: a tapped icon does the same */
+.tool.is-tapped .tool-icon { opacity: 1; transform: scale(1.08); }
+.tool.is-tapped .tool-name { opacity: 1; translate: -50% 0; }
+
+/* Words that change for touch screens, like "Click" vs "Tap" */
+.on-touch { display: none; }
+@media (hover: none) {
+  .on-mouse { display: none; }
+  .on-touch { display: inline; }
 }
 
 .callout { display: flex; align-items: center; justify-content: space-between; gap: 48px; }
@@ -458,18 +468,20 @@ html:has(.viewer[open]) { overflow: hidden; }  /* stop the page scrolling behind
 .about .coverflow-intro h2 { margin-bottom: 8px; }
 .coverflow { --size: clamp(150px, 20vw, 240px); margin-top: 56px; text-align: center; }
 .coverflow-stage {
-  position: relative; height: calc(var(--size) * 1.5); padding-top: 12px; perspective: 1400px; outline: none; touch-action: pan-y; user-select: none;
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 18%, #000 82%, transparent);   /* soft fade at both ends */
-  mask-image: linear-gradient(to right, transparent, #000 18%, #000 82%, transparent);
+  position: relative; height: calc(var(--size) * 1.5); padding-top: 12px; perspective: 1400px; outline: none; touch-action: pan-y; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;
+  /* spacing and angle of the side albums: first gap, gap between each after that, and how far they turn */
+  --near: 0.35; --step: 0.22; --angle: 65deg; --edge-fade: 18%;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 var(--edge-fade), #000 calc(100% - var(--edge-fade)), transparent);   /* soft fade at both ends */
+  mask-image: linear-gradient(to right, transparent, #000 var(--edge-fade), #000 calc(100% - var(--edge-fade)), transparent);
 }
 .cover {
   position: absolute; top: 12px; left: 50%; width: var(--size); aspect-ratio: 1; margin-left: calc(var(--size) / -2);
   padding: 0; border: 0; background: #000; cursor: pointer;
-  /* Side albums: pushed out to the side, back, and turned away. Change 0.35 / 0.22 for spacing and 65deg for the angle */
+  /* Side albums: pushed out to the side, back, and turned away. Spacing and angle are set on .coverflow-stage above */
   transform:
-    translateX(calc(var(--side) * (min(var(--distance), 1) * var(--size) * 0.35 + var(--distance) * var(--size) * 0.22)))
+    translateX(calc(var(--side) * (min(var(--distance), 1) * var(--size) * var(--near) + var(--distance) * var(--size) * var(--step))))
     translateZ(calc(min(var(--distance), 1) * var(--size) * -0.5))
-    rotateY(calc(var(--side) * min(var(--distance), 1) * -65deg));
+    rotateY(calc(var(--side) * min(var(--distance), 1) * var(--angle) * -1));
   transition: transform 0.55s var(--ease);
   will-change: transform;
 }
@@ -496,6 +508,12 @@ html:has(.viewer[open]) { overflow: hidden; }  /* stop the page scrolling behind
   opacity: 0; transition: opacity var(--fast) var(--ease);
 }
 .cover.is-current:hover .cover-play, .cover.is-playing .cover-play, .coverflow-stage:focus-visible .cover-play { opacity: 1; }
+@media (hover: none) { .cover.is-current .cover-play { opacity: 1; } }   /* touch screens: always show the play button on the middle album */
+/* Phones: bigger albums, two on each side, spread out more and turned less so they're easier to tap */
+@media (max-width: 600px) {
+  .coverflow { --size: 46vw; }
+  .coverflow-stage { --near: 0.45; --step: 0.3; --angle: 50deg; --edge-fade: 6%; }
+}
 .coverflow-stage:focus-visible .cover.is-current { outline: 3px solid var(--paper); outline-offset: 4px; }
 .coverflow-caption { min-height: 88px; }
 .coverflow-title { color: var(--paper) !important; font-size: var(--h4); font-weight: 600; }

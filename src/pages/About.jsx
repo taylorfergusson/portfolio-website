@@ -88,7 +88,7 @@ export default function About() {
 
           <div className="coverflow-intro">
             <h2 className="reveal">My faves!</h2>
-            <p className="reveal">Click an album to hear a little preview</p>
+            <p className="reveal"><span className="on-mouse">Click</span><span className="on-touch">Tap</span> an album to hear a little preview</p>
           </div>
         </div>
         <CoverFlow />

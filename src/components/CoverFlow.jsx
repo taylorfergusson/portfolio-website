@@ -8,8 +8,11 @@ import songData from '../songs-data.json'
 
 const VOLUME = 0.8    // preview loudness (0 to 1)
 const FADE = 400      // how long the sound fades in and out (milliseconds)
-const DRAG_STEP = 70  // how far to drag or swipe (pixels) to move one album
-const VISIBLE = 4     // how many albums to show on each side of the middle one
+const SWIPE_MIN = 30     // how far a swipe has to go (pixels) to move one album
+const FLICK_SPEED = 0.8 // a swipe faster than this (pixels per millisecond) moves extra albums
+const MAX_FLICK = 4     // the most albums one fast flick can move
+const VISIBLE = 4       // how many albums to show on each side of the middle one
+const VISIBLE_PHONE = 2 // the same, on phones
 const ART_SIZE = 400  // album art resolution to download (pixels)
 
 // Sorted A–Z by artist, like the iPod: "The Cardigans" files under C. Songs by the same artist go A–Z by title.
@@ -29,6 +32,14 @@ export default function CoverFlow() {
   const fadeTimer = useRef(null)
   const drag = useRef(null)
   const wheel = useRef(0)
+  const [phone, setPhone] = useState(() => window.matchMedia('(max-width: 600px)').matches)
+  useEffect(() => {
+    const query = window.matchMedia('(max-width: 600px)')
+    const update = () => setPhone(query.matches)
+    query.addEventListener('change', update)
+    return () => query.removeEventListener('change', update)
+  }, [])
+  const visible = phone ? VISIBLE_PHONE : VISIBLE
 
   const go = (i) => setIndex(Math.max(0, Math.min(items.length - 1, i)))
   const current = items[index]
@@ -84,15 +95,32 @@ export default function CoverFlow() {
     if (Math.abs(wheel.current) > 40) { go(index + Math.sign(wheel.current)); wheel.current = 0 }
   }
 
-  // Drag with the mouse or swipe on a phone
-  const onPointerDown = (e) => { drag.current = { x: e.clientX, start: index, moved: false } }
-  const onPointerMove = (e) => {
-    if (!drag.current) return
-    const dx = e.clientX - drag.current.x
-    if (Math.abs(dx) > 8) drag.current.moved = true
-    go(drag.current.start - Math.round(dx / DRAG_STEP))
+  // Swipe (or drag with the mouse): one swipe moves one album, a fast flick moves a few
+  const onPointerDown = (e) => {
+    const now = performance.now()
+    drag.current = { x: e.clientX, lastX: e.clientX, lastTime: now, speed: 0, moved: false }
   }
-  const onPointerUp = () => { setTimeout(() => (drag.current = null), 0) }
+  const onPointerMove = (e) => {
+    const d = drag.current
+    if (!d) return
+    const now = performance.now()
+    if (Math.abs(e.clientX - d.x) > 8) d.moved = true
+    const dt = Math.max(now - d.lastTime, 1)
+    d.speed = 0.7 * ((e.clientX - d.lastX) / dt) + 0.3 * d.speed // recent speed, smoothed
+    d.lastX = e.clientX
+    d.lastTime = now
+  }
+  const onPointerUp = (e) => {
+    const d = drag.current
+    if (!d) return
+    const dx = e.clientX - d.x
+    if (Math.abs(dx) >= SWIPE_MIN) {
+      const fast = Math.abs(d.speed) > FLICK_SPEED
+      const steps = fast ? Math.min(MAX_FLICK, 1 + Math.round((Math.abs(d.speed) - FLICK_SPEED) * 3)) : 1
+      go(index - Math.sign(dx) * steps)
+    }
+    setTimeout(() => (drag.current = null), 0) // after the click that follows, so a swipe doesn't also count as a tap
+  }
 
   return (
     <div className="coverflow">
@@ -107,7 +135,7 @@ export default function CoverFlow() {
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={onPointerUp}
-        onPointerLeave={onPointerUp}
+        onPointerCancel={() => { drag.current = null }}
       >
         {items.map((song, i) => {
           const offset = i - index
@@ -123,7 +151,7 @@ export default function CoverFlow() {
               style={{ '--offset': offset, '--distance': distance, '--side': Math.sign(offset), zIndex: 100 - distance }}
               onClick={() => { if (!drag.current?.moved) onCoverClick(i) }}
               aria-label={`${song.title} by ${song.artist}`}
-              hidden={distance > VISIBLE}
+              hidden={distance > visible}
             >
               {song.artwork
               ? <>

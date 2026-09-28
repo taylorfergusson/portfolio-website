@@ -17,25 +17,41 @@ export default function Layout() {
   // Fade-up animation: anything with class="reveal" (and every block in a
   // case study) fades in when it scrolls into view. The look is set in styles.css.
   useEffect(() => {
+    const show = (el, i = 0) => {
+      if (el.classList.contains('visible')) return
+      el.style.transitionDelay = `${Math.min(i, 5) * 80}ms` // items appearing together go one after another
+      el.classList.add('visible')
+      observer.unobserve(el)
+      // Once it has faded in, remove the animation classes so hover effects work normally
+      setTimeout(() => {
+        el.classList.remove('reveal', 'visible')
+        el.style.transitionDelay = ''
+      }, 1400)
+    }
     const observer = new IntersectionObserver((entries) => {
-      const appearing = entries.filter((entry) => entry.isIntersecting)
-      appearing.forEach((entry, i) => {
-        const el = entry.target
-        el.style.transitionDelay = `${Math.min(i, 5) * 80}ms` // items appearing together go one after another
-        el.classList.add('visible')
-        observer.unobserve(el)
-        // Once it has faded in, remove the animation classes so hover effects work normally
-        setTimeout(() => {
-          el.classList.remove('reveal', 'visible')
-          el.style.transitionDelay = ''
-        }, 1400)
-      })
-    }, { threshold: 0.1 })
-    document.querySelectorAll('.reveal, .prose > *').forEach((el) => {
+      entries.filter((entry) => entry.isIntersecting).forEach((entry, i) => show(entry.target, i))
+    }, { threshold: 0, rootMargin: '0px 0px -8% 0px' }) // starts as soon as the top of a block is on screen
+    // The black process section is too tall to fade in as one piece, so its contents fade in one by one
+    document.querySelectorAll('.reveal, .prose > :not(.process), .prose .process > *').forEach((el) => {
       el.classList.add('reveal')
       observer.observe(el)
     })
-    return () => observer.disconnect()
+    // Safety net: anything already scrolled past is shown, even if a fast scroll skipped it
+    let frame
+    const catchUp = () => {
+      cancelAnimationFrame(frame)
+      frame = requestAnimationFrame(() => {
+        document.querySelectorAll('.reveal:not(.visible)').forEach((el) => {
+          if (el.getBoundingClientRect().top < window.innerHeight) show(el)
+        })
+      })
+    }
+    window.addEventListener('scroll', catchUp, { passive: true })
+    return () => {
+      observer.disconnect()
+      window.removeEventListener('scroll', catchUp)
+      cancelAnimationFrame(frame)
+    }
   }, [pathname])
 
   return (
