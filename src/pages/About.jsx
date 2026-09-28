@@ -1,5 +1,6 @@
 import { email } from '../site.js'
 import CoverFlow from '../components/CoverFlow.jsx'
+import FlingPhoto from '../components/FlingPhoto.jsx'
 
 // The About page. Edit the text right here, like HTML.
 export default function About() {
@@ -19,7 +20,9 @@ export default function About() {
             <span className="tag">Sooooo much music</span>
           </p>
         </div>
-        <img src="/images/headshot.png" alt="Portrait of Taylor Fergusson" className="headshot reveal" />
+        <div className="photo-wrap reveal">
+          <FlingPhoto src="/images/headshot.png" alt="Portrait of Taylor Fergusson" />
+        </div>
       </section>
 
       <section className="container">
