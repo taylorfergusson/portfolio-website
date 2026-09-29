@@ -183,6 +183,7 @@ Small extras:
 - Home, About, Projects and Resume: edit `pages` at the bottom of `src/site.js`.
 - Case studies: they use the project's `title` and `summary` from `src/projects.js`.
 - Preview images are 1200 x 630 JPGs in `public/images/share/`: `default.jpg` (your headshot card, used everywhere except case studies) and one per case study, named after its slug (`yumgo.jpg`...). To swap one, replace the file and keep the name. A project can also point to a different image with `shareImage: '/images/share/...'` in `projects.js`.
+- The build also makes `sitemap.xml` and `robots.txt` (every page, for Google), and a plain-text copy of each page for search engines that don't run JavaScript. New case studies are included automatically.
 - Previews are written into each page when the site builds (`scripts/make-pages.mjs`), so changes show up after you push. Sites like LinkedIn remember old previews for a while; https://www.linkedin.com/post-inspector/ refreshes it.
 
 ## Publishing
