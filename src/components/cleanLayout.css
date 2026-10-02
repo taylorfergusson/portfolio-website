@@ -1,0 +1,165 @@
+/* =========================================================
+   Case study layout (see cleanLayout.js). Used for every case study; theme: 'classic' in projects.js
+   brings back the older look. Black and grey text on white, thin lines, small labels on the left,
+   content on the right. Colour is only used where it means something (see "Colour" below).
+   ========================================================= */
+.cs-clean {
+  /* Colours with a meaning (the same ones as the home page) */
+  --c-red: #BE3A30;          /* my part: what I personally did */
+  --c-orange: #C06234;       /* problems and pain points */
+  --c-orange-text: #A6511F;  /* the same orange, a touch darker so small text is readable */
+  --c-green: #20665F;        /* solutions and fixes */
+  --c-purple: #6D5699;       /* insights and learning */
+  --hairline: #e8e8ed;   /* the thin lines between rows */
+  --body: #2c2c2e;       /* paragraph text: darker than the other case studies */
+  --label-gap: 56px;     /* space between the label column and the content */
+  --row-space: 112px;    /* space above and below each row */
+}
+
+/* One wide column, no side menu */
+.case-study.cs-clean { display: block; max-width: calc(1180px + var(--gutter) * 2); }
+.cs-clean .cs-nav { display: none; }
+.cs-clean .cs-main { max-width: none; margin: 0; }
+
+/* ---------- Top of the page ---------- */
+.cs-back { display: inline-flex; gap: 6px; font-size: var(--fs-sm); color: var(--muted); transition: color var(--fast) var(--ease); }
+.cs-back:hover { color: var(--ink); }
+.cs-eyebrow { margin-top: 64px; font-size: var(--fs-sm); font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+.cs-clean .cs-main > h1 { margin-top: 12px; font-size: var(--fs-5xl); line-height: 1; letter-spacing: -0.04em; }
+.cs-subtitle { margin-top: 20px; max-width: 34em; font-size: var(--fs-md); line-height: 1.45; color: var(--muted); }
+.cs-clean .banner { margin: 56px 0 0; border-radius: var(--radius-sm); }
+
+/* Role / Team / Timeline / Tools in a thin outlined box */
+.cs-clean .details {
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0; margin: 40px 0 0; padding: 0;
+  border: 1px solid var(--hairline); border-radius: var(--radius-sm); overflow: hidden;
+}
+.cs-clean .details > div { padding: 24px 28px; box-shadow: -1px 0 0 var(--hairline); }
+.cs-clean .details dt { font-size: var(--fs-xs); font-weight: 500; letter-spacing: 0.14em; }
+
+/* ---------- Rows: label on the left, content on the right ---------- */
+.cs-clean .prose { margin: 96px 0 0; }
+.cs-clean .prose > .cs-row {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); column-gap: var(--label-gap);
+  margin: 0; padding: var(--row-space) 0; border-top: 1px solid var(--hairline);
+}
+.cs-content { min-width: 0; }   /* lets wide things like galleries scroll inside the column instead of stretching it */
+.cs-label { position: sticky; top: 110px; align-self: start; }   /* the label stays in view while you read its row */
+.cs-clean .prose .cs-label h2 {
+  margin: 0; padding: 0; border: 0; scroll-margin-top: 110px;
+  font-size: var(--fs-sm); font-weight: 500; letter-spacing: 0.14em; color: var(--muted);
+}
+.cs-clean .prose .cs-label h2[data-step]::before { content: attr(data-step); display: block; margin-bottom: 6px; color: var(--ink); }
+
+/* Spacing inside a row's content (same settings as the other case studies) */
+.cs-content > :first-child { margin-top: 0; }
+:where(.cs-clean .cs-content) > * + * { margin-top: var(--flow); }
+:where(.cs-clean .cs-content) > :where(div, blockquote, ul.badge-cards, ul:has(> li > strong:first-child), ul:has(> li > img:first-child), p:has(> img:only-child)):not(:first-child),
+:where(.cs-clean .cs-content) > :where(div, blockquote, ul.badge-cards, ul:has(> li > strong:first-child), ul:has(> li > img:first-child), p:has(> img:only-child), p:has(> em:only-child)) + :where(:not(h3, h4)) { margin-top: var(--block-gap); }
+.cs-clean .cs-content > p > img:only-child { padding: 24px; background: var(--soft); }
+
+.cs-clean .prose h3 { margin-top: 0; font-size: var(--fs-xl); line-height: 1.15; letter-spacing: -0.02em; }
+.cs-clean .prose p, .cs-clean .prose li { color: var(--body); }
+
+/* ---------- Cards: a round badge with the icon in white, and plain text ---------- */
+.prose .badge-cards { list-style: none; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 28px 40px; }
+.cs-clean .prose .badge-cards > li { display: grid; grid-template-columns: 34px 1fr; column-gap: 14px; margin: 0; padding: 0; background: none; border-radius: 0; color: var(--muted); line-height: 1.5; }
+.prose .badge-cards > li.no-badge { grid-template-columns: 1fr; }
+.prose .badge-cards > li.no-badge .badge { display: none; }
+.prose .badge {
+  width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--ink); color: #fff; font-size: 16px; font-weight: 700; line-height: 1;
+}
+.prose .card-problem .badge { background: var(--c-orange); }        /* problems */
+.prose .card-opportunity .badge { background: var(--c-green); }     /* opportunities */
+.prose .badge img { position: static; width: 18px; height: 18px; border-radius: 0; opacity: 1; filter: brightness(0) invert(1); }   /* your icon, in white */
+.prose .badge-body > strong { display: block; margin-bottom: 2px; font-size: var(--fs-base); font-weight: 600; line-height: 1.35; color: var(--ink); }
+
+/* The summary row keeps small coloured labels instead of badges */
+.cs-clean .prose .summary ul:has(> li > strong:first-child) { gap: 32px 40px; }
+.cs-clean .prose .summary ul:has(> li > strong:first-child) > li { padding: 16px 0 0; background: none; border-radius: 0; border-top: 2px solid var(--hairline); color: var(--body); }
+.cs-clean .prose .summary .card > strong > .visually-hidden { display: none; }
+.cs-clean .prose .summary li > strong,
+.cs-clean .prose .summary .card-problem > strong,
+.cs-clean .prose .summary .card-opportunity > strong { font-size: var(--fs-xs); font-weight: 500; letter-spacing: 0.14em; color: var(--muted); }
+
+/* ---------- My part: what I personally did, under the section label ---------- */
+/* In a case study, write <p class="my-part">What I did</p> anywhere in a section */
+.prose .my-part { margin-top: 20px; padding-top: 12px; border-top: 1px solid var(--hairline); max-width: 18em; font-size: var(--fs-sm); line-height: 1.45; letter-spacing: 0; color: var(--ink); }
+.prose .my-part::before { content: 'My part'; display: block; margin-bottom: 4px; font-size: var(--fs-xs); font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--c-red); }
+
+/* ---------- Quieter extras ---------- */
+.cs-clean .prose .numbered li { border-color: var(--hairline); }
+.cs-clean .prose .numbered li::before { font-size: var(--fs-lg); font-weight: 500; color: var(--muted); }
+.cs-clean .prose blockquote { padding: 32px 0; background: none; border: 0; border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); border-radius: 0; }
+.cs-clean .prose blockquote p { font-size: var(--fs-lg); line-height: 1.4; letter-spacing: -0.01em; }
+.cs-clean .prose blockquote strong:first-child,
+.cs-clean .prose .callout-box > p:first-child strong:only-child { font-size: var(--fs-xs); font-weight: 500; letter-spacing: 0.14em; color: var(--muted); }
+.cs-clean .prose .callout-box { padding: 40px; background: none; border: 1px solid var(--hairline); border-radius: var(--radius-sm); }
+.cs-clean .prose .callout-box .compare img { background: var(--soft); }
+.cs-clean .prose li::marker { color: var(--muted); }
+.cs-clean .prose .kicker { font-size: var(--fs-xs); font-weight: 500; letter-spacing: 0.14em; color: var(--muted); }
+.cs-clean .prose .steps li:not(:last-child)::after { color: var(--line); }
+
+/* ---------- Endings: live project and next project ---------- */
+.cs-clean .cs-end { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); column-gap: var(--label-gap); padding: 80px 0; border-top: 1px solid var(--hairline); }
+.cs-end-label { font-size: var(--fs-sm); font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+.cs-end-body { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.cs-end-body p { color: var(--body); }
+.cs-next { display: flex; align-items: center; justify-content: space-between; gap: 24px; font-size: var(--fs-4xl); font-weight: 600; line-height: 1; letter-spacing: -0.04em; color: var(--ink); }
+.cs-next .arrow { font-size: var(--fs-2xl); font-weight: 300; color: var(--muted); transition: transform var(--fast) var(--ease), color var(--fast) var(--ease); }
+.cs-next:hover .arrow { transform: translate(4px, -4px); color: var(--ink); }
+.cs-clean .back-row { display: none; }
+
+/* ---------- Colour: each colour means something ---------- */
+/* The key under the details box */
+.cs-key { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: 28px; font-size: var(--fs-sm); color: var(--muted); }
+.cs-key span { display: inline-flex; align-items: center; gap: 8px; }
+.cs-key span::before { content: ''; width: 10px; height: 10px; border-radius: 50%; background: var(--dot); }
+.key-me { --dot: var(--c-red); }
+.key-problem { --dot: var(--c-orange); }
+.key-solution { --dot: var(--c-green); }
+.key-insight { --dot: var(--c-purple); }
+.cs-clean .prose { margin-top: 64px; }
+
+/* Black: where you are (process steps, outcome numbers). Red is kept for "My part". */
+.cs-clean .prose .numbered li::before { color: var(--ink); }
+
+/* Summary row: a coloured line and label for the problem and the solution */
+.cs-clean .prose .summary ul > li.card-problem { border-top-color: var(--c-orange); }
+.cs-clean .prose .summary ul > li.card-opportunity { border-top-color: var(--c-green); }
+.cs-clean .prose .summary .card-problem > strong { color: var(--c-orange-text); }
+.cs-clean .prose .summary .card-opportunity > strong { color: var(--c-green); }
+
+/* Before / after: before is orange, after is green */
+.cs-clean .prose .compare figure:first-child figcaption { color: var(--c-orange-text); }
+.cs-clean .prose .compare figure:last-child figcaption { color: var(--c-green); }
+.cs-clean .prose .kicker { color: var(--c-green); }
+
+/* Purple: insights. Takeaways and the problem statement get a purple line and a faint purple wash */
+.cs-clean .prose blockquote {
+  padding: 28px 32px; border: 0; border-top: 2px solid var(--c-purple); border-radius: 0;
+  background: color-mix(in srgb, var(--c-purple) 5%, white);
+}
+.cs-clean .prose blockquote strong:first-child { color: var(--c-purple); }
+.cs-clean .prose .cs-row[data-section="reflection"] .numbered li::before { color: var(--c-purple); }
+
+/* The MAYDAY story was a problem in testing, so its label is orange */
+.cs-clean .prose .callout-box { border-top: 2px solid var(--c-orange); }
+.cs-clean .prose .callout-box > p:first-child strong:only-child { color: var(--c-orange-text); }
+
+/* ---------- Phones: rows stack, label on top ---------- */
+@media (max-width: 800px) {
+  .cs-clean { --row-space: 72px; }
+  .cs-eyebrow { margin-top: 40px; }
+  .cs-clean .cs-main > h1 { font-size: var(--fs-2xl); }
+  .cs-clean .details { grid-template-columns: 1fr 1fr; }
+  .cs-clean .details > div { box-shadow: -1px 0 0 var(--hairline), 0 -1px 0 var(--hairline); }
+  .cs-clean .prose { margin-top: 56px; }
+  .cs-clean .prose > .cs-row, .cs-clean .cs-end { grid-template-columns: 1fr; row-gap: 20px; }
+  .cs-label { position: static; }
+  .cs-clean .prose .summary ul:has(> li > strong:first-child), .prose .badge-cards { grid-template-columns: 1fr; gap: 24px; }
+  .prose .my-part { max-width: none; }
+  .cs-end-body { flex-direction: column; align-items: flex-start; }
+  .cs-next { font-size: var(--fs-xl); }
+}

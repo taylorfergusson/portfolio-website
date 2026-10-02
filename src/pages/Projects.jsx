@@ -6,7 +6,7 @@ export default function Projects() {
     <section className="projects dark">
       <div className="container">
         <h1 className="reveal">Projects</h1>
-        {projects.map((p) => <ProjectCard key={p.slug} project={p} />)}
+        {projects.filter((p) => !p.hidden).map((p) => <ProjectCard key={p.slug} project={p} />)}
       </div>
     </section>
   )

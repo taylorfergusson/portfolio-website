@@ -3,6 +3,8 @@ import { Link, useParams } from 'react-router-dom'
 import { marked } from 'marked'
 import { projects } from '../projects.js'
 import NotFound from './NotFound.jsx'
+import { makeCleanLayout } from '../components/cleanLayout.js'
+import { makeGallery } from '../components/galleries.js'
 
 // Loads every .md file in src/case-studies/ as text
 const caseStudies = import.meta.glob('../case-studies/*.md', { query: '?raw', import: 'default', eager: true })
@@ -62,69 +64,6 @@ function markCardType(strong) {
   strong.prepend(tag)
 }
 
-// Turns a paragraph of back-to-back images into a swipeable row of equal tiles.
-// Each tile shows the image's alt text as a caption and opens the viewer when clicked.
-function makeGallery(p, openViewer) {
-  const images = [...p.querySelectorAll(':scope > img')].map((img) => ({ src: img.getAttribute('src'), alt: img.getAttribute('alt') || '' }))
-
-  const row = document.createElement('div')
-  row.className = 'gallery'
-  images.forEach((image, i) => {
-    const tile = document.createElement('figure')
-    tile.className = 'tile'
-    const button = document.createElement('button')
-    button.type = 'button'
-    button.className = 'tile-button'
-    button.setAttribute('aria-label', `Enlarge: ${image.alt || `image ${i + 1}`}`)
-    const img = document.createElement('img')
-    img.src = image.src
-    img.alt = image.alt
-    img.loading = 'lazy'
-    button.append(img)
-    button.addEventListener('click', () => openViewer(images, i))
-    tile.append(button)
-    if (image.alt) {
-      const caption = document.createElement('figcaption')
-      caption.textContent = image.alt
-      tile.append(caption)
-    }
-    row.append(tile)
-  })
-
-  // Tall images (like phone screens) get tall tiles; everything else gets wide tiles
-  Promise.all([...row.querySelectorAll('img')].map((img) => img.decode().catch(() => {}))).then(() => {
-    const imgs = [...row.querySelectorAll('img')].filter((img) => img.naturalWidth)
-    const average = imgs.reduce((sum, img) => sum + img.naturalWidth / img.naturalHeight, 0) / (imgs.length || 1)
-    if (average < 0.8) row.classList.add('portrait')
-  })
-
-  // Fade out whichever edge has more images beyond it
-  const updateFade = () => {
-    const end = row.scrollWidth - row.clientWidth
-    row.classList.toggle('more-left', row.scrollLeft > 4)
-    row.classList.toggle('more-right', row.scrollLeft < end - 4)
-  }
-  row.addEventListener('scroll', updateFade, { passive: true })
-  new ResizeObserver(updateFade).observe(row)
-
-  const controls = document.createElement('div')
-  controls.className = 'gallery-controls'
-  for (const [label, direction, symbol] of [['Previous images', -1, '‹'], ['Next images', 1, '›']]) {
-    const b = document.createElement('button')
-    b.type = 'button'
-    b.className = 'gallery-button'
-    b.setAttribute('aria-label', label)
-    b.textContent = symbol
-    b.addEventListener('click', () => row.scrollBy({ left: direction * row.clientWidth * 0.6, behavior: 'smooth' }))
-    controls.append(b)
-  }
-
-  const wrap = document.createElement('div')
-  wrap.className = 'gallery-wrap'
-  wrap.append(row, controls)
-  p.replaceWith(wrap)
-}
-
 export default function CaseStudy() {
   const { slug } = useParams()
   const project = projects.find((p) => p.slug === slug)
@@ -155,6 +94,7 @@ export default function CaseStudy() {
     })
     prose.querySelectorAll('.prototype').forEach(makePrototype)
     prose.querySelectorAll('li > strong').forEach(markCardType)
+    if (project?.theme !== 'classic') makeCleanLayout(prose)
   }, [slug])
 
   // Highlight the section you're currently reading in the side menu
@@ -203,9 +143,15 @@ export default function CaseStudy() {
   if (!project || !markdown) return <NotFound />
 
   const current = viewer && viewer.images[viewer.index]
+  // Every case study uses the clean layout. theme: 'classic' in projects.js brings back the older look.
+  const clean = project.theme !== 'classic'
+  // The next project in the list (skipping hidden ones), for the "Next project" link at the end
+  const visible = projects.filter((p) => !p.hidden)
+  const after = projects.slice(projects.indexOf(project) + 1).find((p) => !p.hidden)
+  const next = after || visible[0]
 
   return (
-    <article className="case-study container">
+    <article className={`case-study container${clean ? ' cs-clean' : ''}`}>
       {/* Side menu of sections (desktop only) */}
       {sections.length > 0 && (
         <nav ref={navRef} className="cs-nav" aria-label="Case study sections">
@@ -220,7 +166,15 @@ export default function CaseStudy() {
       )}
 
       <div className="cs-main">
-        <h1 className="reveal">{project.title}</h1>
+        {clean && (
+          <>
+            <Link to="/case-study" className="cs-back"><span aria-hidden="true">←</span> All projects</Link>
+            <p className="cs-eyebrow reveal">{project.category} · {project.date}</p>
+          </>
+        )}
+        <h1 className="reveal">{clean ? project.title.split(' - ')[0] : project.title}</h1>
+        {clean && <p className="cs-subtitle reveal">{project.summary}</p>}
+        {clean && <img src={project.thumbnail} alt={project.thumbnailAlt || project.title} className="banner reveal" />}
         <dl className="details reveal">
           {Object.entries(project.details).map(([label, value]) => (
             <div key={label}>
@@ -229,10 +183,28 @@ export default function CaseStudy() {
             </div>
           ))}
         </dl>
-        <img src={project.thumbnail} alt={project.thumbnailAlt || project.title} className="banner reveal" />
+        {!clean && <img src={project.thumbnail} alt={project.thumbnailAlt || project.title} className="banner reveal" />}
 
         {/* The case study itself, written in Markdown */}
         <div className="prose" ref={proseRef} dangerouslySetInnerHTML={{ __html: marked.parse(markdown) }} />
+
+        {clean && project.link && (
+          <section className="cs-end">
+            <p className="cs-end-label">{project.linkLabel || 'Live project'}</p>
+            <div className="cs-end-body">
+              <p>{project.linkText || 'See it for yourself.'}</p>
+              <a className="btn" href={project.link} target="_blank" rel="noreferrer">{project.linkButton || 'Visit site'} ↗</a>
+            </div>
+          </section>
+        )}
+        {clean && next && (
+          <section className="cs-end">
+            <p className="cs-end-label">Next project</p>
+            <Link to={`/case-study/${next.slug}`} className="cs-next">
+              {next.title.split(' - ')[0]} <span className="arrow" aria-hidden="true">↗</span>
+            </Link>
+          </section>
+        )}
 
         <p className="back-row">
           <Link to="/case-study" className="text-link back"><span className="chevron" aria-hidden="true">‹</span> All projects</Link>

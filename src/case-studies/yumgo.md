@@ -1,5 +1,7 @@
 ## Overview
 
+<p class="my-part">Led a team of 4, from research to prototype</p>
+
 ### Comfort in the unfamiliar
 
 YumGo is a food discovery app for tourists. When you're somewhere new, with dietary needs or a certain vibe in mind, it helps you find a place that feels right.
@@ -13,6 +15,8 @@ YumGo is a food discovery app for tourists. When you're somewhere new, with diet
 </div>
 
 ## Result
+
+<p class="my-part">Designed my own version of the final prototype</p>
 
 ### YumGo (Taylor's Version)
 
@@ -74,6 +78,8 @@ Now you're bouncing between apps to find the info you actually care about. Where
 
 ## Secondary research
 
+<p class="my-part">Convinced the team to pivot from speed to authenticity</p>
+
 ### We (wrongfully) assumed it was all about time
 
 We thought tourists wanted food ASAP so they could get back to sightseeing. Early research said otherwise: wait times barely came up.
@@ -87,6 +93,8 @@ We thought tourists wanted food ASAP so they could get back to sightseeing. Earl
 > So I convinced my team to pivot: less about speed, more about authentic experiences that current apps weren't supporting.
 
 ## Interviews
+
+<p class="my-part">Moderated 2 interviews and took notes on 2 more</p>
 
 ### Travellers wanted to dine with certainty
 
@@ -103,6 +111,8 @@ We ran eight interviews with recent tourists about travel, food, and the apps th
 > People wanted to feel like they'd been somewhere before they walked in the door. So we focused on cultural connection and seeing the menu ahead of time.
 
 ## Prototyping
+
+<p class="my-part">Defined our main user path and built the main restaurant page</p>
 
 ### So… what do we make?
 
@@ -127,6 +137,8 @@ We got a little too excited about features, so I defined our main user path earl
 </div>
 
 ## Testing
+
+<p class="my-part">Spotted and fixed the broken filter toggles between tests</p>
 
 ### Clarity had to be improved… a lot
 

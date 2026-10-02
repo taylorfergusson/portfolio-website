@@ -36,4 +36,4 @@ export function pageMeta(pathname) {
 }
 
 // Every page that gets its own link preview
-export const allPaths = [...Object.keys(pages), ...projects.map((p) => `/case-study/${p.slug}`)]
+export const allPaths = [...Object.keys(pages), ...projects.filter((p) => !p.hidden).map((p) => `/case-study/${p.slug}`)]

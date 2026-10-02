@@ -5,6 +5,8 @@
 
 ## Overview
 
+<p class="my-part">Built it solo: crawler, algorithm, server, and site</p>
+
 ### Shazam, but for SoundCloud
 
 FoundCloud finds the edits, bootlegs, and secret tracks that DJs love to gatekeep. I built it because I was tired of falling in love with songs I could never find again.
@@ -77,6 +79,8 @@ A playground of edits and bootlegs, with nothing to search it.
 
 ## The Hard Part
 
+<p class="my-part">Built the matching algorithm from scratch</p>
+
 ### A matching algorithm from nothing
 
 The hardest part, and the part I'm proudest of. I started with nothing but 10,000 songs and a lot of reading about how audio fingerprinting actually works, starting with how Shazam does it.
@@ -112,5 +116,3 @@ I don't want it to turn into this whole big thing, though. I just want it to hel
 2. **Both halves of my brain** This is the project where both halves of my brain finally got to work together. I found the problem as a listener, then built the fix myself.
 
 </div>
-
-<p><a class="btn" href="https://foundcloud.taylorfergusson.com/" target="_blank" rel="noreferrer">Try FoundCloud ↗</a></p>

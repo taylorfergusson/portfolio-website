@@ -19,7 +19,7 @@ src/
     Home.jsx           hero words + tools list are at the top of this file
     About.jsx
     Projects.jsx
-    CaseStudy.jsx      the template every case study uses (side menu, galleries, image viewer)
+    CaseStudy.jsx      the template every case study uses (title, details, ending, image viewer)
   case-studies/      one Markdown file per case study (yumgo.md, ciut-upgrade.md, foundcloud.md)
   projects.js        the list of projects: title, date, thumbnail, summary, and the
                      Role / Team / Timeline / Tools details shown at the top of each case study
@@ -29,6 +29,8 @@ src/
     Footer.jsx
     Layout.jsx         wraps every page; runs the fade-up animation
     ProjectCard.jsx    project cards on Home + Projects
+    cleanLayout.js/.css  the case study layout: label column, badges, My part, colours
+    galleries.js/.css    case study galleries (bento grid + scroll strip)
     HeroBackground.jsx moving colour blobs behind the home hero (colours + speed at the top)
     ToolStrip.jsx      draggable scrolling strip of tool icons
     FlingPhoto.jsx     the headshot you can fling around
@@ -47,17 +49,20 @@ public/images/       all images, one folder per project
 
 | Write this | You get |
 | --- | --- |
-| `## Overview` | Small red section label. It's also the name in the side menu, so rename it here to rename it there |
+| `## Overview` | Starts a new section. The name becomes the small label in the left column |
+| `<p class="my-part">What I did</p>` right under a `##` | A red **My part** note under the section's label. Keep it to one short line |
 | `### Big heading` | The section's big heading |
 | `#### Subheading` | Smaller heading |
-| `> **Title**` then `> text` on the next line | Grey callout box with a red title |
+| `> **Title**` then `> text` on the next line | Big takeaway box with a purple title (purple = insight) |
 | `*italic line*` | Grey caption text |
 | `![caption](/images/folder/file.jpg)` | A single image |
-| 2+ images on back-to-back lines | A swipeable gallery. The text in `[ ]` becomes each caption, and clicking opens a full-screen viewer |
-| A bullet list where every item starts with `**bold**` | Cards, two per row. The bold part is the card title, the rest is the description |
-| `- ![](/images/icon.png) **Title** text` | A card with an icon on the left |
-| `- **!Title** text` | A **problem** card, tinted brand orange |
-| `- **+Title** text` | An **opportunity** card, tinted brand green |
+| 2+ images on back-to-back lines | A gallery, picked automatically. Tall images (phone screens, wireframes) become a **scroll strip** you can drag or swipe; everything else becomes a **bento grid** (one big image, smaller ones around it). The text in `[ ]` is the caption: anything before a `:` is the short label, and the full text shows in the full-screen viewer. Put the image you want biggest first |
+| A bullet list where every item starts with `**bold**` | Cards, two per row, each with a round badge. The bold part is the card title, the rest is the description |
+| `- ![](/images/icon.png) **Title** text` | Your icon, turned white, inside the badge |
+| `- **!Title** text` | A **problem** card: orange badge (`!` if there's no icon) |
+| `- **+Title** text` | An **opportunity** card: green badge (`+` if there's no icon) |
+
+**Colours mean something** (and a small key above the first section says so): red = my part, orange = problem, green = solution, purple = insight. They're set at the top of `src/components/cleanLayout.css`.
 
 A bigger callout that holds a whole story (text, images, before/after) as one box. Leave the blank lines in:
 
@@ -113,7 +118,7 @@ Before / after images:
 ```
 
 **Case study layout.** Every case study follows the same order, so they feel like a set:
-Overview (summary cards) → Result (prototype + "What came out of it") → **the process section** (black, full width) → Reflection.
+Overview (summary cards) → Result (prototype + "What came out of it") → **the process section** → Reflection, then a link row and "Next project" at the end.
 
 Summary cards, three across. `!` makes a problem card, `+` an opportunity card:
 
@@ -138,7 +143,7 @@ Big numbered list (outcomes, fixes, lessons). Each item is a bold title, then it
 </div>
 ```
 
-The process section. Everything between the two `div` lines gets a full-width black background (like the dark sections on the home page), and its sections are indented in the side menu. Its colours are set at the top of the "Process section" part of `styles.css`. Start it with `## The process`, and link each step to a section below (the link is the section's `##` name in lowercase, with dashes for spaces):
+The process section. Every `##` section between the two `div` lines gets a numbered label ("Process · 01", "Process · 02"...). Start it with `## The process`, and link each step to a section below (the link is the section's `##` name in lowercase, with dashes for spaces):
 
 ```md
 <div class="process">
@@ -167,6 +172,19 @@ Small extras:
 | `<p class="kicker">Fix 2 · Add context</p>` above a `####` | A small green label over the heading |
 | A plain bullet list inside `<div class="chips">` ... `</div>` | Small grey pills |
 
+**The ending of a case study:** set these in the project's entry in `src/projects.js` (leave them out to skip that row):
+
+```js
+link: 'https://...',             // where the button goes
+linkLabel: 'Live project',       // the small label on the left ("Prototype", "Live project"...)
+linkText: 'Try it yourself.',    // one line next to it
+linkButton: 'Visit site',        // the button text
+```
+
+"Next project" picks the next project in the list automatically (and wraps around to the first). To bring back the older case study look for one project, add `theme: 'classic'`.
+
+**Change the case study layout's spacing:** at the top of `src/components/cleanLayout.css`, `--row-space` is the space above and below each section and `--label-gap` is the space between the label column and the content. Gallery sizes are at the top of `src/components/galleries.css` (`--bento-row`, `--strip-height`).
+
 **Add a project:** add an entry to `src/projects.js`, then create `src/case-studies/<slug>.md` (the file name must match the slug) and put its images in `public/images/<slug>/`.
 
 **Change the Cover Flow songs (About page):** edit the list in `src/songs.js`, then run `npm run songs`. It looks each song up on Apple Music and saves the album art and 30-second preview into `src/songs-data.json` (commit that file too). If it picks the wrong version of a song, add that song's Apple Music `id` (see the note at the top of `songs.js`).
@@ -177,7 +195,7 @@ Small extras:
 
 **Animations:** add `className="reveal"` to anything to make it fade up as it scrolls into view. Every block in a case study does this automatically.
 
-**Images:** keep them under ~2400px wide; use JPG for photos, PNG for flat graphics. Tall images in a gallery are laid out as portrait tiles automatically.
+**Images:** keep them under ~2400px wide; use JPG for photos, PNG for flat graphics. Tall images in a gallery become a scroll strip automatically.
 
 **Page titles, descriptions and link previews:** what shows in the browser tab, in Google, and in the preview card when someone shares a link (iMessage, LinkedIn, Slack...).
 - Home, About, Projects and Resume: edit `pages` at the bottom of `src/site.js`.

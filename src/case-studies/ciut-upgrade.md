@@ -1,5 +1,7 @@
 ## Overview
 
+<p class="my-part">Solo project: the audit, research, and redesign</p>
+
 ### Showing off a station with a good heart
 
 CIUT 89.5 FM is U of T's campus and community radio station. It has a good heart, but its website wasn't showing it.
@@ -63,6 +65,8 @@ It didn't stop there. Info about the station and how to get involved was often m
 > CIUT's listeners and community need a clear way to find the station's shows, events, and ways to help, so they can connect with it and support it.
 
 ## Audit
+
+<p class="my-part">Crawled all 155 URLs and rated the content</p>
 
 ### Every page, rated
 
@@ -139,6 +143,8 @@ I looked at three stations with similar missions and more polished sites: CJTM (
 *After: clear top-level sections, with individual show and podcast pages, and supporting pages grouped under About.*
 
 ## Redesign
+
+<p class="my-part">Prototyped all 12 pages in Figma</p>
 
 ### The fixes, in action
 

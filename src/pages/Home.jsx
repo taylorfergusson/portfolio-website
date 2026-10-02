@@ -75,7 +75,7 @@ export default function Home() {
       <section className="projects dark">
         <div className="container">
           <h2 className="reveal">Projects</h2>
-          {projects.map((p) => <ProjectCard key={p.slug} project={p} />)}
+          {projects.filter((p) => !p.hidden).map((p) => <ProjectCard key={p.slug} project={p} />)}
           <p className="center">
             <Link to="/case-study" className="text-link">View all projects <span className="chevron" aria-hidden="true">›</span></Link>
           </p>
