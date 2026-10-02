@@ -150,8 +150,10 @@ export default function CaseStudy() {
   const after = projects.slice(projects.indexOf(project) + 1).find((p) => !p.hidden)
   const next = after || visible[0]
 
+  // key={slug}: going to another case study (like "Next project") builds the page fresh,
+  // so nothing from the last case study is left behind
   return (
-    <article className={`case-study container${clean ? ' cs-clean' : ''}`}>
+    <article key={slug} className={`case-study container${clean ? ' cs-clean' : ''}`}>
       {/* Side menu of sections (desktop only) */}
       {sections.length > 0 && (
         <nav ref={navRef} className="cs-nav" aria-label="Case study sections">
