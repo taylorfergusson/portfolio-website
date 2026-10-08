@@ -1,6 +1,6 @@
 ## Overview
 
-<p class="my-part">Solo project: the audit, research, and redesign</p>
+<p class="my-part">Solo project: the audit, research, redesign, and pitch to the station</p>
 
 ### Showing off a station with a good heart
 
@@ -10,13 +10,15 @@ CIUT 89.5 FM is U of T's campus and community radio station. It has a good heart
 
 - **!The problem** Info on volunteering, donating, and even the shows themselves was missing, misplaced, or buried.
 - **Why it matters** CIUT runs on donations and volunteers. If people can't find how to help, they can't help!
-- **+The solution** An audit of every page, five ranked fixes, and a 12-page redesign built around the people who love the station.
+- **+The solution** An audit of every page, five ranked fixes, and a 12-page redesign built around what listeners actually come to the site to do.
 
 </div>
 
 ![CIUT website redesign concept](/images/ciut/overview.png)
 
 ## Result
+
+<p class="my-part">Presented my findings to the station</p>
 
 ### CIUT.fm, redesigned
 
@@ -31,9 +33,9 @@ Here's where it ended up. All 12 pages are clickable, so have a look around:
 
 <div class="numbered">
 
-1. **Every problem, backed by data** I crawled all 155 URLs and rated the content, so every fix points back to something real.
-2. **A to-do list, ranked** Five fixes, most important first, that a small volunteer team can actually work through.
-3. **A redesign you can click** Every fix shows up in the prototype, so it's shown, not just described.
+1. **The station took it on** I presented my findings to CIUT, and they adopted the page-level fixes, like repairing broken links and adding missing context.
+2. **A full rebuild, on the way** The deeper structural and style problems I found convinced the station to plan a complete rebuild of the site.
+3. **Every fix, backed by data** I crawled all 155 URLs and rated the content, so every recommendation points back to something real.
 
 </div>
 
@@ -70,7 +72,7 @@ It didn't stop there. Info about the station and how to get involved was often m
 
 ### Every page, rated
 
-This started as a school assignment, but I picked CIUT because I actually care about it, and I took it way past what was asked.
+This started as a two-week content audit for school. I picked CIUT because I actually care about it, and I took it way past what was asked.
 
 - ![](/images/ciut/icon-seo-crawl.png) **Phase 1: SEO crawl** Screaming Frog pulled all 155 URLs: every page, image, link, and bit of metadata.
 - ![](/images/ciut/icon-manual-audit.png) **Phase 2: Content audit** I rated content from 1 to 5, including 10 of the 74 show pages in depth, on whether it was:
@@ -98,13 +100,13 @@ This started as a school assignment, but I picked CIUT because I actually care a
 ![HeadingsMap: the Contact page jumps from an h1 straight to h6s](/images/ciut/audit-4.png)
 
 > **The takeaway**
-> Visitors had to work way too hard to piece things together, and so did search engines.
+> None of these problems were huge on their own. Together, they meant visitors had to work way too hard to piece things together, and so did search engines.
 
 ## Fixes
 
 ### Five fixes, most important first
 
-Everything I found boiled down to five fixes. The rest of the project is me putting them into action.
+Everything I found boiled down to five fixes, ordered so a small volunteer team could start at the top and work down. The rest of the project is me putting them into action.
 
 <div class="numbered">
 
@@ -117,6 +119,8 @@ Everything I found boiled down to five fixes. The rest of the project is me putt
 </div>
 
 ## Structure
+
+<p class="my-part">Compared 3 peer stations and redrew the site map</p>
 
 ### How do other stations do it?
 
@@ -147,6 +151,8 @@ I looked at three stations with similar missions and more polished sites: CJTM (
 <p class="my-part">Prototyped all 12 pages in Figma</p>
 
 ### The fixes, in action
+
+Each change below maps back to one of the five fixes, so the station can see why it's there.
 
 <p class="kicker">Fix 2 · Add context</p>
 
@@ -215,8 +221,8 @@ I looked at three stations with similar missions and more polished sites: CJTM (
 
 <div class="numbered">
 
-1. **A vague feeling can become a to-do list** At first, I just knew the site felt hard to use. The audit turned that feeling into specific problems I could actually fix.
-2. **Show it, don't just say it** A peer reviewer suggested sticking to wireframes to save time. I prototyped every page instead. More work, but now you can click the fixes instead of reading about them.
-3. **The work that matters most might be right in front of you** We often dream about redesigning giant platforms. But CIUT runs on volunteers, with limited funding and not enough hands to catch everything. It felt so good to help people connect with an organization that's truly lovable.
+1. **A vague feeling can become a to-do list** At first, I just knew the site felt hard to use. The audit turned that feeling into specific problems, and ranking them is what made it something the station could actually act on.
+2. **Show it, don't just say it** A peer reviewer suggested sticking to wireframes to save time. I prototyped every page instead. More work, but now anyone can click through the fixes instead of imagining them.
+3. **The work that matters most might be right in front of you** We often dream about redesigning giant platforms. But CIUT runs on volunteers, with limited funding and not enough hands to catch everything. Seeing them adopt the fixes and plan a rebuild felt so good, for an organization that's truly lovable.
 
 </div>
