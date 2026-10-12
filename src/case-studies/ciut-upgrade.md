@@ -1,6 +1,6 @@
 ## Overview
 
-<p class="my-part">Solo project: the audit, research, redesign, and pitch to the station</p>
+<p class="my-part">Solo project: the content audit, information architecture, redesign, and pitch to the station</p>
 
 ### Showing off a station with a good heart
 
@@ -10,11 +10,13 @@ CIUT 89.5 FM is U of T's campus and community radio station. It has a good heart
 
 - **!The problem** Info on volunteering, donating, and even the shows themselves was missing, misplaced, or buried.
 - **Why it matters** CIUT runs on donations and volunteers. If people can't find how to help, they can't help!
-- **+The solution** An audit of every page, five ranked fixes, and a 12-page redesign built around what listeners actually come to the site to do.
+- **+The solution** An audit of every page, five ranked fixes, a new site structure, and a 12-page redesign that puts them into action.
 
 </div>
 
 ![CIUT website redesign concept](/images/ciut/overview.png)
+
+*This is a content audit and information architecture project. The recommendations come from crawl data, a content review, and peer benchmarking. I didn't interview or test with listeners, so the new structure is a well-grounded starting point, not a validated one.*
 
 ## Result
 
@@ -131,7 +133,7 @@ I looked at three stations with similar missions and more polished sites: CJTM (
 - **+Show pages that invite** Genre tags, external links, and easy access to past episodes
 - **+A home for events** Dedicated News & Events pages, plus footers with address and socials
 
-#### So I rebuilt the site around what listeners do
+#### So I restructured the site around its core tasks
 
 - **Always one click away** Listen Live and Donate sit in the header on every page
 - **Schedule and Shows, split** "What's on now?" and "what's on CIUT?" each get a clear answer
@@ -223,6 +225,7 @@ Each change below maps back to one of the five fixes, so the station can see why
 
 1. **A vague feeling can become a to-do list** At first, I just knew the site felt hard to use. The audit turned that feeling into specific problems, and ranking them is what made it something the station could actually act on.
 2. **Show it, don't just say it** A peer reviewer suggested sticking to wireframes to save time. I prototyped every page instead. More work, but now anyone can click through the fixes instead of imagining them.
-3. **The work that matters most might be right in front of you** We often dream about redesigning giant platforms. But CIUT runs on volunteers, with limited funding and not enough hands to catch everything. Seeing them adopt the fixes and plan a rebuild felt so good, for an organization that's truly lovable.
+3. **An audit shows what's broken, not what people need** The crawl and the content review told me where the site falls short. They can't tell me how listeners actually look for shows or how volunteers decide to sign up. Next time, I'd run a quick tree test or card sort with real listeners to check the new structure before designing on top of it.
+4. **The work that matters most might be right in front of you** We often dream about redesigning giant platforms. But CIUT runs on volunteers, with limited funding and not enough hands to catch everything. Seeing them adopt the fixes and plan a rebuild felt so good, for an organization that's truly lovable.
 
 </div>

@@ -206,8 +206,9 @@ All 6 remaining participants used the filters without getting stuck, and the res
 
 <div class="numbered">
 
-1. **Fixing everyone's work isn't leading** Halfway through, I caught myself rewriting teammates' sections as we pulled things together, which made me the bottleneck. So I moved the work earlier: we agreed on direction, scope, and reasons before anyone started drafting, and I kept it all in one shared brief (our findings, what we were still working on, and what we'd dropped). When someone's AI-assisted draft wandered off-scope, the brief brought it back.
+1. **Fixing everyone's work isn't leading** Halfway through, I caught myself rewriting teammates' sections as we pulled things together, which made me the bottleneck. So I moved the work earlier: we agreed on direction, scope, and reasons before anyone started drafting, and I kept it all in one shared brief (our findings, what we were still working on, and what we'd dropped). Whenever the work started drifting off-scope, the brief brought it back.
 2. **Disagreements need evidence** We talked every disagreement through, with one rule: a new direction had to point back to something we'd found in research. That kept the arguing about the work, not about who was right.
-3. **Moving in reverse is still moving** Backpedalling on wait times was hard, but I learned to hold ideas loosely and see pivots for what they REALLY are: improvements!
+3. **Leadership is hard to judge from the inside** There were stretches of confusion where I worried I wasn't leading well, or that people couldn't follow what I meant. At the end, a teammate told me I'd been a good team leader. I cared a lot about getting that right, so it meant a lot, and it taught me not to judge leadership by the messy middle.
+4. **Moving in reverse is still moving** Backpedalling on wait times was hard, but I learned to hold ideas loosely and see pivots for what they REALLY are: improvements!
 
 </div>

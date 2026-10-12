@@ -5,11 +5,7 @@
    ========================================================= */
 .cs-clean {
   /* Colours with a meaning (the same ones as the home page) */
-  --c-red: #BE3A30;          /* my part: what I personally did */
-  --c-orange: #C06234;       /* problems and pain points */
-  --c-orange-text: #A6511F;  /* the same orange, a touch darker so small text is readable */
-  --c-green: #20665F;        /* solutions and fixes */
-  --c-purple: #6D5699;       /* insights and learning */
+  --c-red: #BE3A30;          /* "My part": the only colour in a case study */
   --hairline: #e8e8ed;   /* the thin lines between rows */
   --body: #2c2c2e;       /* paragraph text: darker than the other case studies */
   --label-gap: 56px;     /* space between the label column and the content */
@@ -56,7 +52,7 @@
 :where(.cs-clean .cs-content) > * + * { margin-top: var(--flow); }
 :where(.cs-clean .cs-content) > :where(div, blockquote, ul.badge-cards, ul:has(> li > strong:first-child), ul:has(> li > img:first-child), p:has(> img:only-child)):not(:first-child),
 :where(.cs-clean .cs-content) > :where(div, blockquote, ul.badge-cards, ul:has(> li > strong:first-child), ul:has(> li > img:first-child), p:has(> img:only-child), p:has(> em:only-child)) + :where(:not(h3, h4)) { margin-top: var(--block-gap); }
-.cs-clean .cs-content > p > img:only-child { padding: 24px; background: var(--soft); }
+.cs-clean .cs-content > p > img:only-child { padding: 0; background: none; }
 
 .cs-clean .prose h3 { margin-top: 0; font-size: var(--fs-xl); line-height: 1.15; letter-spacing: -0.02em; }
 .cs-clean .prose p, .cs-clean .prose li { color: var(--body); }
@@ -70,8 +66,7 @@
   width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center;
   background: var(--ink); color: #fff; font-size: 16px; font-weight: 700; line-height: 1;
 }
-.prose .card-problem .badge { background: var(--c-orange); }        /* problems */
-.prose .card-opportunity .badge { background: var(--c-green); }     /* opportunities */
+/* Problem (!) and opportunity (+) badges stay black like every other badge: the symbol says what it is */
 .prose .badge img { position: static; width: 18px; height: 18px; border-radius: 0; opacity: 1; filter: brightness(0) invert(1); }   /* your icon, in white */
 .prose .badge-body > strong { display: block; margin-bottom: 2px; font-size: var(--fs-base); font-weight: 600; line-height: 1.35; color: var(--ink); }
 
@@ -96,7 +91,7 @@
 .cs-clean .prose blockquote strong:first-child,
 .cs-clean .prose .callout-box > p:first-child strong:only-child { font-size: var(--fs-xs); font-weight: 500; letter-spacing: 0.14em; color: var(--muted); }
 .cs-clean .prose .callout-box { padding: 40px; background: none; border: 1px solid var(--hairline); border-radius: var(--radius-sm); }
-.cs-clean .prose .callout-box .compare img { background: var(--soft); }
+.cs-clean .prose .callout-box .compare img { background: none; }
 .cs-clean .prose li::marker { color: var(--muted); }
 .cs-clean .prose .kicker { font-size: var(--fs-xs); font-weight: 500; letter-spacing: 0.14em; color: var(--muted); }
 .cs-clean .prose .steps li:not(:last-child)::after { color: var(--line); }
@@ -111,42 +106,32 @@
 .cs-next:hover .arrow { transform: translate(4px, -4px); color: var(--ink); }
 .cs-clean .back-row { display: none; }
 
-/* ---------- Colour: each colour means something ---------- */
-/* The key under the details box */
-.cs-key { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: 28px; font-size: var(--fs-sm); color: var(--muted); }
-.cs-key span { display: inline-flex; align-items: center; gap: 8px; }
-.cs-key span::before { content: ''; width: 10px; height: 10px; border-radius: 50%; background: var(--dot); }
-.key-me { --dot: var(--c-red); }
-.key-problem { --dot: var(--c-orange); }
-.key-solution { --dot: var(--c-green); }
-.key-insight { --dot: var(--c-purple); }
+/* ---------- Colour: red is the only colour, and it always means "My part" ---------- */
+/* Everything else is black and grey. Problems, solutions and takeaways are told apart by their
+   labels and badges (!, +, "The takeaway"), so nobody needs a colour key to read the page. */
 .cs-clean .prose { margin-top: 64px; }
 
-/* Black: where you are (process steps, outcome numbers). Red is kept for "My part". */
+/* Black: where you are (process steps, outcome numbers) */
 .cs-clean .prose .numbered li::before { color: var(--ink); }
 
-/* Summary row: a coloured line and label for the problem and the solution */
-.cs-clean .prose .summary ul > li.card-problem { border-top-color: var(--c-orange); }
-.cs-clean .prose .summary ul > li.card-opportunity { border-top-color: var(--c-green); }
-.cs-clean .prose .summary .card-problem > strong { color: var(--c-orange-text); }
-.cs-clean .prose .summary .card-opportunity > strong { color: var(--c-green); }
+/* Summary row: the same thin line and grey label on all three cards */
+.cs-clean .prose .summary ul > li.card-problem,
+.cs-clean .prose .summary ul > li.card-opportunity { border-top-color: var(--hairline); }
 
-/* Before / after: before is orange, after is green */
-.cs-clean .prose .compare figure:first-child figcaption { color: var(--c-orange-text); }
-.cs-clean .prose .compare figure:last-child figcaption { color: var(--c-green); }
-.cs-clean .prose .kicker { color: var(--c-green); }
+/* Before / after labels and kickers: quiet grey */
+.cs-clean .prose .compare figcaption { color: var(--muted); }
+.cs-clean .prose .kicker { color: var(--muted); }
 
-/* Purple: insights. Takeaways and the problem statement get a purple line and a faint purple wash */
+/* Takeaways and the problem statement: a black line on top, no tint */
 .cs-clean .prose blockquote {
-  padding: 28px 32px; border: 0; border-top: 2px solid var(--c-purple); border-radius: 0;
-  background: color-mix(in srgb, var(--c-purple) 5%, white);
+  padding: 28px 0; border: 0; border-top: 2px solid var(--ink); border-bottom: 1px solid var(--hairline); border-radius: 0;
+  background: none;
 }
-.cs-clean .prose blockquote strong:first-child { color: var(--c-purple); }
-.cs-clean .prose .cs-row[data-section="reflection"] .numbered li::before { color: var(--c-purple); }
+.cs-clean .prose blockquote strong:first-child { color: var(--muted); }
 
-/* The MAYDAY story was a problem in testing, so its label is orange */
-.cs-clean .prose .callout-box { border-top: 2px solid var(--c-orange); }
-.cs-clean .prose .callout-box > p:first-child strong:only-child { color: var(--c-orange-text); }
+/* Story boxes (like YumGo's MAYDAY): a black line on top */
+.cs-clean .prose .callout-box { border-top: 2px solid var(--ink); }
+.cs-clean .prose .callout-box > p:first-child strong:only-child { color: var(--muted); }
 
 /* ---------- Phones: rows stack, label on top ---------- */
 @media (max-width: 800px) {

@@ -8,7 +8,7 @@ import FlingPhoto from '../components/FlingPhoto.jsx'
 import HeroBackground from '../components/HeroBackground.jsx'
 
 // The words that cycle in the hero, in order
-const heroWords = ['designer', 'researcher', 'developer', 'leader', 'friend']
+const heroWords = ['designer', 'researcher', 'developer']
 
 // The app icons in the scrolling strip under the photo (files are in public/images/tools/)
 //   file: the icon's file name (without .svg)   name: shown when hovering, and read out by screen readers
@@ -40,18 +40,34 @@ export default function Home() {
       <section className="hero container">
         <HeroBackground />
         <div className="hero-inner">
-          <h1 className="hero-text reveal">
-            Hi! I'm Taylor, a
+          {/* The real heading, read by screen readers and search engines. It names all three words at once,
+              so the changing word below stays out of the heading. */}
+          <h1 className="visually-hidden">
+            Hi! I'm Taylor, a {heroWords.join(', ').replace(/, ([^,]*)$/, ', and $1')} exploring how people listen, learn, and understand their world. Currently based in Toronto, Ontario.
           </h1>
-          <h1 className="reveal">
-            <span className="hero-word" key={wordIndex}>{heroWords[wordIndex]}</span>
-          </h1>
-          <h1 className="hero-text reveal">
-            exploring how people listen, learn, and understand their world.
-          </h1>
-          <h1 className="hero-text hero-line reveal">
-            Currently based in Toronto, Ontario.
-          </h1>
+          {/* What you see: the same sentence, with the word that changes */}
+          <div aria-hidden="true">
+            <p className="hero-text reveal">Hi! I'm Taylor, a</p>
+            <p className="hero-text hero-word-line reveal">
+              <span className="hero-word" key={wordIndex}>{heroWords[wordIndex]}</span>
+            </p>
+            <p className="hero-text reveal">exploring how people listen, learn, and understand their world.</p>
+            <p className="hero-text hero-line reveal">Currently based in Toronto, Ontario.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="projects dark">
+        <div className="container">
+          <h2 className="reveal">Projects</h2>
+          {/* Featured projects only (featured: 1, 2, 3 in projects.js). The Projects page lists them all. */}
+          {(() => {
+            const featured = projects.filter((p) => p.featured && !p.hidden).sort((a, b) => a.featured - b.featured)
+            return featured.map((p, i) => <ProjectCard key={p.slug} project={p} index={i} total={featured.length} />)
+          })()}
+          <p className="center">
+            <Link to="/case-study" className="text-link">View all projects <span className="chevron" aria-hidden="true">›</span></Link>
+          </p>
         </div>
       </section>
 
@@ -69,16 +85,6 @@ export default function Home() {
             I like to follow the rules, then break them when necessary, taking design projects to the next level with technical solutions or a full build. I love the whole journey, from the first interview to the last line of code.
           </p>
           <Link to="/about" className="btn reveal">More about me</Link>
-        </div>
-      </section>
-
-      <section className="projects dark">
-        <div className="container">
-          <h2 className="reveal">Projects</h2>
-          {projects.filter((p) => !p.hidden).map((p) => <ProjectCard key={p.slug} project={p} />)}
-          <p className="center">
-            <Link to="/case-study" className="text-link">View all projects <span className="chevron" aria-hidden="true">›</span></Link>
-          </p>
         </div>
       </section>
 

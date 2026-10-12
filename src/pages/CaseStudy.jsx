@@ -76,7 +76,7 @@ export default function CaseStudy() {
   const [viewer, setViewer] = useState(null) // { images, index } while an image is enlarged
 
   // Once the Markdown is on the page: give each ## section an id for the side menu,
-  // and turn rows of images into galleries
+  // and turn every image (on its own or in a row) into a gallery
   useEffect(() => {
     const prose = proseRef.current
     if (!prose) return
@@ -88,7 +88,7 @@ export default function CaseStudy() {
     })
     setSections(found)
     prose.querySelectorAll('p').forEach((p) => {
-      if (p.querySelectorAll(':scope > img').length >= 2) {
+      if (p.querySelectorAll(':scope > img').length >= 1) {
         makeGallery(p, (images, index) => setViewer({ images, index }))
       }
     })

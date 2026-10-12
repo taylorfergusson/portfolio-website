@@ -53,16 +53,16 @@ public/images/       all images, one folder per project
 | `<p class="my-part">What I did</p>` right under a `##` | A red **My part** note under the section's label. Keep it to one short line |
 | `### Big heading` | The section's big heading |
 | `#### Subheading` | Smaller heading |
-| `> **Title**` then `> text` on the next line | Big takeaway box with a purple title (purple = insight) |
+| `> **Title**` then `> text` on the next line | Takeaway box: a small grey label over big text, with a black line on top |
 | `*italic line*` | Grey caption text |
 | `![caption](/images/folder/file.jpg)` | A single image |
 | 2+ images on back-to-back lines | A gallery, picked automatically. Tall images (phone screens, wireframes) become a **scroll strip** you can drag or swipe; everything else becomes a **bento grid** (one big image, smaller ones around it). The text in `[ ]` is the caption: anything before a `:` is the short label, and the full text shows in the full-screen viewer. Put the image you want biggest first |
 | A bullet list where every item starts with `**bold**` | Cards, two per row, each with a round badge. The bold part is the card title, the rest is the description |
 | `- ![](/images/icon.png) **Title** text` | Your icon, turned white, inside the badge |
-| `- **!Title** text` | A **problem** card: orange badge (`!` if there's no icon) |
-| `- **+Title** text` | An **opportunity** card: green badge (`+` if there's no icon) |
+| `- **!Title** text` | A **problem** card: black `!` badge (or your icon) |
+| `- **+Title** text` | An **opportunity** card: black `+` badge (or your icon) |
 
-**Colours mean something** (and a small key above the first section says so): red = my part, orange = problem, green = solution, purple = insight. They're set at the top of `src/components/cleanLayout.css`.
+**Red is the only colour, and it always means "My part".** Everything else is black and grey, told apart by labels and badges, so no colour key is needed. The red is set at the top of `src/components/cleanLayout.css`.
 
 A bigger callout that holds a whole story (text, images, before/after) as one box. Leave the blank lines in:
 
@@ -169,7 +169,7 @@ Small extras:
 
 | Write this | You get |
 | --- | --- |
-| `<p class="kicker">Fix 2 · Add context</p>` above a `####` | A small green label over the heading |
+| `<p class="kicker">Fix 2 · Add context</p>` above a `####` | A small grey label over the heading |
 | A plain bullet list inside `<div class="chips">` ... `</div>` | Small grey pills |
 
 **The ending of a case study:** set these in the project's entry in `src/projects.js` (leave them out to skip that row):

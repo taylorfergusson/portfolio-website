@@ -15,8 +15,7 @@ export function makeCleanLayout(prose) {
     band.replaceWith(...band.childNodes)
   })
 
-  // Cards get a round badge: your icon in white (or ! / + if the card has no icon),
-  // orange for problems, green for opportunities, black for everything else. Summary cards keep their own look.
+  // Cards get a round black badge: your icon in white (or ! / + if the card has no icon). Summary cards keep their own look.
   prose.querySelectorAll('ul:has(> li > strong:first-child), ul:has(> li > img:first-child)').forEach((list) => {
     if (list.closest('.summary')) return
     list.classList.add('badge-cards')
@@ -36,11 +35,6 @@ export function makeCleanLayout(prose) {
     })
   })
 
-  // A small colour key above the first section
-  const key = document.createElement('p')
-  key.className = 'cs-key'
-  key.innerHTML = '<span class="key-me">My part</span><span class="key-problem">Problem</span><span class="key-solution">Solution</span><span class="key-insight">Insight</span>'
-  prose.before(key)
 
   // Each ## heading starts a new row: the heading goes in the left column, everything after it on the right
   let content = null

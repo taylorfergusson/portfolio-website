@@ -55,7 +55,7 @@ export default function About() {
           <li className="reveal">
             <span className="when">2025–now</span>
             <h3>UX Design at the University of Toronto</h3>
-            <p>Now I'm doing my Master of Information in UX Design, and designing for UDesign, U of T's student design club. Next up: a product design role, somewhere I can raise a product and see it grow up like a newborn baby. Ok maybe not exactly like that, but you know what I mean.</p>
+            <p>Now I'm doing my Master of Information in UX Design, and designing for UDesign, U of T's student design club. Next up: a product design role, where I can help a product grow from early ideas to something people rely on.</p>
             <figure className="timeline-figure">
               <img src="/images/about/uoft.jpg" alt="Taylor and his sister under the University of Toronto sign" className="timeline-photo" loading="lazy" />
               <figcaption>My sister and I at U of T during her visit</figcaption>

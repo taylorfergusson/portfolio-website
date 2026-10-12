@@ -172,6 +172,7 @@ section.hero { position: relative; isolation: isolate; margin-top: -72px; min-he
 /* Each line starts with an indent, like the original Framer design */
 .hero-text { font-size: var(--h1); line-height: 1.05; font-weight: 600; letter-spacing: -0.035em; color: var(--ink); text-indent: 1.2em; }
 .hero-line { display: block; text-indent: 1.2em; }
+.hero-word-line { text-indent: 0; }   /* the changing word sits on its own line, with no indent */
 .hero-word { display: inline-block; text-indent: 0; animation: word-in 0.5s var(--ease); }
 @keyframes word-in { from { opacity: 0; transform: translateY(0.3em); } }
 
@@ -262,16 +263,46 @@ section.hero { position: relative; isolation: isolate; margin-top: -72px; min-he
 /* =========================================================
    Project cards (home + projects page)
    ========================================================= */
-.projects h1, .projects h2 { margin-bottom: 64px; }
-.project-card { display: grid; grid-template-columns: 1.4fr 1fr; gap: 64px; align-items: center; margin-bottom: 128px; }
-.project-frame { border-radius: var(--radius); overflow: hidden; }  /* scales up gently as it scrolls into view */
-.project-thumb { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; transition: transform var(--slow) var(--ease); }
-.project-card:hover .project-thumb { transform: scale(1.03); }
-.project-meta { display: flex; justify-content: space-between; padding-bottom: 12px; margin-bottom: 16px; border-bottom: 1px solid rgba(255, 255, 255, 0.2); font-size: var(--fs-sm); color: #86868b; transition: border-color var(--fast) var(--ease); }
-.project-card:hover .project-meta { border-color: var(--accent); }
-.project-title { display: flex; justify-content: space-between; margin-bottom: 10px; }
-.project-title .chevron { transition: transform var(--fast) var(--ease); }
-.project-card:hover .project-title .chevron { transform: translateX(4px); }
+.projects h1, .projects h2 { margin-bottom: 24px; }
+
+/* Each project fills about one screen: text and details on the left, big screens on the right */
+.work { display: grid; grid-template-columns: minmax(0, 320px) minmax(0, 1fr); gap: 64px; align-items: center; min-height: min(100vh, 900px); padding: 72px 0; border-top: 1px solid rgba(255, 255, 255, 0.16); color: var(--paper); }
+.work-index { font-size: var(--fs-xs); color: #86868b; letter-spacing: 0.04em; font-variant-numeric: tabular-nums; margin-bottom: 28px; }
+.work-cat { font-size: var(--fs-xs); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #86868b; margin-bottom: 10px; }
+.work-title { font-size: var(--fs-xl); line-height: 1.08; letter-spacing: -0.025em; margin-bottom: 16px; }
+.work .work-summary { color: #d2d2d7; font-size: var(--fs-sm); line-height: 1.55; margin-bottom: 28px; }
+.work-details { display: grid; grid-template-columns: 96px 1fr; margin: 0 0 32px; font-size: var(--fs-sm); }
+.work-details div { display: contents; }
+.work-details dt, .work-details dd { margin: 0; padding: 11px 0; border-top: 1px solid rgba(255, 255, 255, 0.16); line-height: 1.4; }
+.work-details dt { color: #86868b; }
+.work-details dd { color: var(--paper); }
+.work-details b { font-weight: 600; }
+.work-cta { display: inline-flex; gap: 8px; align-items: center; padding: 12px 22px; border-radius: 999px; background: var(--paper); color: var(--ink); font-weight: 600; font-size: var(--fs-sm); transition: transform var(--fast) var(--ease); }
+.work-cta span { transition: transform var(--fast) var(--ease); }
+.work-cta:hover span { transform: translateX(4px); }
+.work-cta:focus-visible { outline: 2px solid var(--paper); outline-offset: 4px; }
+
+/* The screens */
+/* The screens grow slightly on hover, like the old thumbnails did */
+.work-shots-link { display: block; min-width: 0; }
+.work-shots { display: flex; gap: 24px; justify-content: center; align-items: center; min-width: 0; transition: transform var(--slow) var(--ease); }
+.work-shots-link:hover .work-shots { transform: scale(1.03); }
+.work-shots img { display: block; }
+.work-phone { flex: 0 1 250px; min-width: 0; border-radius: 28px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.12); background: var(--paper); }
+.work-phone img { width: 100%; height: auto; }
+.work-stack { position: relative; width: 100%; max-width: 900px; }
+.work-browser { border-radius: 14px; overflow: hidden; background: var(--paper); border: 1px solid rgba(255, 255, 255, 0.12); }
+.work-browser.back { position: absolute; right: 0; top: 0; width: 58%; transform: translateY(-6%); }
+.work-browser.front { position: relative; width: 78%; margin-top: 60px; box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45); }
+.work-browser img { width: 100%; height: min(58vh, 520px); object-fit: cover; object-position: top; }
+.work-browser.back img { height: min(40vh, 360px); }
+.work-bar { height: 34px; background: #f0f0f2; display: flex; align-items: center; gap: 7px; padding: 0 14px; }
+.work-bar i { width: 10px; height: 10px; border-radius: 50%; background: #cfcfd4; }
+.work-bar span { margin-left: 14px; flex: 1; height: 20px; border-radius: 6px; background: var(--paper); font-size: 11px; color: #86868b; display: flex; align-items: center; padding-left: 10px; }
+.work-cards { flex-direction: column; align-items: stretch; width: 100%; max-width: 660px; margin: 0 auto; gap: 0; }
+.work-cards img { width: 100%; height: auto; background: var(--paper); border-radius: var(--radius-sm); padding: 16px; }
+.work-cards img:nth-child(2) { width: 80%; align-self: flex-end; margin-top: -56px; margin-right: -24px; box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45); }
+.work-wide { width: 100%; max-width: 900px; height: auto; border-radius: var(--radius); }
 
 /* =========================================================
    Case study pages (the Markdown content is inside .prose)
@@ -317,7 +348,7 @@ section.hero { position: relative; isolation: isolate; margin-top: -72px; min-he
 .prose li::marker { color: var(--accent); }
 .prose img { width: 100%; border-radius: var(--radius); }
 /* A single image sits in a soft grey frame */
-.prose > p > img:only-child { padding: 24px; background: var(--soft); }
+.prose > p > img:only-child { padding: 0; background: none; }   /* no grey frame box on images */
 
 /* Galleries: images on back-to-back lines become a row of equal tiles you can swipe sideways.
    Each tile's caption is the image's alt text; clicking a tile opens it full size.
@@ -362,7 +393,7 @@ html:has(.viewer[open]) { overflow: hidden; }  /* stop the page scrolling behind
 /* Before / after pair (see the MAYDAY section in yumgo.md) */
 .prose .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 480px; }
 .prose .compare figcaption { margin-bottom: 8px; font-size: var(--fs-sm); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
-.prose .compare img { padding: 16px; background: var(--soft); }
+.prose .compare img { padding: 0; background: none; border-radius: 16px; border: 1px solid var(--line); }   /* same clean edge as the phone-screen strips */
 /* Click-to-load Figma prototype, framed like a browser window: <div class="prototype" ...> in a case study */
 .prototype-bar { display: flex; gap: 6px; padding: 12px 14px; border: 1px solid var(--line); border-bottom: 0; border-radius: var(--radius-sm) var(--radius-sm) 0 0; background: var(--soft); }
 .prototype-bar span { width: 10px; height: 10px; border-radius: 50%; background: var(--line); }
@@ -389,7 +420,7 @@ html:has(.viewer[open]) { overflow: hidden; }  /* stop the page scrolling behind
 
 /* Wider before/after, for full web pages: <div class="compare wide"> */
 .prose .compare.wide { max-width: none; align-items: start; }
-.prose .compare.wide img { padding: 10px; }
+.prose .compare.wide img { padding: 0; }
 
 /* Captions: a line in *italics* on its own, right under an image or gallery */
 .prose em { color: var(--muted); }
@@ -428,7 +459,7 @@ html:has(.viewer[open]) { overflow: hidden; }  /* stop the page scrolling behind
 .prose .callout-box > p:first-child + * { margin-top: 8px; }   /* label sits close to the text */
 .prose .callout-box > p:has(> em:only-child) { margin-top: 12px; }   /* caption hugs its images */
 .prose .callout-box > p:first-child strong:only-child { display: block; font-size: var(--fs-sm); letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
-.prose .callout-box .compare img { background: var(--paper); }
+.prose .callout-box .compare img { background: none; }
 
 /* =========================================================
    About page
@@ -555,10 +586,18 @@ html:has(.viewer[open]) { overflow: hidden; }  /* stop the page scrolling behind
    ========================================================= */
 @media (max-width: 800px) {
   section.hero { min-height: auto; padding-top: 120px; padding-bottom: 48px; }
-  .intro, .project-card, .about-intro { grid-template-columns: 1fr; gap: 32px; }
+  .intro, .about-intro { grid-template-columns: 1fr; gap: 32px; }
   .intro-left { position: static; }
   .headshot { max-width: 240px; }
-  .project-card { margin-bottom: 64px; }
+  .work { grid-template-columns: 1fr; gap: 28px; min-height: 0; padding: 48px 0; }
+  .work-shots-link { order: -1; }
+  .work-phones { justify-content: flex-start; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; }
+  .work-phone { flex: 0 0 62%; max-width: 220px; border-radius: 24px; scroll-snap-align: start; }
+  .work-browser.back { display: none; }
+  .work-browser.front { width: 100%; margin: 0; }
+  .work-browser img { height: 260px; }
+  .work-cards img:nth-child(2) { display: none; }
+  .work-cards img { padding: 10px; }
   .callout { flex-direction: column; align-items: flex-start; }
   .intro-right .btn, .callout .btn { align-self: center; }   /* buttons sit in the middle on phones */
   .timeline li { grid-template-columns: 1fr; }
@@ -572,7 +611,7 @@ html:has(.viewer[open]) { overflow: hidden; }  /* stop the page scrolling behind
   .gallery.portrait .tile { width: 180px; }
   .viewer { padding: 60px 12px; }
   .viewer-prev, .viewer-next { top: auto; bottom: 12px; transform: none; }
-  .prose > p > img:only-child { padding: 14px; }
+  .prose > p > img:only-child { padding: 0; }
   .prose ul:has(> li > strong:first-child), .prose ul:has(> li > img:first-child) { grid-template-columns: 1fr; gap: 12px; }
   .prose .columns { grid-template-columns: 1fr; grid-template-rows: none; grid-auto-flow: row; }
   .prose .columns h4:not(:first-child) { margin-top: 24px; }
@@ -637,7 +676,7 @@ html:has(.viewer[open]) { overflow: hidden; }  /* stop the page scrolling behind
   margin-top: 180px; padding: 128px 0 144px; background: var(--ink); color: var(--paper);
   box-shadow: 0 0 0 100vmax var(--ink); clip-path: inset(0 -100vmax);   /* stretches the black to the edges of the screen */
 }
-.prose .process > p > img:only-child { padding: 24px; background: var(--soft); }
+.prose .process > p > img:only-child { padding: 0; background: none; }
 .prose .process > h2:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
 .prose .process > h2:first-child + h3 { font-size: var(--h2); }
 .prose .process h3 { font-size: var(--fs-xl); }   /* process headings a step smaller than the story around them */
@@ -651,7 +690,7 @@ html:has(.viewer[open]) { overflow: hidden; }  /* stop the page scrolling behind
 .prose .process .steps a:hover, .prose .process .tile-button:hover { background: #3a3a3c; }
 .prose .process .chips li { color: var(--paper); }
 .prose .process .kicker { color: #6cc4b8; }   /* lighter green on black */
-.prose .process .callout-box .compare img { background: var(--ink); }
+.prose .process .callout-box .compare img { background: none; }
 .prose .process + h2 { margin-top: 180px; border-top: 0; }
 /* The side menu floats over the black section. Each link that's over it gets "data-on-dark" (from CaseStudy.jsx) and turns light */
 .cs-nav { z-index: 2; }
@@ -662,6 +701,6 @@ html:has(.viewer[open]) { overflow: hidden; }  /* stop the page scrolling behind
 
 @media (max-width: 800px) {
   .prose .process { margin-top: 104px; padding: 72px 0 88px; }
-  .prose .process > p > img:only-child { padding: 14px; }
+  .prose .process > p > img:only-child { padding: 0; }
   .prose .process + h2 { margin-top: 104px; }
 }

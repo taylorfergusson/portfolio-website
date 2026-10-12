@@ -5,6 +5,8 @@ import './galleries.css'
 //     you can drag or swipe, with a counter and a progress line underneath.
 //   - Everything else (photos, research, website screenshots) becomes a bento grid: one big image and
 //     smaller ones around it, with short captions as pills.
+//   - A single image gets the same rounded tile and viewer, shown whole at its own shape (no pill:
+//     write a caption line under it instead).
 // Clicking any image opens the full-size viewer. Captions come from each image's alt text:
 // "Persona: Pat, the picky taster" shows "Persona" as the short caption and the whole thing in the viewer.
 // The look is in galleries.css.
@@ -37,12 +39,13 @@ function imageButton(image, i, images, openViewer) {
 function buildBento(wrap, images, openViewer) {
   wrap.classList.add('bento')
   const n = images.length
+  if (n === 1) wrap.classList.add('bento-one')
   if (n === 2) wrap.classList.add('bento-two')
   if (n === 4) wrap.classList.add('bento-four') // one big image on the left, three stacked on the right
   images.forEach((image, i) => {
     const figure = document.createElement('figure')
     figure.append(imageButton(image, i, images, openViewer))
-    if (image.alt) {
+    if (image.alt && n > 1) {
       const caption = document.createElement('figcaption')
       caption.textContent = shortCaption(image.alt)
       figure.append(caption)
@@ -130,7 +133,7 @@ export function makeGallery(p, openViewer) {
   }))
   Promise.all(ratios).then((r) => {
     const average = r.reduce((a, b) => a + b, 0) / r.length
-    if (average < PORTRAIT) buildStrip(wrap, images, openViewer)
+    if (average < PORTRAIT && images.length > 1) buildStrip(wrap, images, openViewer)
     else buildBento(wrap, images, openViewer)
   })
 }

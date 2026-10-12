@@ -1,6 +1,8 @@
 > **Live now!**
 > Put on a DJ mix, hold up your phone, and see if FoundCloud can find the track.
 
+**How to try it:** open FoundCloud on your phone, play a DJ mix out loud, and tap **Get ID**. Your browser will ask to use your microphone. It listens for about 5 seconds, then shows the closest match it can find.
+
 <p><a class="btn" href="https://foundcloud.taylorfergusson.com/" target="_blank" rel="noreferrer">Try FoundCloud ↗</a></p>
 
 ## Overview
@@ -32,7 +34,7 @@ FoundCloud finds the edits, bootlegs, and secret tracks that DJs love to gatekee
 
 <div class="numbered">
 
-1. **About 10,000 tracks** Downloaded, fingerprinted, and indexed in a Postgres database, all by me
+1. **About 10,000 tracks** Fingerprinted and indexed in a Postgres database, all by me
 2. **60–70% of songs found** Most matches come back in 5 to 10 seconds, and up to about 20 in a noisy room. Results depend on background noise, the speaker, and how close your phone is to it.
 3. **Live on AWS** I set up the server myself: Linux, Nginx, SSL, security groups, and backups
 
@@ -80,6 +82,9 @@ A playground of edits and bootlegs, with nothing to search it.
 ### How it finds your song
 
 A Python backend does the work. Every song is turned into a set of fingerprints and stored in hash maps, so a few seconds of audio from your phone can be looked up quickly instead of compared against every song one by one.
+
+> **A note on sourcing**
+> I scraped and downloaded the SoundCloud tracks only to generate their fingerprints. As soon as a track was fingerprinted, its audio file was deleted. FoundCloud never stores or plays the songs themselves, only the fingerprints and basic track info it needs to find a match.
 
 ![How FoundCloud works: it crawls SoundCloud, collects 10,000 songs and fingerprints them into a database. When you listen, your recording is fingerprinted the same way and matched against the database, with a confidence score.](/images/foundcloud/how-it-works.svg)
 

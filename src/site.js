@@ -30,7 +30,7 @@ export const pages = {
   },
   '/case-study': {
     title: 'Projects – Taylor Fergusson',
-    description: 'UX design, research, and development case studies by Taylor Fergusson: YumGo, CIUT, and FoundCloud.',
+    description: 'UX design, research, and development case studies by Taylor Fergusson: YumGo, SoundCloud, BorrowCircle, CIUT, and SideQuest.',
   },
   '/resume': {
     title: 'Resume – Taylor Fergusson',
