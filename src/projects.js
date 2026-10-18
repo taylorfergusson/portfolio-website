@@ -92,7 +92,7 @@ export const projects = [
     title: 'YumGo - UX Case Study',
     featured: 1,   // shown on the home page, in this order
     category: 'UI/UX Design',
-    date: 'Sep - Dec 2025',
+    date: 'Sep - Dec 2025 · revised Oct 2026',
     summary: 'Led a team of 4 from research to a tested prototype, and rebuilt a broken filter mid-study so testing could go on.',
     // The two numbers under the summary on the project cards
     stats: [
@@ -103,14 +103,14 @@ export const projects = [
     outcome: '**6/6** testers finished the task after the filter rebuild',
     // The screens on the project cards: type 'phone', 'browser', 'cards' or 'image'
     shots: { type: 'phone', images: [
-      { src: '/images/yumgo/final-discover.jpg', alt: 'YumGo Discover screen with dining tips for Toronto' },
-      { src: '/images/yumgo/final-restaurant.jpg', alt: 'YumGo restaurant page for Mama\'s Diner' },
-      { src: '/images/yumgo/final-filters.jpg', alt: 'YumGo filters for price, distance and dietary needs' },
+      { src: '/images/yumgo/r26-home-half.jpg', alt: 'YumGo home screen with a map and nearby restaurants' },
+      { src: '/images/yumgo/r26-restaurant.jpg', alt: 'YumGo restaurant page for Mama\'s Diner' },
+      { src: '/images/yumgo/r26-discover.jpg', alt: 'YumGo Discover screen with dining tips for Toronto' },
     ] },
-    thumbnail: '/images/yumgo/thumbnail.png',
-    thumbnailAlt: 'YumGo app screens showing a restaurant map, listings and menus',
+    thumbnail: '/images/yumgo/thumbnail-2026.jpg',
+    thumbnailAlt: 'YumGo app screens: Community, restaurant info, filters, reviews, Discover Toronto and profile',
     // Shown as labelled columns under the title. Add, remove or rename labels freely.
-    details: { Role: 'Lead UI/UX Designer', Team: 'Team of 4', Timeline: '12 weeks\nSep - Dec 2025', Tools: 'Figma' },
+    details: { Role: 'Lead UI/UX Designer', Team: 'Team of 4', Timeline: '12 weeks\nSep - Dec 2025\nRevised Oct 2026', Tools: 'Figma' },
     // The row at the very end of the case study. Leave these out to skip it.
     link: 'https://www.figma.com/proto/X8Lj3tw4SuO8GV3fsCCiKU/YumGo-Final-Prototype?node-id=2131-13299&starting-point-node-id=2131%3A13299&page-id=2131%3A13129&scaling=min-zoom&content-scaling=fixed',
     linkLabel: 'Prototype',

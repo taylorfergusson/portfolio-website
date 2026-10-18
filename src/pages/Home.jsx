@@ -1,60 +1,52 @@
-import { useEffect, useState } from 'react'
+import { Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import { projects } from '../projects.js'
 import { linkedin } from '../site.js'
 import ProjectCard from '../components/ProjectCard.jsx'
-import ToolStrip from '../components/ToolStrip.jsx'
 import FlingPhoto from '../components/FlingPhoto.jsx'
 import HeroBackground from '../components/HeroBackground.jsx'
 
-// The words that cycle in the hero, in order
-const heroWords = ['designer', 'researcher', 'developer']
-
-// The app icons in the scrolling strip under the photo (files are in public/images/tools/)
-//   file: the icon's file name (without .svg)   name: shown when hovering, and read out by screen readers
-const tools = [
-  { file: 'figma', name: 'Figma' },
-  { file: 'miro', name: 'Miro' },
-  { file: 'ableton', name: 'Ableton Live' },
-  { file: 'photoshop', name: 'Adobe Photoshop' },
-  { file: 'blender', name: 'Blender' },
-  { file: 'html', name: 'HTML' },
-  { file: 'css', name: 'CSS' },
-  { file: 'javascript', name: 'JavaScript' },
-  { file: 'python', name: 'Python' },
-  { file: 'java', name: 'Java' },
-  { file: 'linux', name: 'Linux' },
-  { file: 'aws', name: 'Amazon Web Services' },
-]
+// The hero sentence, revealed one letter at a time at about reading speed (about 250 words a minute).
+// LETTER_DELAY is the gap between letters in seconds. The photo and blurb fade in once the last letter is in.
+const heroSentence = "Hi! I'm Taylor, a UX researcher & designer with a background in computer science & psychology"
+const heroWords = heroSentence.split(' ')
+const LETTER_DELAY = 0.025
+const ROW_DELAY = heroSentence.length * LETTER_DELAY + 0.3
 
 export default function Home() {
-  // Switch to the next hero word every 2 seconds
-  const [wordIndex, setWordIndex] = useState(0)
-  useEffect(() => {
-    const timer = setInterval(() => setWordIndex((i) => (i + 1) % heroWords.length), 1250)
-    return () => clearInterval(timer)
-  }, [])
-
   return (
     <>
       <section className="hero container">
         <HeroBackground />
         <div className="hero-inner">
-          {/* The real heading, read by screen readers and search engines. It names all three words at once,
-              so the changing word below stays out of the heading. */}
-          <h1 className="visually-hidden">
-            Hi! I'm Taylor, a {heroWords.join(', ').replace(/, ([^,]*)$/, ', and $1')} exploring how people listen, learn, and understand their world. Currently based in Toronto, Ontario.
+          <h1 className="hero-headline" aria-label={heroSentence}>
+            {(() => {
+              let n = 0   // counts letters so each one starts a little after the last
+              return heroWords.map((word, w) => (
+                <Fragment key={w}>
+                  <span className="hero-w" aria-hidden="true">
+                    {[...word].map((ch, i) => (
+                      <span key={i} className="hero-letter" style={{ '--d': `${(n++ * LETTER_DELAY).toFixed(3)}s` }}>{ch}</span>
+                    ))}
+                  </span>
+                  {' '}
+                </Fragment>
+              ))
+            })()}
           </h1>
-          {/* What you see: the same sentence, with the word that changes */}
-          <div aria-hidden="true">
-            <p className="hero-text reveal">Hi! I'm Taylor, a</p>
-            <p className="hero-text hero-word-line reveal">
-              <span className="hero-word" key={wordIndex}>{heroWords[wordIndex]}</span>
-            </p>
-            <p className="hero-text reveal">exploring how people listen, learn, and understand their world.</p>
-            <p className="hero-text hero-line reveal">Currently based in Toronto, Ontario.</p>
+
+          <div className="hero-row" style={{ '--row-delay': `${ROW_DELAY.toFixed(2)}s` }}>
+            {/* The photo can still be grabbed and thrown */}
+            <div className="hero-photo">
+              <FlingPhoto src="/images/headshot.png" alt="Portrait of Taylor Fergusson" />
+            </div>
+            <div className="hero-side">
+              <p className="hero-blurb">I turn complex research into accessible, robust interfaces (and build them too)</p>
+              <Link to="/about" className="btn hero-btn">More about me <span aria-hidden="true">→</span></Link>
+            </div>
           </div>
         </div>
+
       </section>
 
       <section className="projects dark">
@@ -68,23 +60,6 @@ export default function Home() {
           <p className="center">
             <Link to="/case-study" className="text-link">View all projects <span className="chevron" aria-hidden="true">›</span></Link>
           </p>
-        </div>
-      </section>
-
-      <section className="intro container">
-        <div className="intro-left">
-          <div className="photo-wrap reveal">
-            <FlingPhoto src="/images/headshot.png" alt="Portrait of Taylor Fergusson" />
-          </div>
-          <ToolStrip tools={tools} />
-        </div>
-
-        <div className="intro-right">
-          <h2 className="reveal">I design it. Then I build it.</h2>
-          <p className="reveal">
-            I like to follow the rules, then break them when necessary, taking design projects to the next level with technical solutions or a full build. I love the whole journey, from the first interview to the last line of code.
-          </p>
-          <Link to="/about" className="btn reveal">More about me</Link>
         </div>
       </section>
 

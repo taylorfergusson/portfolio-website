@@ -48,6 +48,51 @@ function makePrototype(box) {
   full.addEventListener('click', () => screen.requestFullscreen?.())
 }
 
+// Turns <div class="flow-video" data-src="..." data-poster="..." data-caption="..." data-device="phone"></div>
+// into a short video of the app in use. It plays by itself (muted, looping) and has a pause button.
+// It pauses on its own when scrolled out of view, and starts paused for people who prefer reduced motion.
+//   data-src:     the video file, e.g. /videos/yumgo/booking.mp4 (put the file in public/videos/yumgo/)
+//   data-poster:  optional picture shown until the video loads
+//   data-caption: optional line of text under the video (also read out by screen readers)
+//   data-device="phone": keeps the video phone-sized instead of full width
+function makeVideo(box) {
+  if (box.dataset.ready) return
+  box.dataset.ready = 'true'
+  const { src, poster, caption, device } = box.dataset
+  if (device === 'phone') box.classList.add('phone')
+  const video = document.createElement('video')
+  video.src = src
+  video.muted = true
+  video.loop = true
+  video.playsInline = true
+  video.preload = 'metadata'
+  if (poster) video.poster = poster
+  video.setAttribute('aria-label', caption || 'Short video of the app in use')
+  const button = document.createElement('button')
+  button.type = 'button'
+  button.className = 'flow-video-toggle'
+  const show = () => { button.textContent = video.paused ? '\u25B6 Play video' : '\u275A\u275A Pause video' }
+  video.addEventListener('play', show)
+  video.addEventListener('pause', show)
+  show()
+  let userPaused = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  button.addEventListener('click', () => {
+    userPaused = !video.paused
+    if (video.paused) video.play(); else video.pause()
+  })
+  new IntersectionObserver(([entry]) => {
+    if (entry.isIntersecting && !userPaused) video.play().catch(() => {})
+    else video.pause()
+  }, { threshold: 0.4 }).observe(video)
+  box.replaceChildren(video, button)
+  if (caption) {
+    const text = document.createElement('p')
+    text.className = 'flow-video-caption'
+    text.textContent = caption
+    box.append(text)
+  }
+}
+
 // Card types: a card whose bold title starts with ! is a problem, with + an opportunity.
 // The symbol is removed, the card is tinted, and a label is added for screen readers only.
 const CARD_TYPES = { '!': 'Problem', '+': 'Opportunity' }
@@ -93,6 +138,7 @@ export default function CaseStudy() {
       }
     })
     prose.querySelectorAll('.prototype').forEach(makePrototype)
+    prose.querySelectorAll('.flow-video').forEach(makeVideo)
     prose.querySelectorAll('li > strong').forEach(markCardType)
     if (project?.theme !== 'classic') makeCleanLayout(prose)
   }, [slug])

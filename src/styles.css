@@ -288,10 +288,10 @@ section.hero { position: relative; isolation: isolate; margin-top: -72px; min-he
 .work-shots { display: flex; gap: 24px; justify-content: center; align-items: center; min-width: 0; transition: transform var(--slow) var(--ease); }
 .work-shots-link:hover .work-shots { transform: scale(1.03); }
 .work-shots img { display: block; }
-.work-phone { flex: 0 1 250px; min-width: 0; border-radius: 28px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.12); background: var(--paper); }
+.work-phone { flex: 0 1 250px; min-width: 0; border-radius: 28px; overflow: hidden; background: var(--paper); }
 .work-phone img { width: 100%; height: auto; }
 .work-stack { position: relative; width: 100%; max-width: 900px; }
-.work-browser { border-radius: 14px; overflow: hidden; background: var(--paper); border: 1px solid rgba(255, 255, 255, 0.12); }
+.work-browser { border-radius: 14px; overflow: hidden; background: var(--paper); }
 .work-browser.back { position: absolute; right: 0; top: 0; width: 58%; transform: translateY(-6%); }
 .work-browser.front { position: relative; width: 78%; margin-top: 60px; box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45); }
 .work-browser img { width: 100%; height: min(58vh, 520px); object-fit: cover; object-position: top; }
@@ -300,7 +300,7 @@ section.hero { position: relative; isolation: isolate; margin-top: -72px; min-he
 .work-bar i { width: 10px; height: 10px; border-radius: 50%; background: #cfcfd4; }
 .work-bar span { margin-left: 14px; flex: 1; height: 20px; border-radius: 6px; background: var(--paper); font-size: 11px; color: #86868b; display: flex; align-items: center; padding-left: 10px; }
 .work-cards { flex-direction: column; align-items: stretch; width: 100%; max-width: 660px; margin: 0 auto; gap: 0; }
-.work-cards img { width: 100%; height: auto; background: var(--paper); border-radius: var(--radius-sm); padding: 16px; }
+.work-cards img { width: 100%; height: auto; background: var(--paper); border-radius: var(--radius-sm); }
 .work-cards img:nth-child(2) { width: 80%; align-self: flex-end; margin-top: -56px; margin-right: -24px; box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45); }
 .work-wide { width: 100%; max-width: 900px; height: auto; border-radius: var(--radius); }
 
@@ -405,7 +405,7 @@ html:has(.viewer[open]) { overflow: hidden; }  /* stop the page scrolling behind
 /* Phone prototypes (data-device="phone"): a phone-shaped frame instead of a browser window */
 .prototype.phone { max-width: 340px; margin-left: auto; margin-right: auto; }
 .prototype.phone .prototype-bar { display: none; }
-.prototype.phone .prototype-screen { aspect-ratio: 440 / 956; border: 8px solid var(--ink); border-radius: 40px; }
+.prototype.phone .prototype-screen { box-sizing: content-box; width: calc(100% - 16px); aspect-ratio: 440 / 956; border: 8px solid var(--ink); border-radius: 40px; }   /* content-box: the inside is exactly 440:956 */
 .prototype.phone .prototype-play { white-space: nowrap; }
 .prototype-play {
   position: absolute; left: 50%; top: 50%; translate: -50% -50%; display: inline-flex; align-items: center; gap: 10px;
@@ -419,6 +419,7 @@ html:has(.viewer[open]) { overflow: hidden; }  /* stop the page scrolling behind
 .prototype-links a:hover, .prototype-full:hover { color: var(--ink); }
 
 /* Wider before/after, for full web pages: <div class="compare wide"> */
+.prose .compare.three { grid-template-columns: repeat(3, 1fr); max-width: 720px; }
 .prose .compare.wide { max-width: none; align-items: start; }
 .prose .compare.wide img { padding: 0; }
 
@@ -597,7 +598,6 @@ html:has(.viewer[open]) { overflow: hidden; }  /* stop the page scrolling behind
   .work-browser.front { width: 100%; margin: 0; }
   .work-browser img { height: 260px; }
   .work-cards img:nth-child(2) { display: none; }
-  .work-cards img { padding: 10px; }
   .callout { flex-direction: column; align-items: flex-start; }
   .intro-right .btn, .callout .btn { align-self: center; }   /* buttons sit in the middle on phones */
   .timeline li { grid-template-columns: 1fr; }
@@ -704,3 +704,66 @@ html:has(.viewer[open]) { overflow: hidden; }  /* stop the page scrolling behind
   .prose .process > p > img:only-child { padding: 0; }
   .prose .process + h2 { margin-top: 104px; }
 }
+
+
+/* arrow nudges right on hover, like the Read case study buttons */
+.hero-btn span { display: inline-block; transition: transform var(--fast) var(--ease); }
+.hero-btn:hover span { transform: translateX(4px); }
+
+/* ---- Hero draft: big sentence, photo left, short intro right, project peek below ---- */
+.hero-inner { max-width: none; width: 100%; display: flex; flex-direction: column; align-items: flex-start; gap: 56px; font-size: var(--base); }
+.hero-headline { font-size: var(--h1); line-height: 1.05; font-weight: 600; letter-spacing: -0.035em; color: var(--ink); text-wrap: pretty; }
+.hero-row { width: 100%; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 52px; align-items: center; }
+/* Words appear one after another, then the photo and blurb fade in (only opacity, so the photo's throw still works) */
+.hero-letter { opacity: 0; animation: hero-letter-in 0.5s ease-out var(--d, 0s) forwards; }   /* fade only: no sliding, so the text sits still as one block */
+@keyframes hero-letter-in { to { opacity: 1; } }
+/* After the headline: the photo fades in, then the bubble pops in, then the button fades in */
+.hero-photo { opacity: 0; animation: hero-row-in 0.6s var(--ease) var(--row-delay, 3s) forwards; }
+.hero-btn { opacity: 0; animation: hero-row-in 0.5s var(--ease) calc(var(--row-delay, 3s) + 1s) forwards; }
+@keyframes hero-row-in { to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .hero-letter, .hero-photo, .hero-btn { opacity: 1; animation: none; }
+  .hero-blurb { animation: none !important; }
+}
+.hero-photo { display: flex; justify-content: flex-start; }
+.hero-photo .headshot { max-width: 320px; cursor: grab; }
+.hero-photo:has(.flung) { position: relative; z-index: 60; }
+.hero-side { display: flex; flex-direction: column; align-items: flex-start; gap: 28px; }
+/* The blurb is a speech bubble coming from the photo: its tail points left on desktop, up on phones.
+   It pops in (a small scale-up) once the headline has finished typing. */
+.hero-blurb {
+  position: relative; font-size: var(--fs-xl); line-height: 1.2; font-weight: 500; letter-spacing: -0.02em; color: var(--ink); max-width: 17em; text-wrap: balance;
+  padding: 26px 32px; background: var(--paper); border-radius: 32px;
+  filter: drop-shadow(0 0 0.6px rgba(0, 0, 0, 0.35)) drop-shadow(0 14px 22px rgba(0, 0, 0, 0.08));   /* also outlines the tail */
+  transform-origin: -48px 78px; animation: bubble-pop 0.55s cubic-bezier(0.34, 1.45, 0.64, 1) calc(var(--row-delay, 3s) + 0.5s) backwards;
+}
+.hero-blurb::before {
+  content: ''; position: absolute; left: -50px; top: 34px; width: 58px; height: 46px; background: var(--paper);
+  clip-path: path('M58 0 C52 22 30 38 0 44 C28 49 48 47 58 42 Z');
+}
+@keyframes bubble-pop { from { opacity: 0; transform: scale(0.82); } to { opacity: 1; transform: scale(1); } }
+
+/* The tool strip sits under the intro text now that the photo has moved to the hero */
+.intro { grid-template-columns: minmax(0, 1fr); gap: 64px; justify-items: center; }
+.intro-right { align-items: center; text-align: center; max-width: 760px; width: 100%; min-width: 0; }
+.intro-tools { width: 100%; max-width: 760px; min-width: 0; }
+
+@media (max-width: 800px) {
+  .hero-inner { gap: 36px; }
+  .hero-row { grid-template-columns: 1fr; gap: 28px; }
+  .hero-photo { justify-content: center; }   /* the photo sits in the middle on phones */
+  .hero-photo .headshot { max-width: 220px; }
+  .hero-blurb { font-size: var(--fs-lg); padding: 22px 26px; align-self: center; }
+  .hero-blurb { transform-origin: 50% -48px; }
+  .hero-blurb::before { left: calc(50% - 24px); top: -48px; width: 48px; height: 56px; clip-path: path('M0 56 C18 48 22 28 24 0 C28 28 38 46 48 56 Z'); }
+  .hero-side .btn { align-self: center; }   /* the button sits in the middle on phones */
+  .intro { gap: 40px; }
+}
+
+/* Short videos of the app in use (see makeVideo in CaseStudy.jsx) */
+.flow-video { margin: 48px auto; text-align: center; }
+.flow-video video { display: block; width: 100%; height: auto; border-radius: 20px; }
+.flow-video.phone video { width: auto; max-width: min(100%, 320px); max-height: 640px; margin: 0 auto; }
+.flow-video-toggle { margin-top: 16px; padding: 8px 16px; border: 1px solid var(--line); border-radius: 999px; background: none; font: inherit; font-size: var(--fs-sm); font-weight: 600; color: var(--ink); cursor: pointer; transition: background-color var(--fast) var(--ease); }
+.flow-video-toggle:hover { background: var(--soft); }
+.flow-video-caption { margin-top: 12px; font-size: var(--fs-sm); color: var(--muted); }
