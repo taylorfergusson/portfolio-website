@@ -38,8 +38,8 @@ export const projects = [
     title: 'BorrowCircle - Design System & UI',
     featured: 3,   // shown on the home page, in this order
     category: 'UI Design & Design Systems',
-    date: 'Jan - Apr 2026',
-    summary: 'Built a full design system for a community lending app, with every colour pairing passing WCAG AA.',
+    date: 'Mar - Apr 2026',
+    summary: 'A community lending app that uses borrowing as a reason to actually meet your neighbours.',
     // The two numbers under the summary on the project cards
     stats: [
       { value: '22', label: 'component sets on 3 tiers of tokens' },
@@ -56,7 +56,7 @@ export const projects = [
     thumbnail: '/images/borrowcircle/thumbnail.jpg',
     thumbnailAlt: 'BorrowCircle app screens: search results, home, an item page, a listing preview and a chat',
     shareImage: '/images/share/default.jpg',
-    details: { Role: 'UI Designer', Team: 'Team of 3\n(my own final prototype)', Timeline: 'Jan - Apr 2026', Tools: 'Figma' },
+    details: { Role: 'UI Designer', Team: 'Team of 3\n(my own final prototype)', Timeline: 'Mar - Apr 2026', Tools: 'Figma' },
     // TODO: add the prototype link so the "Prototype" row shows at the end
     // link: 'https://www.figma.com/proto/...',
     // linkLabel: 'Prototype',
