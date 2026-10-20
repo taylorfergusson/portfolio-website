@@ -18,9 +18,9 @@ BorrowCircle is a community lending app: neighbours list the tools and equipment
 
 ## Result
 
-### BorrowCircle, finished
+### BorrowCircle's final prototype
 
-Here's my final prototype.
+We each finalized our own prototype individually. This one is mine. Styled after Honest Ed's, the quirky Toronto landmark that once gave its neighbourhood character.
 
 #### The borrowing flow
 
@@ -56,9 +56,10 @@ Here's my final prototype.
 <div class="steps">
 
 1. [Research](#research)
-2. [Testing](#testing)
-3. [Iterating](#iterating)
-4. [Design system](#design-system)
+2. [Prototyping](#prototyping)
+3. [Design system](#design-system)
+4. [Testing](#testing)
+5. [Iterating](#iterating)
 
 </div>
 
@@ -87,6 +88,24 @@ Each persona got a core task: Bill borrows a nearby lawnmower on short notice, a
 
 > **The takeaway**
 > Bill and Janine both need to trust each other, which should shape the screens we built.
+
+## Prototyping
+
+### Initial screens
+
+<!-- PLACEHOLDER: add the initial screens here, e.g. ![Description](/images/borrowcircle/initial-home.png) -->
+
+## Design System
+
+<p class="my-part">Led the token and component work</p>
+
+### Tokens and components
+
+I started with the system underneath the screens:
+
+- **Three tiers of tokens** Every colour, size, and space value is defined once and reused everywhere
+- **22 component sets** Buttons, cards, inputs, navigation, and more, each with its own variants and states
+- **Auto layout everywhere** Consistent spacing and dimensions, so screens stay tidy as content changes
 
 ## Testing
 
@@ -125,6 +144,8 @@ Before testing, peer designers had critiqued the same prototype. Reading their n
 
 ### Four changes, all about trust
 
+<p class="kicker">Change 1</p>
+
 #### Mandatory, clear deposit
 
 Moved out of a checkbox buried in the form, into its own confirmation step you have to read and accept.
@@ -153,6 +174,8 @@ Moved out of a checkbox buried in the form, into its own confirmation step you h
 </figure>
 </div>
 
+<p class="kicker">Change 2</p>
+
 #### Distinct profile reviews
 
 Profiles now show the person's rating on its own, apart from reviews of a single item.
@@ -167,6 +190,8 @@ Profiles now show the person's rating on its own, apart from reviews of a single
 <img src="/images/borrowcircle/final-profile-other.png" alt="Final profile with a star rating, what they're currently borrowing, listings and reviews">
 </figure>
 </div>
+
+<p class="kicker">Change 3</p>
 
 #### Show what people are borrowing right now
 
@@ -183,6 +208,8 @@ A borrowing history became a live "Currently borrowing" list, with days left on 
 </figure>
 </div>
 
+<p class="kicker">Change 4</p>
+
 #### Clear availability
 
 Items you can borrow right now get a "get it now" tag, so people stop assuming a borrowed item is off-limits.
@@ -197,22 +224,6 @@ Items you can borrow right now get a "get it now" tag, so people stop assuming a
 <img src="/images/borrowcircle/final-results.png" alt="Final search results where only the item you can borrow now gets a Get it now! starburst">
 </figure>
 </div>
-
-## Design System
-
-<p class="my-part">Led the token and component work</p>
-
-### Tokens and components
-
-I started with the system underneath the screens:
-
-- **Three tiers of tokens** Every colour, size, and space value is defined once and reused everywhere
-- **22 component sets** Buttons, cards, inputs, navigation, and more, each with its own variants and states
-- **Auto layout everywhere** Consistent spacing and dimensions, so screens stay tidy as content changes
-
-#### Honest Ed's
-
-Styled after Honest Ed's, the quirky Toronto landmark that once gave its neighbourhood character.
 
 </div>
 
