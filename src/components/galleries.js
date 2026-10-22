@@ -9,9 +9,51 @@ import './galleries.css'
 //     write a caption line under it instead).
 // Clicking any image opens the full-size viewer. Captions come from each image's alt text:
 // "Persona: Pat, the picky taster" shows "Persona" as the short caption and the whole thing in the viewer.
+// Phone screens (any image shaped like a phone, about 1 wide by 2.2 tall) are put in a phone frame with a
+// soft shadow, like the slides. Other images get a soft shadow too. To stop an image getting a phone frame
+// (say it already has one drawn in), give it class="framed".
 // The look is in galleries.css.
 
 const PORTRAIT = 0.8 // images narrower than this (width / height) count as tall screens
+const isPhone = (ratio) => ratio > 0.38 && ratio < 0.56 // phone screens are about 0.46
+
+// Wraps an image in a phone frame: a dark bezel, the Dynamic Island and a drop shadow
+export function framePhone(img, ratio) {
+  if (img.closest('.phone')) return
+  const phone = document.createElement('span')
+  phone.className = 'phone'
+  phone.style.setProperty('--ar', ratio.toFixed(4))
+  const body = document.createElement('span')
+  body.className = 'phone-body'
+  const island = document.createElement('span')
+  island.className = 'phone-island'
+  island.setAttribute('aria-hidden', 'true')
+  img.replaceWith(phone)
+  body.append(img, island)
+  phone.append(body)
+  const holder = img.closest('.gallery-image, figure')
+  holder?.classList.add('has-phone')
+  holder?.style.setProperty('--ar', ratio.toFixed(4))
+}
+
+const ratioOf = (src) => new Promise((resolve) => {
+  const probe = new Image()
+  probe.onload = () => resolve(probe.naturalWidth / probe.naturalHeight)
+  probe.onerror = () => resolve(1)
+  probe.src = src
+})
+
+// Images written straight into the case study (before/afters, rows of shots): phone screens get the
+// phone frame, everything else gets the soft shadow
+export function frameImages(root) {
+  root.querySelectorAll('.compare img, .shots img').forEach((img) => {
+    if (img.classList.contains('framed')) return img.classList.add('shadowed')
+    ratioOf(img.getAttribute('src')).then((r) => {
+      if (isPhone(r)) framePhone(img, r)
+      else img.classList.add('shadowed')
+    })
+  })
+}
 
 const shortCaption = (alt) => {
   const [first] = alt.split(':')
@@ -36,15 +78,17 @@ function imageButton(image, i, images, openViewer) {
   return button
 }
 
-function buildBento(wrap, images, openViewer) {
+function buildBento(wrap, images, openViewer, ratios = []) {
   wrap.classList.add('bento')
   const n = images.length
   if (n === 1) wrap.classList.add('bento-one')
+  if (n === 1 && isPhone(ratios[0])) wrap.classList.add('bento-phone')
   if (n === 2) wrap.classList.add('bento-two')
   if (n === 4) wrap.classList.add('bento-four') // one big image on the left, three stacked on the right
   images.forEach((image, i) => {
     const figure = document.createElement('figure')
     figure.append(imageButton(image, i, images, openViewer))
+    if (n === 1 && isPhone(ratios[0])) framePhone(figure.querySelector('img'), ratios[0])
     if (image.alt && n > 1) {
       const caption = document.createElement('figcaption')
       caption.textContent = shortCaption(image.alt)
@@ -60,13 +104,14 @@ function buildBento(wrap, images, openViewer) {
   }
 }
 
-function buildStrip(wrap, images, openViewer) {
+function buildStrip(wrap, images, openViewer, ratios = []) {
   wrap.classList.add('strip-wrap')
   const strip = document.createElement('div')
   strip.className = 'strip'
   images.forEach((image, i) => {
     const figure = document.createElement('figure')
     figure.append(imageButton(image, i, images, openViewer))
+    if (isPhone(ratios[i])) framePhone(figure.querySelector('img'), ratios[i])
     if (image.alt) {
       const caption = document.createElement('figcaption')
       caption.textContent = shortCaption(image.alt)
@@ -125,15 +170,9 @@ export function makeGallery(p, openViewer) {
   p.replaceWith(wrap)
 
   // Check the images' shapes, then build the right kind of gallery
-  const ratios = images.map((image) => new Promise((resolve) => {
-    const probe = new Image()
-    probe.onload = () => resolve(probe.naturalWidth / probe.naturalHeight)
-    probe.onerror = () => resolve(1)
-    probe.src = image.src
-  }))
-  Promise.all(ratios).then((r) => {
+  Promise.all(images.map((image) => ratioOf(image.src))).then((r) => {
     const average = r.reduce((a, b) => a + b, 0) / r.length
-    if (average < PORTRAIT && images.length > 1) buildStrip(wrap, images, openViewer)
-    else buildBento(wrap, images, openViewer)
+    if (average < PORTRAIT && images.length > 1) buildStrip(wrap, images, openViewer, r)
+    else buildBento(wrap, images, openViewer, r)
   })
 }

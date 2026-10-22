@@ -42,11 +42,11 @@ export const projects = [
     summary: 'A community lending app that uses borrowing as a reason to actually meet your neighbours.',
     // The two numbers under the summary on the project cards
     stats: [
-      { value: '22', label: 'component sets on 3 tiers of tokens' },
-      { value: '19/19', label: 'colour pairings pass WCAG AA' },
+      { value: '27', label: 'component sets on 3 tiers of tokens' },
+      { value: '16/16', label: 'colour pairings pass WCAG AA' },
     ],
     // The "Outcome" row on the project cards. Wrap numbers in ** to make them bold.
-    outcome: '**22** component sets, **19/19** pairings pass AA',
+    outcome: '**27** component sets, **16/16** pairings pass AA',
     // The screens on the project cards: type 'phone', 'browser', 'cards' or 'image'
     shots: { type: 'phone', images: [
       { src: '/images/borrowcircle/final-home.png', alt: 'BorrowCircle home: Wanted! signs and hot items nearby' },
@@ -56,7 +56,7 @@ export const projects = [
     thumbnail: '/images/borrowcircle/thumbnail.jpg',
     thumbnailAlt: 'BorrowCircle app screens: search results, home, an item page, a listing preview and a chat',
     shareImage: '/images/share/default.jpg',
-    details: { Role: 'UI Designer', Team: 'Team of 3\n(my own final prototype)', Timeline: 'Mar - Apr 2026', Tools: 'Figma' },
+    details: { Role: 'UI Designer', Team: 'Team of 3\n(my own final prototype)', Timeline: '3 weeks\nMar - Apr 2026', Tools: 'Figma' },
     // TODO: add the prototype link so the "Prototype" row shows at the end
     // link: 'https://www.figma.com/proto/...',
     // linkLabel: 'Prototype',

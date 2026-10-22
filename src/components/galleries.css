@@ -31,6 +31,13 @@
   font-size: var(--fs-xs); font-weight: 600; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 
+/* Every photo gets the slides' soft drop shadow */
+.prose .bento figure { box-shadow: var(--shadow-soft); }
+.prose .bento.bento-one figure:first-child { border: 0; }
+/* A single phone screen on its own: a phone frame, not too big */
+.prose .bento.bento-phone figure:first-child { width: min(300px, 70%); margin-inline: auto; overflow: visible; background: none; box-shadow: none; border-radius: 0; }
+.prose .bento.bento-phone figure:hover img { transform: none; }
+
 /* ---------- Scroll strip (phone screens, wireframes) ---------- */
 .prose .strip {
   --strip-height: 440px;   /* how tall the screens are */
@@ -44,12 +51,50 @@
 .prose .strip .gallery-image { height: var(--strip-height); width: auto; }
 .prose .strip img { height: 100%; width: auto; border-radius: 16px; border: 1px solid var(--line); }
 .prose .strip figcaption { margin-top: 10px; font-size: var(--fs-sm); color: var(--muted); }
+.prose .strip:has(.phone) { padding: 8px 0 40px; margin: -8px 0 -24px; }   /* room for the phones' shadows */
+.prose .strip .gallery-image.has-phone { height: auto; width: calc(var(--strip-height) * var(--ar, 0.46)); }
+.prose .strip figure:has(.phone) figcaption { margin-top: 16px; text-align: center; }
 .strip-bar { display: flex; align-items: center; gap: 16px; margin-top: 18px; font-size: var(--fs-sm); color: var(--muted); }
 .strip-count { font-variant-numeric: tabular-nums; min-width: 3.5em; }
 .strip-progress { position: relative; flex: 1; height: 2px; background: var(--line); }
 .strip-progress i { position: absolute; left: 0; top: 0; bottom: 0; background: var(--ink); transition: width 0.15s linear; }
 
+/* ---------- Phone frame (added by galleries.js to any phone-shaped screen) ----------
+   Black bezel, Dynamic Island and a soft drop shadow, like the phones on the slides.
+   Sizes are in cqw (percent of the phone's width), so the frame looks the same at any size. */
+:root {
+  --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.05), 0 10px 30px -6px rgba(0, 0, 0, 0.14);
+  --shadow-phone: 0 2px 4px rgba(0, 0, 0, 0.08), 0 24px 48px -12px rgba(0, 0, 0, 0.28);
+}
+.phone { display: block; width: 100%; container-type: inline-size; }
+.phone-body {
+  position: relative; display: block; padding: 2.6cqw; background: #141414;
+  border-radius: 15.5cqw; box-shadow: 0 0 0 1px #c9c9ce, var(--shadow-phone);
+}
+.prose .phone img, .phone img, .prose :is(.compare, .shots, .strip, .bento) .phone img {
+  display: block; width: 100%; height: auto; aspect-ratio: var(--ar); object-fit: cover; object-position: top;
+  padding: 0; border: 0; border-radius: 13cqw; background: #fff;
+}
+.phone-island { position: absolute; top: 5.4cqw; left: 50%; translate: -50% 0; width: 28.5cqw; height: 8.4cqw; border-radius: 999px; background: #000; }
+.prose .strip .has-phone img { height: auto; }
+.prose .bento .has-phone img, .prose .bento figure:hover .phone img { height: auto; transform: none; }
+
+/* Other images written into a case study (cards, forms, before/afters) get the soft shadow instead of a border */
+.prose img.shadowed, .prose :is(.compare, .shots) img.shadowed { border: 0; border-radius: 16px; box-shadow: var(--shadow-soft); }
+
+/* ---------- Row of shots, captions underneath: <div class="shots"> or <div class="shots three"> ----------
+   Each shot is <figure><img src="..." alt="..."><figcaption>Caption</figcaption></figure> */
+.prose .shots { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; align-items: start; }
+.prose .shots.three { grid-template-columns: repeat(3, 1fr); }
+.prose .shots.one { grid-template-columns: 1fr; }
+.prose .shots figure { margin: 0; }
+.prose .shots img { cursor: zoom-in; }
+.prose .shots figcaption { margin-top: 14px; font-size: var(--fs-sm); color: var(--muted); text-align: center; }
+.prose .compare figure.has-phone figcaption { text-align: center; }
+.prose .compare:has(.phone) { gap: 24px; }
+
 @media (max-width: 800px) {
+  .prose .shots.three { grid-template-columns: 1fr 1fr; }
   .prose .bento { --bento-row: 120px; gap: 8px; }
   .prose .bento.bento-two { grid-auto-rows: 180px; }
   .prose .strip { --strip-height: 360px; gap: 12px; }

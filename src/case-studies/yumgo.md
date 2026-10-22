@@ -4,7 +4,7 @@
 
 ### Providing comfort in unfamiliar places
 
-YumGo is a food discovery app for tourists, supporting individuals and groups who . When you're somewhere new, with dietary needs or a certain vibe in mind, it helps you find a place that feels right before you walk in.
+YumGo is a food discovery app for tourists. When you're somewhere new, with dietary needs or a certain vibe in mind, it helps you find a place that feels right before you walk in.
 
 <div class="summary">
 
@@ -107,7 +107,7 @@ We started out with the assumption that tourists wanted food ASAP so they could 
 - ![](/images/yumgo/icon-irrelevant.png) **!Irrelevant content** Full of noise and unwanted results
 - ![](/images/yumgo/icon-authenticity.png) **+Desire for authenticity!** Tourists wanted local, quality meals
 
-Not everyone was ready to let go of th original idea, but I emphasized how it's important to move in the direction that the research is pushing us.
+Not everyone was ready to let go of the original idea, but I emphasized how it's important to move in the direction that the research is pushing us.
 
 > **The takeaway**
 > We shifted gears away from wait times and toward the authentic experiences that weren't showcased in current apps.
@@ -134,11 +134,11 @@ On the surface, people talked about menus, reviews, and photos, but thematic ana
 
 ## Prototyping
 
-<p class="my-part">Defined our main user path and built the main restaurant page</p>
+<p class="my-part">Defined our main user path, built the main restaurant page, and kept teammates' screens consistent</p>
 
 ### So… what do we make?
 
-We got a little too excited about features to add, so I defined our main user path early to keep us on track. Then I built the wireframe for the restaurant page, including its info, menu, and reviews.
+We got a little too excited about features to add, so I defined our main user path early to keep us on track. Then I built the wireframe for the restaurant page, including its info, menu, and reviews, and revised teammate screens to keep a consistent visual language.
 
 ![Home map](/images/yumgo/wireframe-1.png)
 ![Restaurant info](/images/yumgo/wireframe-2.png)
@@ -180,11 +180,11 @@ I knew that if we left it, a big portion of testing time would be wasted reveali
 <div class="compare">
 <figure>
 <figcaption>Before</figcaption>
-<img src="/images/yumgo/toggle-before.jpg" alt="Initial version: not all filter buttons updated as expected">
+<img class="framed" src="/images/yumgo/toggle-before.jpg" alt="Initial version: not all filter buttons updated as expected">
 </figure>
 <figure>
 <figcaption>After</figcaption>
-<img src="/images/yumgo/toggle-after.jpg" alt="Updated version: icons are now properly selectable and deselectable">
+<img class="framed" src="/images/yumgo/toggle-after.jpg" alt="Updated version: icons are now properly selectable and deselectable">
 </figure>
 </div>
 
@@ -206,7 +206,7 @@ All 6 remaining participants used the filters without getting stuck, and the res
 <div class="compare three">
 <figure>
 <figcaption>Tested</figcaption>
-<img src="/images/yumgo/toggle-after.jpg" alt="Filters as tested: icon-only buttons">
+<img src="/images/yumgo/filters-tested.jpg" alt="Filters as tested: icon-only buttons">
 </figure>
 <figure>
 <figcaption>Labelled</figcaption>
@@ -222,13 +222,71 @@ All 6 remaining participants used the filters without getting stuck, and the res
 
 </div>
 
+## Design system
+
+<p class="my-part">Set up the tokens, components and documentation</p>
+
+### Design system
+
+When I polished YumGo for my portfolio, I rebuilt the components and styles on a full design system.
+
+<div class="numbered">
+
+1. **Reusable restaurant page for all restaurants** I used variable modes to swap the content on the restaurant page, keeping consistency between 5 restaurants.
+2. **31 component sets** Tab bars, headers, footers, filter chips, and more, each with descriptive variant states.
+3. **AA contrast throughout** Every text pairing is at least 4.5:1, and every icon has a text label.
+
+</div>
+
+<div class="ds-grid">
+<figure class="ds-figure">
+<div class="ds-card">
+<table class="ds-tiers">
+<thead><tr><th scope="col">Tier</th><th scope="col">Tokens</th><th scope="col">Example</th></tr></thead>
+<tbody>
+<tr><td>Primitive</td><td>211, hidden</td><td><span class="ds-swatch" style="--c: #1e5c4f" aria-hidden="true"></span><code>colours/brand/700</code></td></tr>
+<tr><td>Semantic</td><td>117</td><td><span class="ds-swatch" style="--c: #1e5c4f" aria-hidden="true"></span><code>bg/brand</code></td></tr>
+<tr><td>Component</td><td>51</td><td><span class="ds-swatch" style="--c: #1e5c4f" aria-hidden="true"></span><code>button/primary/bg</code></td></tr>
+</tbody>
+</table>
+</div>
+<figcaption>Token tiers</figcaption>
+</figure>
+<div class="shots one">
+<figure><img src="/images/yumgo/ds-tabs.png" alt="Restaurant tabs component in all 4 states: Info, Menu, Reviews and Directions selected"><figcaption>Restaurant tabs · all 4 states</figcaption></figure>
+</div>
+</div>
+
+<div class="shots three">
+<figure><img src="/images/yumgo/ds-filter.png" alt="Filter icon component in all 6 variants: off and on, as a small icon, a large icon, and a labelled chip"><figcaption>Filter icon · all 6</figcaption></figure>
+<figure><img src="/images/yumgo/ds-tabbar.png" alt="Tab bar component in all 5 states: none selected, then Explore, Community, Wishlist and Profile selected"><figcaption>Tab bar · all 5</figcaption></figure>
+<figure><img src="/images/yumgo/ds-status.png" alt="Open status component in both states: Open until 10 PM, and Closed, open 11 AM to 10 PM"><figcaption>Open status · both states</figcaption></figure>
+</div>
+
+<figure class="ds-figure">
+<div class="ds-card">
+<table class="contrast">
+<thead><tr><th scope="col">Text ↓ Background →</th><th scope="col">canvas</th><th scope="col">surface</th><th scope="col">subtle</th><th scope="col">brand-subtle</th><th scope="col">brand</th><th scope="col">accent</th></tr></thead>
+<tbody>
+<tr><th scope="row">fg/primary</th><td><span class="pair" style="background: #fffefc; color: #24201c">16.0 AAA</span></td><td><span class="pair" style="background: #f9f7f4; color: #24201c">15.1 AAA</span></td><td><span class="pair" style="background: #efebe5; color: #24201c">13.6 AAA</span></td><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td></tr>
+<tr><th scope="row">fg/body</th><td><span class="pair" style="background: #fffefc; color: #35302a">13.0 AAA</span></td><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td><td><span class="pair" style="background: #efebe5; color: #35302a">11.0 AAA</span></td><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td></tr>
+<tr><th scope="row">fg/secondary</th><td><span class="pair" style="background: #fffefc; color: #635a4f">6.7 AA</span></td><td><span class="pair" style="background: #f9f7f4; color: #635a4f">6.3 AA</span></td><td><span class="pair" style="background: #efebe5; color: #635a4f">5.7 AA</span></td><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td></tr>
+<tr><th scope="row">fg/link</th><td><span class="pair" style="background: #fffefc; color: #1e5c4f">7.7 AAA</span></td><td><span class="pair" style="background: #f9f7f4; color: #1e5c4f">7.3 AAA</span></td><td><span class="pair" style="background: #efebe5; color: #1e5c4f">6.6 AA</span></td><td><span class="pair" style="background: #daeee7; color: #1e5c4f">6.4 AA</span></td><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td></tr>
+<tr><th scope="row">fg/warning</th><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td><td><span class="pair" style="background: #efebe5; color: #6e321c">8.3 AAA</span></td><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td></tr>
+<tr><th scope="row">fg/inverse</th><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td><td><span class="pair" style="background: #1e5c4f; color: #fffefc">7.7 AAA</span></td><td><span class="pair" style="background: #8e4024; color: #fffefc">7.2 AAA</span></td></tr>
+</tbody>
+</table>
+</div>
+<figcaption>Contrast matrix · Pairings used in the prototype</figcaption>
+</figure>
+
 ## Reflection
 
 ### What I learned
 
 <div class="numbered">
 
-1. **Taking on too much work isn't leading** Halfway through, I caught myself rewriting teammates' sections as we pulled things together, which made me the bottleneck. So I moved the work earlier: we agreed on direction, scope, and reasons before anyone started drafting, and I kept it all in one shared brief (our findings, what we were still working on, and what we'd dropped). Whenever the work started drifting off-scope, the brief broughtus back in.
+1. **Taking on too much work isn't leading** Halfway through, I caught myself rewriting teammates' sections as we pulled things together, which made me the bottleneck. So I moved the work earlier: we agreed on direction, scope, and reasons before anyone started drafting, and I kept it all in one shared brief (our findings, what we were still working on, and what we'd dropped). Whenever the work started drifting off-scope, the brief brought us back in.
 2. **Leadership is hard to judge from the inside** While I tried my best to be a "good leader", there were times I felt like I wasn't leading the team well, like when we felt confused or took the project in different directions. At the end, one teammate told me unprompted that I was a good leader, which meant a lot. This taught me to check in more with my peers, not for reassurance, but to make sure they are getting what they need.
 3. **Moving in reverse is still moving** It was hard to backpedal on wait times, features, and stylistic directions. However, I learned to hold ideas loosely and see pivots for what they really are: improvements!
 

@@ -4,7 +4,7 @@ import { marked } from 'marked'
 import { projects } from '../projects.js'
 import NotFound from './NotFound.jsx'
 import { makeCleanLayout } from '../components/cleanLayout.js'
-import { makeGallery } from '../components/galleries.js'
+import { makeGallery, frameImages } from '../components/galleries.js'
 
 // Loads every .md file in src/case-studies/ as text
 const caseStudies = import.meta.glob('../case-studies/*.md', { query: '?raw', import: 'default', eager: true })
@@ -137,6 +137,13 @@ export default function CaseStudy() {
         makeGallery(p, (images, index) => setViewer({ images, index }))
       }
     })
+    // A row of shots (<div class="shots">): click any one to see it full size
+    prose.querySelectorAll('.shots').forEach((row) => {
+      const imgs = [...row.querySelectorAll('img')]
+      const images = imgs.map((img) => ({ src: img.getAttribute('src'), alt: img.getAttribute('alt') || '' }))
+      imgs.forEach((img, i) => img.addEventListener('click', () => setViewer({ images, index: i })))
+    })
+    frameImages(prose)
     prose.querySelectorAll('.prototype').forEach(makePrototype)
     prose.querySelectorAll('.flow-video').forEach(makeVideo)
     prose.querySelectorAll('li > strong').forEach(markCardType)

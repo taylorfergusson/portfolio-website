@@ -767,3 +767,40 @@ html:has(.viewer[open]) { overflow: hidden; }  /* stop the page scrolling behind
 .flow-video-toggle { margin-top: 16px; padding: 8px 16px; border: 1px solid var(--line); border-radius: 999px; background: none; font: inherit; font-size: var(--fs-sm); font-weight: 600; color: var(--ink); cursor: pointer; transition: background-color var(--fast) var(--ease); }
 .flow-video-toggle:hover { background: var(--soft); }
 .flow-video-caption { margin-top: 12px; font-size: var(--fs-sm); color: var(--muted); }
+
+/* =========================================================
+   Design system tables: token tiers and the contrast matrix
+   <figure class="ds-figure"><div class="ds-card"> a table </div><figcaption>Caption</figcaption></figure>
+   ========================================================= */
+.prose .ds-figure { margin-inline: 0; margin-bottom: 0; min-width: 0; contain: inline-size; }   /* a wide table scrolls inside its card on phones */
+.prose .ds-grid > .ds-figure { margin: 0; }
+.prose .ds-figure figcaption { margin-top: 14px; font-size: var(--fs-sm); color: var(--muted); }
+.prose .ds-card { position: relative; padding: 18px 20px; background: #fff; border-radius: 16px; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), 0 10px 30px -6px rgba(0, 0, 0, 0.14); overflow-x: auto; }
+.prose .ds-card table { width: 100%; border-collapse: collapse; font-size: var(--fs-sm); line-height: 1.3; }
+.prose .ds-card th { font-weight: 500; text-align: left; color: var(--muted); font-size: var(--fs-xs); }
+
+/* Token tiers: Tier / Tokens / Example */
+.prose .ds-tiers th { padding: 0 12px 10px 0; }
+.prose .ds-tiers td { padding: 12px 12px 12px 0; border-top: 1px solid var(--line); color: var(--ink); white-space: nowrap; }
+.prose .ds-tiers td:last-child { padding-right: 0; }
+.prose .ds-tiers td:first-child { font-weight: 600; }
+.prose .ds-tiers code { font-family: inherit; font-size: inherit; color: var(--body); background: none; padding: 0; }
+.prose .ds-swatch { display: inline-block; width: 16px; height: 16px; margin-right: 10px; vertical-align: -3px; border-radius: 4px; background: var(--c); }
+
+/* Contrast matrix: text colours down the side, backgrounds across the top */
+.prose .contrast { min-width: 640px; table-layout: fixed; border-spacing: 4px; border-collapse: separate; }
+.prose .contrast th { padding: 0 2px 4px; text-align: center; white-space: nowrap; }
+.prose .contrast th:first-child { text-align: left; width: 120px; }
+.prose .contrast tbody th { color: var(--ink); font-size: var(--fs-sm); padding-left: 0; text-align: left; }
+.prose .contrast td { padding: 0; }
+.prose .contrast .pair {
+  display: block; padding: 6px 4px; border-radius: 6px; text-align: center; white-space: nowrap;
+  font-size: var(--fs-xs); font-weight: 500; font-variant-numeric: tabular-nums; border: 1px solid rgba(0, 0, 0, 0.08);
+}
+.prose .contrast .pair.none { border: 1px dashed var(--line); color: transparent; }
+
+/* Design system: two cards side by side, then three */
+.prose .ds-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 24px; align-items: start; }
+@media (max-width: 800px) {
+  .prose .ds-grid { grid-template-columns: 1fr; }
+}

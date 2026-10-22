@@ -41,8 +41,8 @@ We each finalized our own prototype individually. This one is mine. Styled after
 
 <div class="numbered">
 
-1. **A fully integrated design system** 3-tier tokens and 22 component sets, built in Figma with variables, components, and auto layout.
-2. **Accessible colour pairings** All 19 text and background pairings meet WCAG AA, and 12 of them reach AAA.
+1. **A fully integrated design system** 3-tier tokens and 27 component sets, built in Figma with variables, components, and auto layout.
+2. **Accessible colour pairings** All 16 text and background pairings meet WCAG AA, and 9 of them reach AAA.
 3. **Four changes backed by usability testing** Reviews, transaction details, borrowing status, and availability tags were all reworked.
 
 </div>
@@ -71,10 +71,13 @@ We started with a scenario. Bill has just moved to the suburbs, and his family i
 
 From there, we wrote proto-personas for both sides of a loan:
 
-- **Bill, the borrower** A remote software developer on a budget. Comfortable online, nervous face to face. "I'm a little nervous making an introduction."
+- **Bill, the borrower** A remote software developer on a budget due to moving. Comfortable online, nervous face to face. "I'm a little nervous making an introduction."
 - **Janine, the lender** A community-minded grandmother whose house is full of equipment from years past. "We have all this junk that we only ever use every couple years!"
 
-![Proto-personas: Bill, a budget-conscious remote developer who's nervous about introductions, and Janine, a community-driven grandmother with equipment to share](/images/borrowcircle/personas.png)
+<div class="shots">
+<figure><img src="/images/borrowcircle/persona-bill.png" alt="Proto-persona: Bill, the borrower. Remote software developer, budget-conscious, people pleaser, prefers chatting online. Quotes: I'm ok with the mess, as long as no one else sees it. I should really get on that, but I gotta do this first. I'm a little nervous making an introduction."><figcaption>Bill, the borrower</figcaption></figure>
+<figure><img src="/images/borrowcircle/persona-janine.png" alt="Proto-persona: Janine, the lender. Grandmother, community-driven, empty nester, lots of equipment from past years. Quotes: We have all this junk that we only ever use every couple years! It's hard to keep up with all the people moving in and out of the neighbourhood. Back in my day I would have liked someone to help me out."><figcaption>Janine, the lender</figcaption></figure>
+</div>
 
 Each persona got a core task: Bill borrows a nearby lawnmower on short notice, and Janine lists her lawn equipment for the community. We mapped both as task flows before designing any screens.
 
@@ -97,19 +100,65 @@ Each persona got a core task: Bill borrows a nearby lawnmower on short notice, a
 
 ## Design System
 
-<p class="my-part">Led the token and component work</p>
+<p class="my-part">Led the tokens, components and documentation</p>
 
-### Tokens and components
+### Design system
 
-I started with the system underneath the screens:
+I set up the system before the screens, then we built the full screens with it.
 
-- **Three tiers of tokens** Every colour, size, and space value is defined once and reused everywhere
-- **22 component sets** Buttons, cards, inputs, navigation, and more, each with its own variants and states
-- **Auto layout everywhere** Consistent spacing and dimensions, so screens stay tidy as content changes
+<div class="numbered">
+
+1. **Tokens first** Spacing and greyscale colours were set up first to give the screens a solid foundation that could be restyled later.
+2. **27 component sets** Reusable elements like item cards, buttons, text input, and user info, all with variants and variant properties.
+3. **AA contrast throughout** All 16 text pairings are at least 4.5:1 (AA), with 9 above 7:1 (AAA).
+
+</div>
+
+<div class="ds-grid">
+<figure class="ds-figure">
+<div class="ds-card">
+<table class="ds-tiers">
+<thead><tr><th scope="col">Tier</th><th scope="col">Tokens</th><th scope="col">Example</th></tr></thead>
+<tbody>
+<tr><td>Primitive</td><td>95, hidden</td><td><span class="ds-swatch" style="--c: #ba3830" aria-hidden="true"></span><code>colour/red/600</code></td></tr>
+<tr><td>Semantic</td><td>74</td><td><span class="ds-swatch" style="--c: #ba3830" aria-hidden="true"></span><code>colour/brand/accent</code></td></tr>
+<tr><td>Component</td><td>73</td><td><span class="ds-swatch" style="--c: #ba3830" aria-hidden="true"></span><code>button/primary-bg</code></td></tr>
+</tbody>
+</table>
+</div>
+<figcaption>Token tiers</figcaption>
+</figure>
+<div class="shots one">
+<figure><img src="/images/borrowcircle/ds-search.png" alt="Search field component in all 3 states: default, typing with a clear button, and filled"><figcaption>Search field · all 3 states</figcaption></figure>
+</div>
+</div>
+
+<div class="shots three">
+<figure><img src="/images/borrowcircle/ds-wanted.png" alt="Wanted! poster component in all 3 variants: yellow, red and cream"><figcaption>Wanted! poster · all 3 variants</figcaption></figure>
+<figure><img src="/images/borrowcircle/ds-tag.png" alt="Item tag component in all 3 variants: grey, yellow and dark"><figcaption>Item tag · all 3</figcaption></figure>
+<figure><img src="/images/borrowcircle/ds-message.png" alt="Message component in both types: received with an avatar, and sent"><figcaption>Message · both types</figcaption></figure>
+</div>
+
+<figure class="ds-figure">
+<div class="ds-card">
+<table class="contrast">
+<thead><tr><th scope="col">Text ↓ Background →</th><th scope="col">page</th><th scope="col">subtle</th><th scope="col">surface</th><th scope="col">loud</th><th scope="col">vibrant</th><th scope="col">brand/accent</th><th scope="col">dark</th><th scope="col">messages</th></tr></thead>
+<tbody>
+<tr><th scope="row">text/primary</th><td><span class="pair" style="background: #fcfcfb; color: #191919">17.1 AAA</span></td><td><span class="pair" style="background: #f3f2ee; color: #191919">15.7 AAA</span></td><td><span class="pair" style="background: #eeebe6; color: #191919">14.8 AAA</span></td><td><span class="pair" style="background: #fff6d7; color: #191919">16.3 AAA</span></td><td><span class="pair" style="background: #ffde5c; color: #191919">13.3 AAA</span></td><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td></tr>
+<tr><th scope="row">text/secondary</th><td><span class="pair" style="background: #fcfcfb; color: #555350">7.5 AAA</span></td><td><span class="pair" style="background: #f3f2ee; color: #555350">6.8 AA</span></td><td><span class="pair" style="background: #eeebe6; color: #555350">6.4 AA</span></td><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td></tr>
+<tr><th scope="row">text/attention</th><td><span class="pair" style="background: #fcfcfb; color: #ba3830">5.5 AA</span></td><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td><td><span class="pair" style="background: #eeebe6; color: #ba3830">4.8 AA</span></td><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td></tr>
+<tr><th scope="row">status/error</th><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td><td><span class="pair" style="background: #fff6d7; color: #892d26">7.9 AAA</span></td><td><span class="pair" style="background: #ffde5c; color: #892d26">6.4 AA</span></td><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td></tr>
+<tr><th scope="row">text/light</th><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td><td><span class="pair" style="background: #ba3830; color: #f1efea">4.9 AA</span></td><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td></tr>
+<tr><th scope="row">text/inverse</th><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td><td><span class="pair none"><span class="visually-hidden">Not used</span></span></td><td><span class="pair" style="background: #ba3830; color: #fcfcfb">5.5 AA</span></td><td><span class="pair" style="background: #322a12; color: #fcfcfb">13.9 AAA</span></td><td><span class="pair" style="background: #2c2b2a; color: #fcfcfb">13.8 AAA</span></td></tr>
+</tbody>
+</table>
+</div>
+<figcaption>Contrast matrix · Pairings used in the prototype</figcaption>
+</figure>
 
 ## Testing
 
-<p class="my-part">Moderated 2 of our 6 remote sessions</p>
+<p class="my-part">Moderated 2 of our 6 remote sessions and gathered findings from the transcripts</p>
 
 ### Testing with people who already use marketplaces
 
@@ -120,7 +169,6 @@ We recruited 6 participants familiar with online marketplace platforms and ran r
 - **!Trust was in question** People checked reviews and profiles before agreeing to meet a stranger
 - **!The deposit got skimmed** The deposit checkbox was required, but most people ticked it out of habit
 - **!"On lend" read as unavailable** People assumed they couldn't borrow those items at all
-- **!Condition labels felt vague** People wanted the familiar options they knew from resale apps
 - **!Borrowing vs. messaging** People expected to message the lender first, like on Facebook Marketplace
 
 > **Participant 3, on the deposit**
@@ -212,7 +260,7 @@ A borrowing history became a live "Currently borrowing" list, with days left on 
 
 #### Clear availability
 
-Items you can borrow right now get a "get it now" tag, so people stop assuming a borrowed item is off-limits.
+Items you can borrow right now get a "Get it now!" tag, and the "On lend" label was removed completely, so people stop assuming a borrowed item is off-limits.
 
 <div class="compare">
 <figure>
