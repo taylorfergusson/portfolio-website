@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import Phone from './Phone.jsx'
 
 // Turns "**155** URLs audited" into text with the number in bold
 function withBold(text) {
@@ -48,7 +49,7 @@ function Shots({ shots, fallback }) {
 
   return (
     <div className="work-shots work-phones">
-      {images.map((img) => <div className="work-phone" key={img.src}><img src={img.src} alt={img.alt} loading="lazy" /></div>)}
+      {images.map((img) => <div className="work-phone" key={img.src}><Phone><img src={img.src} alt={img.alt} loading="lazy" /></Phone></div>)}
     </div>
   )
 }

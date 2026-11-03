@@ -5,6 +5,7 @@ import { projects } from '../projects.js'
 import NotFound from './NotFound.jsx'
 import { makeCleanLayout } from '../components/cleanLayout.js'
 import { makeGallery, frameImages } from '../components/galleries.js'
+import { makePhone } from '../components/phoneFrame.js'
 
 // Loads every .md file in src/case-studies/ as text
 const caseStudies = import.meta.glob('../case-studies/*.md', { query: '?raw', import: 'default', eager: true })
@@ -31,6 +32,7 @@ function makePrototype(box) {
       <button type="button" class="prototype-full" hidden>Full screen ⤢</button>
     </p>`
   const screen = box.querySelector('.prototype-screen')
+  if (phone) makePhone(screen)   // phone prototypes sit in the site's phone frame
   const full = box.querySelector('.prototype-full')
   box.querySelector('.prototype-play').addEventListener('click', () => {
     // Phones are too small for a desktop prototype, so open it in Figma instead

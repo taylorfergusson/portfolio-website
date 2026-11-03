@@ -1,16 +1,12 @@
 import { projects } from '../projects.js'
-import ProjectCard from '../components/ProjectCard.jsx'
+import WorkCard from '../components/WorkCard.jsx'
 
+// Every project that isn't hidden, in the order they're listed in projects.js
 export default function Projects() {
   return (
-    <section className="projects dark">
-      <div className="container">
-        <h1 className="reveal">Projects</h1>
-        {(() => {
-          const shown = projects.filter((p) => !p.hidden)
-          return shown.map((p, i) => <ProjectCard key={p.slug} project={p} index={i} total={shown.length} />)
-        })()}
-      </div>
+    <section className="pcard-list container">
+      <h1 className="reveal">Projects</h1>
+      {projects.filter((p) => !p.hidden).map((p) => <WorkCard key={p.slug} project={p} />)}
     </section>
   )
 }

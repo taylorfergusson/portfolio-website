@@ -9,7 +9,8 @@
   --muted: #6e6e73;      /* short body text + secondary text */
   --body: #424245;       /* long-read text (case studies) */
   --muted-dark: #a1a1a6; /* body text on dark sections */
-  --accent: #be3a30;     /* red accent: small details only */
+  --accent: #20665F;     /* brand green: the one colour for anything you can click, hover, select or focus */
+  --accent-light: #6cc4b8;   /* the same green, lighter, for black sections (7.7:1 on black) */
   --caution: #C06234;    /* brand orange: problem cards */
   --positive: #20665F;   /* brand green: opportunity cards */
 
@@ -80,6 +81,7 @@ h3 { font-size: var(--h3); line-height: 1.25; font-weight: 600; letter-spacing: 
 
 .container { max-width: 1280px; margin: 0 auto; padding: 0 var(--gutter); }
 .dark { background: var(--ink); color: var(--paper); }
+.dark, .site-footer { --accent: var(--accent-light); }   /* on black, the green is lighter so it stays easy to see */
 .center { text-align: center; }
 section { padding: var(--space) 0; }
 section.container { padding-top: var(--space); padding-bottom: var(--space); }
@@ -176,8 +178,7 @@ section.hero { position: relative; isolation: isolate; margin-top: -72px; min-he
 .hero-word { display: inline-block; text-indent: 0; animation: word-in 0.5s var(--ease); }
 @keyframes word-in { from { opacity: 0; transform: translateY(0.3em); } }
 
-/* Hero background: soft colour blobs that wander, change shape and wobble away from the mouse.
-   Colours and positions are set at the top of src/components/HeroBackground.jsx. */
+/* Hero background: the glass tiles that light up under the mouse (src/components/HeroTiles.jsx). */
 .hero-bg {
   position: absolute; top: 0; bottom: 0; left: 50%; width: 100vw; translate: -50% 0; z-index: -1; overflow: hidden;
   -webkit-mask-image: linear-gradient(to bottom, #FFF 80%, transparent);   /* fades into the page at the bottom */
@@ -288,8 +289,7 @@ section.hero { position: relative; isolation: isolate; margin-top: -72px; min-he
 .work-shots { display: flex; gap: 24px; justify-content: center; align-items: center; min-width: 0; transition: transform var(--slow) var(--ease); }
 .work-shots-link:hover .work-shots { transform: scale(1.03); }
 .work-shots img { display: block; }
-.work-phone { flex: 0 1 250px; min-width: 0; border-radius: 28px; overflow: hidden; background: var(--paper); }
-.work-phone img { width: 100%; height: auto; }
+.work-phone { flex: 0 1 250px; min-width: 0; }   /* the phone frame comes from iphone.css */
 .work-stack { position: relative; width: 100%; max-width: 900px; }
 .work-browser { border-radius: 14px; overflow: hidden; background: var(--paper); }
 .work-browser.back { position: absolute; right: 0; top: 0; width: 58%; transform: translateY(-6%); }
@@ -335,7 +335,7 @@ section.hero { position: relative; isolation: isolate; margin-top: -72px; min-he
 :where(.prose, .prose .process) > * + * { margin-top: var(--flow); }
 :where(.prose, .prose .process) > :where(div, blockquote, ul:has(> li > strong:first-child), ul:has(> li > img:first-child), p:has(> img:only-child)):not(:first-child),
 :where(.prose, .prose .process) > :where(div, blockquote, ul:has(> li > strong:first-child), ul:has(> li > img:first-child), p:has(> img:only-child), p:has(> em:only-child)) + :where(:not(h2, h3, h4)) { margin-top: var(--block-gap); }
-.prose h2 { scroll-margin-top: 100px; margin-top: 160px; padding-top: 32px; border-top: 1px solid var(--line); font-size: var(--fs-sm); letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+.prose h2 { scroll-margin-top: 100px; margin-top: 160px; padding-top: 32px; border-top: 1px solid var(--line); font-size: var(--fs-sm); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
 .prose h3 { font-size: var(--h-section); line-height: 1.12; margin-top: 12px; }
 .prose h3 + * { margin-top: var(--heading-gap); }   /* room between a big heading and what follows */
 .prose h4 + * { margin-top: 16px; }   /* small headings sit close to what they introduce */
@@ -345,7 +345,7 @@ section.hero { position: relative; isolation: isolate; margin-top: -72px; min-he
 .prose ul { list-style: disc; padding-left: 1.3em; }
 .prose ol { list-style: decimal; padding-left: 1.3em; }
 .prose li + li { margin-top: 6px; }
-.prose li::marker { color: var(--accent); }
+.prose li::marker { color: var(--muted); }
 .prose img { width: 100%; border-radius: var(--radius); }
 /* A single image sits in a soft grey frame */
 .prose > p > img:only-child { padding: 0; background: none; }   /* no grey frame box on images */
@@ -405,7 +405,7 @@ html:has(.viewer[open]) { overflow: hidden; }  /* stop the page scrolling behind
 /* Phone prototypes (data-device="phone"): a phone-shaped frame instead of a browser window */
 .prototype.phone { max-width: 340px; margin-left: auto; margin-right: auto; }
 .prototype.phone .prototype-bar { display: none; }
-.prototype.phone .prototype-screen { box-sizing: content-box; width: calc(100% - 16px); aspect-ratio: 440 / 956; border: 8px solid var(--ink); border-radius: 40px; }   /* content-box: the inside is exactly 440:956 */
+.prototype.phone .prototype-screen { width: 100%; aspect-ratio: 440 / 956; border: 0; border-radius: 14.5cqw; }   /* inside the phone frame (iphone.css) */
 .prototype.phone .prototype-play { white-space: nowrap; }
 .prototype-play {
   position: absolute; left: 50%; top: 50%; translate: -50% -50%; display: inline-flex; align-items: center; gap: 10px;
@@ -448,18 +448,18 @@ html:has(.viewer[open]) { overflow: hidden; }  /* stop the page scrolling behind
    Each column is a #### heading followed by its text. */
 .prose .columns { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; grid-auto-flow: column; column-gap: 40px; row-gap: 8px; }
 .prose .columns h4 { margin-top: 0; }
-.prose blockquote { padding: 36px 40px; background: var(--soft); border-left: 3px solid var(--accent); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+.prose blockquote { padding: 36px 40px; background: var(--soft); border-left: 3px solid var(--muted); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
 .prose blockquote p { color: var(--ink); font-size: var(--fs-md); line-height: 1.5; }
-.prose blockquote strong:first-child { display: block; margin-bottom: 8px; font-size: var(--fs-sm); letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+.prose blockquote strong:first-child { display: block; margin-bottom: 8px; font-size: var(--fs-sm); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
 .prose blockquote p + p { margin-top: 12px; }
 /* A bigger callout that can hold anything (text, images, before/after): wrap it in <div class="callout-box"> with blank lines inside.
    Its first line in **bold** becomes the red label, like a > callout. */
-.prose .callout-box { padding: 40px 44px; background: var(--soft); border-left: 3px solid var(--accent); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+.prose .callout-box { padding: 40px 44px; background: var(--soft); border-left: 3px solid var(--muted); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
 .prose .callout-box > :first-child { margin-top: 0; }
 .prose .callout-box > * + * { margin-top: 24px; }
 .prose .callout-box > p:first-child + * { margin-top: 8px; }   /* label sits close to the text */
 .prose .callout-box > p:has(> em:only-child) { margin-top: 12px; }   /* caption hugs its images */
-.prose .callout-box > p:first-child strong:only-child { display: block; font-size: var(--fs-sm); letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+.prose .callout-box > p:first-child strong:only-child { display: block; font-size: var(--fs-sm); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
 .prose .callout-box .compare img { background: none; }
 
 /* =========================================================
@@ -474,7 +474,7 @@ html:has(.viewer[open]) { overflow: hidden; }  /* stop the page scrolling behind
 .tag { padding: 6px 14px; border-radius: 999px; background: var(--soft); font-size: var(--fs-sm); font-weight: 500; color: var(--ink); }
 .about h2 { margin-bottom: 48px; }
 .timeline li { display: grid; grid-template-columns: 180px 1fr; column-gap: 40px; padding: 44px 0; border-top: 1px solid var(--line); }
-.timeline .when { grid-row: span 3; font-weight: 600; color: var(--accent); }
+.timeline .when { grid-row: span 3; font-weight: 600; color: var(--ink); }
 .timeline h3 { font-size: var(--h4); }
 .timeline p { max-width: 65ch; margin-top: 10px; }
 /* A photo or video under a timeline entry */
@@ -593,7 +593,7 @@ html:has(.viewer[open]) { overflow: hidden; }  /* stop the page scrolling behind
   .work { grid-template-columns: 1fr; gap: 28px; min-height: 0; padding: 48px 0; }
   .work-shots-link { order: -1; }
   .work-phones { justify-content: flex-start; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; }
-  .work-phone { flex: 0 0 62%; max-width: 220px; border-radius: 24px; scroll-snap-align: start; }
+  .work-phone { flex: 0 0 62%; max-width: 220px; scroll-snap-align: start; }
   .work-browser.back { display: none; }
   .work-browser.front { width: 100%; margin: 0; }
   .work-browser img { height: 260px; }
@@ -638,7 +638,7 @@ html:has(.viewer[open]) { overflow: hidden; }  /* stop the page scrolling behind
 .prose .numbered ol { list-style: none; padding: 0; counter-reset: big; }
 .prose .numbered li { counter-increment: big; display: grid; grid-template-columns: 80px 1fr; column-gap: 16px; padding: 36px 0; border-top: 1px solid var(--line); margin: 0; }
 .prose .numbered li:last-child { border-bottom: 1px solid var(--line); }
-.prose .numbered li::before { content: counter(big); grid-row: span 2; font-size: var(--fs-2xl); line-height: 1; font-weight: 600; letter-spacing: -0.03em; color: var(--accent); }
+.prose .numbered li::before { content: counter(big); grid-row: span 2; font-size: var(--fs-2xl); line-height: 1; font-weight: 600; letter-spacing: -0.03em; color: var(--muted); }
 .prose .numbered li > strong { font-size: var(--h4); margin-bottom: 4px; }
 
 /* Process steps: a row of linked steps. Wrap a numbered list of links in <div class="steps"> */
@@ -672,7 +672,7 @@ html:has(.viewer[open]) { overflow: hidden; }  /* stop the page scrolling behind
   --line: #3a3a3c;          /* divider lines */
   --body: #d2d2d7;          /* paragraph text */
   --muted: var(--muted-dark);
-  --accent: #ff6f61;        /* section labels: a lighter red so it's readable on black */
+  --accent: var(--accent-light);   /* anything interactive inside the black section: the lighter green */
   margin-top: 180px; padding: 128px 0 144px; background: var(--ink); color: var(--paper);
   box-shadow: 0 0 0 100vmax var(--ink); clip-path: inset(0 -100vmax);   /* stretches the black to the edges of the screen */
 }
@@ -681,7 +681,7 @@ html:has(.viewer[open]) { overflow: hidden; }  /* stop the page scrolling behind
 .prose .process > h2:first-child + h3 { font-size: var(--h2); }
 .prose .process h3 { font-size: var(--fs-xl); }   /* process headings a step smaller than the story around them */
 .prose .process :is(h3, h4, strong, blockquote p) { color: var(--paper); }
-.prose .process :is(blockquote strong:first-child, .callout-box > p:first-child strong:only-child) { color: var(--accent); }   /* callout labels stay red */
+.prose .process :is(blockquote strong:first-child, .callout-box > p:first-child strong:only-child) { color: var(--muted); }   /* callout labels: grey */
 .prose .process li > img:first-child { filter: invert(1); opacity: 0.7; }   /* card icons turn light */
 .prose .process .card.card-problem { background: color-mix(in srgb, var(--caution) 28%, var(--ink)); }
 .prose .process .card.card-opportunity { background: color-mix(in srgb, var(--positive) 35%, var(--ink)); }
@@ -689,14 +689,14 @@ html:has(.viewer[open]) { overflow: hidden; }  /* stop the page scrolling behind
 .prose .process .steps a::before { background: var(--paper); color: var(--ink); }
 .prose .process .steps a:hover, .prose .process .tile-button:hover { background: #3a3a3c; }
 .prose .process .chips li { color: var(--paper); }
-.prose .process .kicker { color: #6cc4b8; }   /* lighter green on black */
+.prose .process .kicker { color: var(--accent-light); }   /* lighter green on black */
 .prose .process .callout-box .compare img { background: none; }
 .prose .process + h2 { margin-top: 180px; border-top: 0; }
 /* The side menu floats over the black section. Each link that's over it gets "data-on-dark" (from CaseStudy.jsx) and turns light */
 .cs-nav { z-index: 2; }
 .cs-nav a[data-on-dark] { color: var(--muted-dark); border-color: #48484a; }
 .cs-nav a[data-on-dark]:hover, .cs-nav a[data-on-dark].current { color: var(--paper); }
-.cs-nav a[data-on-dark].current { border-color: #ff6f61; }
+.cs-nav a[data-on-dark].current { border-color: var(--accent-light); }
 .cs-nav .nested a { padding-left: 26px; }
 
 @media (max-width: 800px) {
@@ -804,3 +804,7 @@ html:has(.viewer[open]) { overflow: hidden; }  /* stop the page scrolling behind
 @media (max-width: 800px) {
   .prose .ds-grid { grid-template-columns: 1fr; }
 }
+
+/* Hero background: frosted glass tiles that light up around the mouse.
+   Settings are at the top of src/components/HeroTiles.jsx. */
+.hero-tiles canvas { display: block; width: 100%; height: 100%; }

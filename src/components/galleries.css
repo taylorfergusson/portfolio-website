@@ -59,23 +59,15 @@
 .strip-progress { position: relative; flex: 1; height: 2px; background: var(--line); }
 .strip-progress i { position: absolute; left: 0; top: 0; bottom: 0; background: var(--ink); transition: width 0.15s linear; }
 
-/* ---------- Phone frame (added by galleries.js to any phone-shaped screen) ----------
-   Black bezel, Dynamic Island and a soft drop shadow, like the phones on the slides.
-   Sizes are in cqw (percent of the phone's width), so the frame looks the same at any size. */
+/* ---------- Phone frame ----------
+   Phone-shaped screens get the site's phone frame (iphone.css, added by galleries.js). These rules size the screen inside it. */
 :root {
   --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.05), 0 10px 30px -6px rgba(0, 0, 0, 0.14);
-  --shadow-phone: 0 2px 4px rgba(0, 0, 0, 0.08), 0 24px 48px -12px rgba(0, 0, 0, 0.28);
-}
-.phone { display: block; width: 100%; container-type: inline-size; }
-.phone-body {
-  position: relative; display: block; padding: 2.6cqw; background: #141414;
-  border-radius: 15.5cqw; box-shadow: 0 0 0 1px #c9c9ce, var(--shadow-phone);
 }
 .prose .phone img, .phone img, .prose :is(.compare, .shots, .strip, .bento) .phone img {
   display: block; width: 100%; height: auto; aspect-ratio: var(--ar); object-fit: cover; object-position: top;
-  padding: 0; border: 0; border-radius: 13cqw; background: #fff;
+  padding: 0; border: 0; border-radius: 14.5cqw; background: #fff; box-shadow: none;
 }
-.phone-island { position: absolute; top: 5.4cqw; left: 50%; translate: -50% 0; width: 28.5cqw; height: 8.4cqw; border-radius: 999px; background: #000; }
 .prose .strip .has-phone img { height: auto; }
 .prose .bento .has-phone img, .prose .bento figure:hover .phone img { height: auto; transform: none; }
 

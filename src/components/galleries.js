@@ -1,4 +1,5 @@
 import './galleries.css'
+import { makePhone } from './phoneFrame.js'
 
 // Turns a paragraph of back-to-back images in a case study into a gallery. It picks the style by itself:
 //   - Tall images (phone screens, wireframes) become a scroll strip: images at their real shape in a row
@@ -9,28 +10,19 @@ import './galleries.css'
 //     write a caption line under it instead).
 // Clicking any image opens the full-size viewer. Captions come from each image's alt text:
 // "Persona: Pat, the picky taster" shows "Persona" as the short caption and the whole thing in the viewer.
-// Phone screens (any image shaped like a phone, about 1 wide by 2.2 tall) are put in a phone frame with a
-// soft shadow, like the slides. Other images get a soft shadow too. To stop an image getting a phone frame
+// Phone screens (any image shaped like a phone, about 1 wide by 2.2 tall) are put in the site's phone frame
+// (an iPhone 18 Pro, see iphone.css). Other images get a soft shadow. To stop an image getting a phone frame
 // (say it already has one drawn in), give it class="framed".
 // The look is in galleries.css.
 
 const PORTRAIT = 0.8 // images narrower than this (width / height) count as tall screens
 const isPhone = (ratio) => ratio > 0.38 && ratio < 0.56 // phone screens are about 0.46
 
-// Wraps an image in a phone frame: a dark bezel, the Dynamic Island and a drop shadow
+// Wraps an image in the site's phone frame (iphone.css)
 export function framePhone(img, ratio) {
   if (img.closest('.phone')) return
-  const phone = document.createElement('span')
-  phone.className = 'phone'
+  const phone = makePhone(img)
   phone.style.setProperty('--ar', ratio.toFixed(4))
-  const body = document.createElement('span')
-  body.className = 'phone-body'
-  const island = document.createElement('span')
-  island.className = 'phone-island'
-  island.setAttribute('aria-hidden', 'true')
-  img.replaceWith(phone)
-  body.append(img, island)
-  phone.append(body)
   const holder = img.closest('.gallery-image, figure')
   holder?.classList.add('has-phone')
   holder?.style.setProperty('--ar', ratio.toFixed(4))

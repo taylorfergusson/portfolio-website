@@ -1,0 +1,123 @@
+/* =========================================================
+   Project cards: a tinted panel with the project's screens, under a sliding pane of glass.
+   Used on the home page and the Projects page (WorkCard.jsx).
+   ========================================================= */
+
+/* The list of projects (on the home page and the Projects page) */
+.pcard-list { padding-top: 140px; padding-bottom: 40px; }
+.pcard-list > :is(h1, h2) { margin: 0 0 96px; }
+.pcard { margin: 0 0 200px; }
+.pcard-link { position: relative; display: block; color: inherit; text-decoration: none; }
+
+/* The panel: the hero's glass tiles on the project's tint, lit up under the cursor */
+.pcard-panel {
+  position: relative; overflow: hidden; height: clamp(320px, 44vw, 580px); border-radius: 28px;
+  background: var(--tint);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.7);
+}
+.pcard-panel .hero-bg {
+  position: absolute; inset: 0; left: 0; width: 100%; translate: none; z-index: 0;
+  -webkit-mask-image: none; mask-image: none;
+}
+.pcard-link:focus-visible { outline: none; }
+.pcard-link:focus-visible .pcard-panel { outline: 2px solid var(--accent); outline-offset: 4px; }
+
+/* The screens, sized by the panel's height so each one always fits completely (even enlarged) */
+.pcard-shots {
+  position: absolute; inset: 0; display: flex; justify-content: center; align-items: center;
+  gap: clamp(16px, 3vw, 44px); pointer-events: none;
+}
+.pcard-phone, .pcard-browser, .pcard-wide, .pcard-chart {
+  position: relative; z-index: 1; flex: none; pointer-events: auto;
+  /* Layers: screens 1, a hovered screen 2 (over its neighbours), the glass 3 (always in front of every screen).
+     On the way back, a screen drops behind its neighbours only once it has shrunk (the z-index waits 0.4s). */
+  transition: scale 0.4s var(--ease), z-index 0s linear 0.4s;
+}
+/* Hovering one screen enlarges it over its neighbours, so it can be previewed (the glass stays in front of it) */
+.pcard-link :is(.pcard-phone, .pcard-browser, .pcard-wide, .pcard-chart):hover {
+  z-index: 2; transition: scale 0.4s var(--ease), z-index 0s;
+}
+.pcard-link .pcard-phone:hover { scale: 1.15; }
+.pcard-link :is(.pcard-browser, .pcard-wide, .pcard-chart):hover { scale: 1.1; }
+
+/* The phones: sized by the panel's height. The frame itself comes from iphone.css (the same phone used across the site). */
+.pcard-phone { height: 72%; aspect-ratio: 1564 / 3264; }
+.pcard-phone-0 { order: 0; height: 80%; }
+.pcard-phone-1 { order: -1; }
+.pcard-phone-2 { order: 1; }
+
+/* Browser screenshots (like CIUT) */
+.pcard-browser {
+  height: 70%; aspect-ratio: 1.33; display: flex; flex-direction: column;
+  border-radius: 12px; overflow: hidden; background: #fff; box-shadow: 0 30px 60px rgba(0, 0, 0, 0.16);
+}
+.pcard-bar { flex: none; display: flex; align-items: center; gap: 6px; height: 30px; padding: 0 12px; background: #f2f2f4; border-bottom: 1px solid var(--line); font-size: 12px; color: var(--muted); }
+.pcard-bar i { width: 9px; height: 9px; border-radius: 50%; background: #d6d6db; }
+.pcard-bar span { margin-left: 10px; }
+.pcard-browser img { display: block; flex: 1; min-height: 0; width: 100%; object-fit: cover; object-position: top; }
+.pcard-wide { height: 70%; width: auto; border-radius: 14px; box-shadow: 0 30px 60px rgba(0, 0, 0, 0.16); }
+/* Charts (like the SoundCloud study): white cards side by side */
+.pcard-chart {
+  height: 62%; width: auto; max-width: 42%; object-fit: contain; padding: 18px; box-sizing: border-box;
+  border-radius: 14px; background: #fff; box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
+}
+
+/* The glass pane over the bottom three-quarters. Hovering the project slides it down to reveal the screens.
+   The same glass as the hero tiles (see the shader in HeroTiles.jsx), as one big pane:
+     frost: blur plus a milky haze that's thicker toward the edges
+     rim: a bright edge lit from the top left, and a soft shade on the far edge
+     sheen: light across the top, and a fine grain over everything */
+.pcard-lip {
+  position: absolute; z-index: 3; left: 0; right: 0; bottom: 0; height: 75%; pointer-events: none;
+  border-radius: 28px;   /* the same corners as the panel */
+  background: rgba(255, 255, 255, 0.06);   /* the middle stays fairly clear, like the middle of a tile */
+  -webkit-backdrop-filter: blur(10px) saturate(170%) brightness(1.05);
+  backdrop-filter: blur(10px) saturate(170%) brightness(1.05);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 1),             /* rim: the bright top edge */
+    inset 2px 0 0 rgba(255, 255, 255, 0.7),           /* rim: lit from the left */
+    inset -1px 0 0 rgba(255, 255, 255, 0.35),         /* rim: the right edge, a little dimmer */
+    inset 0 26px 46px -22px rgba(255, 255, 255, 0.95),/* frost: milky along the top edge */
+    inset 0 0 90px rgba(255, 255, 255, 0.6),          /* frost: milky toward every edge, clearer in the middle */
+    inset 0 -3px 10px rgba(0, 0, 0, 0.04);            /* the far edge in soft shade */
+  transition: translate 1s var(--ease);   /* about as long as the photo's roll on the home page */
+}
+/* Sheen: light catching the top of the glass */
+.pcard-lip::before {
+  content: ''; position: absolute; inset: 0; border-radius: inherit;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.14) 6%, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0) 80%, rgba(255, 255, 255, 0.14));
+}
+/* Fine grain, like frosted glass */
+.pcard-lip::after {
+  content: ''; position: absolute; inset: 0; border-radius: inherit; opacity: 0.16; mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.pcard-panel:hover .pcard-lip { translate: 0 101%; }   /* only when the image part is hovered, not the text */
+/* Touch screens can't hover, so the glass stays low enough to show most of each screen */
+@media (hover: none) {
+  .pcard-lip { height: 22%; }
+}
+
+/* Name, the project sentence (styled like the hero headline), and role / team / timeline */
+.pcard-eyebrow { margin-top: 36px; font-size: var(--fs-sm); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.pcard-outcome {
+  margin-top: 10px; text-wrap: pretty;
+  font-size: var(--fs-xl); font-weight: 600; line-height: 1.1; letter-spacing: -0.03em; color: var(--ink);
+}
+.pcard-meta { margin-top: 14px; font-size: var(--fs-base); color: var(--muted); }
+
+
+/* Phones: smaller panels */
+@media (max-width: 800px) {
+  .pcard { margin-bottom: 120px; }
+  .pcard-list > :is(h1, h2) { margin-bottom: 56px; }
+  .pcard-panel { height: 340px; border-radius: 22px; }
+  .pcard-shots { gap: 10px; }
+  .pcard-outcome { font-size: var(--fs-lg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* No growing or sliding: the glass simply disappears on hover, and the hovered screen comes to the front */
+  .pcard-phone, .pcard-browser, .pcard-wide, .pcard-chart, .pcard-lip { transition: none; }
+  .pcard-link .pcard-phone:hover, .pcard-link :is(.pcard-browser, .pcard-wide, .pcard-chart):hover { scale: none; }
+}

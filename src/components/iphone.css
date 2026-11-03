@@ -1,0 +1,49 @@
+/* =========================================================
+   The phone frame used everywhere on the site: a Black iPhone 18 Pro, as Apple shows it (no case, no shadow).
+   Measured from Apple's front image. Everything is in cqw (1cqw = 1% of the phone's width), so it looks the
+   same at any size. Used by Phone.jsx (React) and phoneFrame.js (case study images and prototypes).
+     body: 1564 x 3264 (0.479)            corners: 18.1cqw
+     border on every side: 3.58cqw = a rounded metal edge (2.1cqw, bright line down its middle) + black glass (1.48cqw)
+     Dynamic Island: 20.7 x 8.1cqw, 7cqw from the top, camera lens on its right
+     earpiece: a thin slit at the top edge, 37cqw wide
+     buttons (from the top of the phone): Action 20.6%, volume up 28.6%, volume down 38% (left); side button 31.1% (right)
+   ========================================================= */
+.phone { position: relative; display: block; width: 100%; container-type: inline-size; }
+
+/* The metal edge: dark at the very outside, a bright line where light catches the curve, then dark again */
+.phone-body {
+  position: relative; display: block; padding: 2.1cqw; border-radius: 18.1cqw; background: #1c1c1e;
+  box-shadow:
+    inset 0 0 0 0.12cqw #1d1d1f,
+    inset 0 0 0.25cqw 0.5cqw #3e3e41,
+    inset 0 0 0.3cqw 1cqw #737376,
+    inset 0 0 0.3cqw 1.5cqw #48484b,
+    inset 0 0 0.3cqw 2.1cqw #242426;
+}
+
+/* The black glass border around the screen */
+.phone-glass { position: relative; display: block; padding: 1.48cqw; border-radius: 16cqw; background: #000; overflow: hidden; }
+.phone-glass > img, .phone-glass > video {
+  display: block; width: 100%; height: auto; object-fit: cover; object-position: top;
+  border: 0; border-radius: 14.5cqw; background: #fff;
+}
+
+/* Earpiece: a thin slit along the top edge */
+.phone-speaker { position: absolute; top: 0.15cqw; left: 50%; translate: -50% 0; width: 37cqw; height: 0.35cqw; border-radius: 999px; background: #2f2f31; }
+
+/* Dynamic Island, with the front camera lens on its right */
+.phone-island { position: absolute; z-index: 1; top: 4.93cqw; left: 50%; translate: -50% 0; width: 20.7cqw; height: 8.1cqw; border-radius: 999px; background: #000; }
+.phone-island::after {
+  content: ''; position: absolute; top: 50%; right: 2.56cqw; translate: 0 -50%; width: 3.2cqw; height: 3.2cqw; border-radius: 50%;
+  background: radial-gradient(circle at 38% 36%, #4a4f7a 0%, #1b1e33 30%, #0a0b14 60%, #000 75%);
+  box-shadow: 0 0 0 0.25cqw #0b0b10;
+}
+
+/* Side buttons: they stick out just past the edge */
+.phone-key { position: absolute; width: 0.64cqw; border-radius: 0.3cqw; }
+.phone-key-action, .phone-key-up, .phone-key-down { left: -0.64cqw; background: linear-gradient(90deg, #2a2a2c, #4d4d50 60%, #3a3a3c); }
+.phone-key-side { right: -0.64cqw; background: linear-gradient(270deg, #2a2a2c, #4d4d50 60%, #3a3a3c); }
+.phone-key-action { top: 20.6%; height: 4.6%; }
+.phone-key-up { top: 28.6%; height: 7.5%; }
+.phone-key-down { top: 38%; height: 7.5%; }
+.phone-key-side { top: 31.1%; height: 11.8%; }
