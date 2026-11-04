@@ -5,12 +5,13 @@ import { useEffect, useRef } from 'react'
 // like Figma's Glass effect.
 // Colours come from where the trail is: a blend of the brand colours below
 // (purple top left, green right, orange and red bottom right).
+//   hex: a colour like '#20665F', or one of the brand colour names from the top of styles.css
 //   x, y: where each colour is strongest, as a fraction of the hero (0 = left/top, 1 = right/bottom)
 const COLOURS = [
-  { hex: '#6D5699', x: 0.04, y: 0.12 }, // purple
-  { hex: '#20665F', x: 0.92, y: 0.3 },  // green
-  { hex: '#C06234', x: 0.6, y: 0.9 },   // orange
-  { hex: '#BE3A30', x: 0.85, y: 0.85 }, // red
+  { hex: '--brand-purple', x: 0.04, y: 0.12 },
+  { hex: '--brand-green', x: 0.92, y: 0.3 },
+  { hex: '--brand-orange', x: 0.6, y: 0.9 },
+  { hex: '--brand-red', x: 0.85, y: 0.85 },
 ]
 
 // The glass (the same settings as the preview sliders)
@@ -153,7 +154,9 @@ function makeProgram(gl, frag) {
   if (!gl.getProgramParameter(program, gl.LINK_STATUS)) throw new Error('link')
   return program
 }
-const hex = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16) / 255)
+// A brand colour name ('--brand-green') is looked up in styles.css; anything else is read as a hex colour
+const resolve = (h) => (h.startsWith('--') ? getComputedStyle(document.documentElement).getPropertyValue(h).trim() : h)
+const hex = (h) => { const c = resolve(h); return [1, 3, 5].map((i) => parseInt(c.slice(i, i + 2), 16) / 255) }
 
 // Optional settings, for reusing the tiles somewhere other than the hero (the hero uses none of these):
 //   colours: 4 colours in the same shape as COLOURS above

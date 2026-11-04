@@ -8,7 +8,7 @@ export default function Resume() {
       <div className="resume-top">
         <h1 className="reveal">Resume</h1>
         <div className="resume-actions reveal">
-          <a href={resumePdf} target="_blank" rel="noreferrer" className="text-link">Open in new tab ↗</a>
+          <a href={resumePdf} target="_blank" rel="noreferrer" className="text-link">Open in new tab <span aria-hidden="true">↗</span></a>
           <a href={resumePdf} download className="btn">Download PDF</a>
         </div>
       </div>
@@ -22,7 +22,7 @@ export default function Resume() {
       >
         <div className="resume-fallback">
           <p>Your browser can't show the resume on this page.</p>
-          <a href={resumePdf} target="_blank" rel="noreferrer" className="btn">View the PDF</a>
+          <a href={resumePdf} target="_blank" rel="noreferrer" className="btn">View the PDF <span aria-hidden="true">↗</span><span className="visually-hidden"> (opens in new tab)</span></a>
         </div>
       </object>
     </section>

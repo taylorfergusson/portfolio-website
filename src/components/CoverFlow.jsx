@@ -198,7 +198,7 @@ export default function CoverFlow() {
         {/* The song title links to the song on Apple Music */}
         <p className="coverflow-title">
           {current.link
-            ? <a href={current.link} target="_blank" rel="noreferrer" title="Listen on Apple Music">{current.title}</a>
+            ? <a href={current.link} target="_blank" rel="noreferrer" title="Listen on Apple Music">{current.title} <span aria-hidden="true">↗</span><span className="visually-hidden"> (Apple Music, opens in new tab)</span></a>
             : current.title}
         </p>
         <p className="coverflow-artist">{current.artist}</p>

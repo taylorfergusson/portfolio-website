@@ -1,12 +1,12 @@
 /* =========================================================
-   Case study layout (see cleanLayout.js). Used for every case study; theme: 'classic' in projects.js
-   brings back the older look. Black and grey text on white, thin lines, small labels on the left,
+   Case study layout (see cleanLayout.js). Used for every case study.
+   Black and grey text on white, thin lines, small labels on the left,
    content on the right. Colour is only used where it means something (see "Colour" below).
    ========================================================= */
 .cs-clean {
   /* Colours with a meaning (the same ones as the home page) */
-  --c-red: #BE3A30;          /* "My part": the only colour in a case study */
-  --hairline: #e8e8ed;   /* the thin lines between rows */
+  --c-red: var(--brand-red);          /* "My part": the only colour in a case study */
+  --hairline: var(--soft-2);   /* the thin lines between rows */
   --body: #2c2c2e;       /* paragraph text: darker than the other case studies */
   --label-gap: 56px;     /* space between the label column and the content */
   --row-space: 112px;    /* space above and below each row */
@@ -20,7 +20,7 @@
 /* ---------- Top of the page ---------- */
 .cs-back { display: inline-flex; gap: 6px; font-size: var(--fs-sm); color: var(--muted); transition: color var(--fast) var(--ease); }
 .cs-back:hover { color: var(--ink); }
-.cs-eyebrow { margin-top: 64px; font-size: var(--fs-sm); font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+.cs-eyebrow { margin-top: 64px; font-size: var(--label-size); font-weight: var(--label-weight); letter-spacing: var(--label-tracking); text-transform: uppercase; color: var(--muted); }
 .cs-clean .cs-main > h1 { margin-top: 12px; font-size: var(--fs-5xl); line-height: 1; letter-spacing: -0.04em; }
 .cs-subtitle { margin-top: 20px; max-width: 34em; font-size: var(--fs-md); line-height: 1.45; color: var(--muted); }
 .cs-clean .banner { margin: 56px 0 0; border-radius: var(--radius-sm); }
@@ -31,7 +31,7 @@
   border: 1px solid var(--hairline); border-radius: var(--radius-sm); overflow: hidden;
 }
 .cs-clean .details > div { padding: 24px 28px; box-shadow: -1px 0 0 var(--hairline); }
-.cs-clean .details dt { font-size: var(--fs-xs); font-weight: 500; letter-spacing: 0.14em; }
+.cs-clean .details dt { font-size: var(--label-size); font-weight: var(--label-weight); letter-spacing: var(--label-tracking); }
 
 /* ---------- Rows: label on the left, content on the right ---------- */
 .cs-clean .prose { margin: 96px 0 0; }
@@ -43,7 +43,7 @@
 .cs-label { position: sticky; top: 110px; align-self: start; }   /* the label stays in view while you read its row */
 .cs-clean .prose .cs-label h2 {
   margin: 0; padding: 0; border: 0; scroll-margin-top: 110px;
-  font-size: var(--fs-sm); font-weight: 500; letter-spacing: 0.14em; color: var(--muted);
+  font-size: var(--label-size); font-weight: var(--label-weight); letter-spacing: var(--label-tracking); color: var(--muted);
 }
 .cs-clean .prose .cs-label h2[data-step]::before { content: attr(data-step); display: block; margin-bottom: 6px; color: var(--ink); }
 
@@ -64,7 +64,7 @@
 .prose .badge-cards > li.no-badge .badge { display: none; }
 .prose .badge {
   width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center;
-  background: var(--ink); color: #fff; font-size: 16px; font-weight: 700; line-height: 1;
+  background: var(--ink); color: var(--paper); font-size: 16px; font-weight: 700; line-height: 1;
 }
 /* Problem (!) and opportunity (+) badges stay black like every other badge: the symbol says what it is */
 .prose .badge img { position: static; width: 18px; height: 18px; border-radius: 0; opacity: 1; filter: brightness(0) invert(1); }   /* your icon, in white */
@@ -76,12 +76,12 @@
 .cs-clean .prose .summary .card > strong > .visually-hidden { display: none; }
 .cs-clean .prose .summary li > strong,
 .cs-clean .prose .summary .card-problem > strong,
-.cs-clean .prose .summary .card-opportunity > strong { font-size: var(--fs-xs); font-weight: 500; letter-spacing: 0.14em; color: var(--muted); }
+.cs-clean .prose .summary .card-opportunity > strong { font-size: var(--label-size); font-weight: var(--label-weight); letter-spacing: var(--label-tracking); color: var(--muted); }
 
 /* ---------- My part: what I personally did, under the section label ---------- */
 /* In a case study, write <p class="my-part">What I did</p> anywhere in a section */
 .prose .my-part { margin-top: 20px; padding-top: 12px; border-top: 1px solid var(--hairline); max-width: 18em; font-size: var(--fs-sm); line-height: 1.45; letter-spacing: 0; color: var(--ink); }
-.prose .my-part::before { content: 'My part'; display: block; margin-bottom: 4px; font-size: var(--fs-xs); font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--c-red); }
+.prose .my-part::before { content: 'My part'; display: block; margin-bottom: 4px; font-size: var(--label-size); font-weight: var(--label-weight); letter-spacing: var(--label-tracking); text-transform: uppercase; color: var(--c-red); }
 
 /* ---------- Quieter extras ---------- */
 .cs-clean .prose .numbered li { border-color: var(--hairline); }
@@ -89,16 +89,16 @@
 .cs-clean .prose blockquote { padding: 32px 0; background: none; border: 0; border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); border-radius: 0; }
 .cs-clean .prose blockquote p { font-size: var(--fs-lg); line-height: 1.4; letter-spacing: -0.01em; }
 .cs-clean .prose blockquote strong:first-child,
-.cs-clean .prose .callout-box > p:first-child strong:only-child { font-size: var(--fs-xs); font-weight: 500; letter-spacing: 0.14em; color: var(--muted); }
+.cs-clean .prose .callout-box > p:first-child strong:only-child { font-size: var(--label-size); font-weight: var(--label-weight); letter-spacing: var(--label-tracking); color: var(--muted); }
 .cs-clean .prose .callout-box { padding: 40px; background: none; border: 1px solid var(--hairline); border-radius: var(--radius-sm); }
 .cs-clean .prose .callout-box .compare img { background: none; }
 .cs-clean .prose li::marker { color: var(--muted); }
-.cs-clean .prose .kicker { font-size: var(--fs-xs); font-weight: 500; letter-spacing: 0.14em; color: var(--muted); }
+.cs-clean .prose .kicker { font-size: var(--label-size); font-weight: var(--label-weight); letter-spacing: var(--label-tracking); color: var(--muted); }
 .cs-clean .prose .steps li:not(:last-child)::after { color: var(--line); }
 
 /* ---------- Endings: live project and next project ---------- */
 .cs-clean .cs-end { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); column-gap: var(--label-gap); padding: 80px 0; border-top: 1px solid var(--hairline); }
-.cs-end-label { font-size: var(--fs-sm); font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+.cs-end-label { font-size: var(--label-size); font-weight: var(--label-weight); letter-spacing: var(--label-tracking); text-transform: uppercase; color: var(--muted); }
 .cs-end-body { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
 .cs-end-body p { color: var(--body); }
 .cs-next { display: flex; align-items: center; justify-content: space-between; gap: 24px; font-size: var(--fs-4xl); font-weight: 600; line-height: 1; letter-spacing: -0.04em; color: var(--ink); }

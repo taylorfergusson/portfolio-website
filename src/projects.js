@@ -16,7 +16,7 @@ export const projects = [
     title: 'YumGo - UX Case Study',
     featured: 1,   // shown on the home page, in this order
     category: 'UI/UX Design',
-    date: 'Sep - Dec 2025 · revised Oct 2026',
+    date: 'Sep–Dec 2025 · revised Oct 2026',
     summary: 'Led a team of 4 from research to a tested prototype, and rebuilt a broken filter mid-study so testing could go on.',
     // The two numbers under the summary on the project cards
     stats: [
@@ -31,10 +31,19 @@ export const projects = [
       { src: '/images/yumgo/r26-restaurant.jpg', alt: 'YumGo restaurant page for Mama\'s Diner' },
       { src: '/images/yumgo/r26-discover.jpg', alt: 'YumGo Discover screen with dining tips for Toronto' },
     ] },
+    // The picture at the top of the case study: the same types as shots, laid out bigger (see CaseBanner.jsx)
+    banner: { type: 'phone', images: [
+      { src: '/images/yumgo/r26-discover.jpg' },
+      { src: '/images/yumgo/r26-restaurant.jpg' },
+      { src: '/images/yumgo/r26-home-half.jpg' },
+      { src: '/images/yumgo/r26-filters.jpg' },
+      { src: '/images/yumgo/r26-reviews.jpg' },
+    ] },
+    bannerAlt: 'YumGo app screens: Discover Toronto, a restaurant page, the home map, filters, and reviews',
     thumbnail: '/images/yumgo/thumbnail-2026.jpg',
     thumbnailAlt: 'YumGo app screens: Community, restaurant info, filters, reviews, Discover Toronto and profile',
     // Shown as labelled columns under the title. Add, remove or rename labels freely.
-    details: { Role: 'Lead UI/UX Designer', Team: 'Team of 4', Timeline: '12 weeks\nSep - Dec 2025\nRevised Oct 2026', Tools: 'Figma' },
+    details: { Role: 'Lead UI/UX Designer', Team: 'Team of 4', Timeline: '12 weeks\nSep–Dec 2025\nRevised Oct 2026', Tools: 'Figma' },
     // The row at the very end of the case study. Leave these out to skip it.
     link: 'https://www.figma.com/proto/X8Lj3tw4SuO8GV3fsCCiKU/YumGo-Final-Prototype?node-id=2131-13299&starting-point-node-id=2131%3A13299&page-id=2131%3A13129&scaling=min-zoom&content-scaling=fixed',
     linkLabel: 'Prototype',
@@ -42,39 +51,9 @@ export const projects = [
     linkButton: 'Open prototype',
   },
   {
-    slug: 'borrowcircle',
-    title: 'BorrowCircle - Design System & UI',
-    featured: 2,   // shown on the home page, in this order
-    category: 'UI Design & Design Systems',
-    date: 'Mar - Apr 2026',
-    summary: 'Designed a community lending app that uses borrowing as a reason to actually meet your neighbours.',
-    // The two numbers under the summary on the project cards
-    stats: [
-      { value: '27', label: 'component sets on 3 tiers of tokens' },
-      { value: '16/16', label: 'colour pairings pass WCAG AA' },
-    ],
-    // The "Outcome" row on the project cards. Wrap numbers in ** to make them bold.
-    outcome: '**27** component sets, **16/16** pairings pass AA',
-    // The screens on the project cards: type 'phone', 'browser', 'cards' or 'image'
-    shots: { type: 'phone', images: [
-      { src: '/images/borrowcircle/final-home.png', alt: 'BorrowCircle home: Wanted! signs and hot items nearby' },
-      { src: '/images/borrowcircle/final-item.png', alt: 'BorrowCircle item page with the lender and borrowing terms' },
-      { src: '/images/borrowcircle/final-request.png', alt: 'BorrowCircle borrow request form' },
-    ] },
-    thumbnail: '/images/borrowcircle/thumbnail.jpg',
-    thumbnailAlt: 'BorrowCircle app screens: search results, home, an item page, a listing preview and a chat',
-    shareImage: '/images/share/default.jpg',
-    details: { Role: 'UI Designer', Team: 'Team of 3\n(my own final prototype)', Timeline: '3 weeks\nMar - Apr 2026', Tools: 'Figma' },
-    // TODO: add the prototype link so the "Prototype" row shows at the end
-    // link: 'https://www.figma.com/proto/...',
-    // linkLabel: 'Prototype',
-    // linkText: 'Click through the final design in Figma.',
-    // linkButton: 'Open prototype',
-  },
-  {
     slug: 'ciut-upgrade',
     title: 'CIUT - Content Audit & IA Redesign',
-    featured: 3,   // shown on the home page, in this order
+    featured: 2,   // shown on the home page, in this order
     category: 'Content Audit & IA',
     date: 'Oct 2025',
     summary: "Audited a campus radio station's whole website. The station adopted the fixes and is planning a full rebuild.",
@@ -91,20 +70,64 @@ export const projects = [
       { src: '/images/ciut/redesign-home.jpg', url: 'ciut.fm', alt: 'Redesigned CIUT home page with On Air Now' },
       { src: '/images/ciut/redesign-shows.jpg', url: 'ciut.fm/shows', alt: 'Redesigned CIUT shows page' },
     ] },
+    banner: { type: 'browser', images: [
+      { src: '/images/ciut/redesign-shows.jpg', url: 'ciut.fm/shows' },
+      { src: '/images/ciut/redesign-home.jpg', url: 'ciut.fm' },
+      { src: '/images/ciut/redesign-schedule.jpg', url: 'ciut.fm/schedule' },
+    ] },
+    bannerAlt: 'Redesigned CIUT pages in browser windows: Shows, the home page with On Air Now, and the Schedule',
     thumbnail: '/images/ciut/thumbnail.jpg',
     thumbnailAlt: 'CIUT website redesign concept with show listings and an alumni section',
-    details: { Role: 'UX Designer (solo)', Team: 'Solo', Timeline: '3 weeks\nOct 2025', Tools: 'Screaming Frog\nFigma' },
+    details: { Role: 'UX Designer', Team: 'Solo', Timeline: '3 weeks\nOct 2025', Tools: 'Screaming Frog\nFigma' },
     link: 'https://www.figma.com/proto/CVXtM5bAcmKy8SH2V2zSpn/CIUT-Prototype-Revised?node-id=3014-12187&starting-point-node-id=3014%3A12187&page-id=3002%3A7008&scaling=scale-down&content-scaling=fixed',
     linkLabel: 'Prototype',
     linkText: 'Click through the redesigned site in Figma.',
     linkButton: 'Open prototype',
   },
   {
+    slug: 'borrowcircle',
+    title: 'BorrowCircle - Design System & UI',
+    featured: 3,   // shown on the home page, in this order
+    category: 'UI Design & Design Systems',
+    date: 'Mar–Apr 2026',
+    summary: 'Designed a community lending app that uses borrowing as a reason to actually meet your neighbours.',
+    // The two numbers under the summary on the project cards
+    stats: [
+      { value: '27', label: 'component sets on 3 tiers of tokens' },
+      { value: '16/16', label: 'colour pairings pass WCAG AA' },
+    ],
+    // The "Outcome" row on the project cards. Wrap numbers in ** to make them bold.
+    outcome: '**27** component sets, **16/16** pairings pass AA',
+    // The screens on the project cards: type 'phone', 'browser', 'cards' or 'image'
+    shots: { type: 'phone', images: [
+      { src: '/images/borrowcircle/final-home.png', alt: 'BorrowCircle home: Wanted! signs and hot items nearby' },
+      { src: '/images/borrowcircle/final-item.png', alt: 'BorrowCircle item page with the lender and borrowing terms' },
+      { src: '/images/borrowcircle/final-request.png', alt: 'BorrowCircle borrow request form' },
+    ] },
+    banner: { type: 'phone', images: [
+      { src: '/images/borrowcircle/final-search.png' },
+      { src: '/images/borrowcircle/final-item.png' },
+      { src: '/images/borrowcircle/final-home.png' },
+      { src: '/images/borrowcircle/final-request.png' },
+      { src: '/images/borrowcircle/final-chat.png' },
+    ] },
+    bannerAlt: 'BorrowCircle app screens: search, an item page, the home screen with Wanted! signs, a borrow request, and a chat',
+    thumbnail: '/images/borrowcircle/thumbnail.jpg',
+    thumbnailAlt: 'BorrowCircle app screens: search results, home, an item page, a listing preview and a chat',
+    shareImage: '/images/share/default.jpg',
+    details: { Role: 'UI Designer', Team: 'Team of 3\n(my own final prototype)', Timeline: '3 weeks\nMar–Apr 2026', Tools: 'Figma' },
+    // TODO: add the prototype link so the "Prototype" row shows at the end
+    // link: 'https://www.figma.com/proto/...',
+    // linkLabel: 'Prototype',
+    // linkText: 'Click through the final design in Figma.',
+    // linkButton: 'Open prototype',
+  },
+  {
     slug: 'soundcloud-study',
     title: 'SoundCloud - Usability Study',
     cardTitle: 'SoundCloud Usability Study',   // the name on the project cards (otherwise it's the title before the dash)
     category: 'UX Research',
-    date: 'Mar - Apr 2026',
+    date: 'Mar–Apr 2026',
     summary: 'Led a usability study that found 4 high-severity issues in SoundCloud, each with a ranked fix.',
     // The two numbers under the summary on the project cards
     stats: [
@@ -118,10 +141,15 @@ export const projects = [
       { src: '/images/soundcloud-study/sus-scores.svg', alt: 'SUS scores by participant, with a median of 38.75 against a benchmark of 68' },
       { src: '/images/soundcloud-study/task-results.svg', alt: 'Task results for 6 participants across 7 tasks' },
     ] },
+    banner: { type: 'cards', images: [
+      { src: '/images/soundcloud-study/sus-scores.svg' },
+      { src: '/images/soundcloud-study/task-results.svg' },
+    ] },
+    bannerAlt: 'Charts from the study: SUS scores by participant, and task results for all 7 tasks',
     thumbnail: '/images/soundcloud-study/thumbnail.jpg',
     thumbnailAlt: "SoundCloud's home page, where every test session started",
     shareImage: '/images/share/default.jpg',
-    details: { Role: 'Research team lead', Team: 'Team of 5', Participants: '6 participants\n7 tasks', Methods: 'Moderated usability testing\nSystem Usability Scale\nProduct reaction cards' },
+    details: { Role: 'Research team lead', Team: 'Team of 5', Timeline: 'Mar–Apr 2026', Participants: '6 participants\n7 tasks', Methods: 'Moderated usability testing\nSystem Usability Scale\nProduct reaction cards' },
   },
   {
     slug: 'sidequest',
@@ -143,6 +171,6 @@ export const projects = [
     thumbnail: '/images/sidequest/thumbnail.svg',
     thumbnailAlt: 'SideQuest: Toronto events near you, from Instagram and Ticketmaster, with AI suggestions',
     shareImage: '/images/share/default.jpg',
-    details: { Role: 'Backend & API lead', Team: 'Team of 6', Timeline: 'Sep - Dec 2026', Tools: 'Node.js / Supabase / Ticketmaster & Instagram APIs / Anthropic API', Status: 'In progress' },
+    details: { Role: 'Backend & API lead', Team: 'Team of 6', Timeline: 'Sep–Dec 2026', Tools: 'Node.js / Supabase / Ticketmaster & Instagram APIs / Anthropic API', Status: 'In progress' },
   },
 ]

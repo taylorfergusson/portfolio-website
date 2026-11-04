@@ -1,8 +1,6 @@
-<!-- TODO (Taylor): add the prototype link in projects.js. These comments don't show on the site. -->
-
 ## Overview
 
-<p class="my-part">I worked with the team through ideation, flows, and the shared design system, taking the lead on tokens and components, then built and refined my own final prototype.</p>
+<p class="my-part">Led the tokens and components, and designed my own final prototype</p>
 
 ### Building community trust, one favour at a time
 
@@ -43,7 +41,7 @@ We each finalized our own prototype individually. This one is mine. Styled after
 
 1. **A fully integrated design system** 3-tier tokens and 27 component sets, built in Figma with variables, components, and auto layout.
 2. **Accessible colour pairings** All 16 text and background pairings meet WCAG AA, and 9 of them reach AAA.
-3. **Four changes backed by usability testing** Reviews, transaction details, borrowing status, and availability tags were all reworked.
+3. **Four changes backed by usability testing** Clear deposit and terms, distinct profile reviews, live borrowing status, and clear availability.
 
 </div>
 
@@ -96,13 +94,17 @@ Each persona got a core task: Bill borrows a nearby lawnmower on short notice, a
 
 ### Initial screens
 
-<!-- PLACEHOLDER: add the initial screens here, e.g. ![Description](/images/borrowcircle/initial-home.png) -->
+Our first full prototype, built on the shared design system and tested with participants.
 
-## Design System
+![Home: what neighbours are seeking, and hot local items](/images/borrowcircle/initial-home.png)
+![Search: recent searches one tap away](/images/borrowcircle/initial-search.png)
+![Post an item: photos, title, deposit, category and condition](/images/borrowcircle/initial-lend.png)
+![Preview: the listing as neighbours will see it](/images/borrowcircle/initial-preview.png)
+![Chat: a borrow request with the pickup details](/images/borrowcircle/initial-chat.png)
+
+## Design system
 
 <p class="my-part">Led the tokens, components and documentation</p>
-
-### Design system
 
 I set up the system before the screens, then we built the full screens with it.
 
@@ -188,17 +190,17 @@ Before testing, peer designers had critiqued the same prototype. Reading their n
 
 ## Iterating
 
-<p class="my-part">Turned the findings into four changes in my final prototype</p>
+<p class="my-part">Turned the findings into 4 changes in my final prototype</p>
 
 ### Four changes, all about trust
 
 <p class="kicker">Change 1</p>
 
-#### Mandatory, clear deposit
+#### Clear deposit and borrowing terms
 
-Moved out of a checkbox buried in the form, into its own confirmation step you have to read and accept.
+The deposit moved out of a checkbox buried in the form, into its own confirmation step you have to read and accept.
 
-<div class="compare wide">
+<div class="compare">
 <figure>
 <figcaption>Before</figcaption>
 <img src="/images/borrowcircle/before-request.png" alt="Earlier borrow form, with the deposit as a small checkbox above the buttons">
@@ -209,7 +211,7 @@ Moved out of a checkbox buried in the form, into its own confirmation step you h
 </figure>
 </div>
 
-**Borrow terms up front** Condition, borrow length, pickup time, and location are now clearly shown on the item page.
+Condition, borrow length, pickup time, and location are now shown up front on the item page.
 
 <div class="compare">
 <figure>
@@ -281,7 +283,7 @@ Items you can borrow right now get a "Get it now!" tag, and the "On lend" label 
 
 <div class="numbered">
 
-1. **The power of design systems** While building tokens and components felt slow at first, it quickly paid off as the prototype scaled. New screens with repeated elements were faster to build, and building the tablet and desktop layouts was easy. Accessibility checks at the end were credible too, since I knew exactly which colours I was using and could trust they were applied correctly everywhere.
-2. **Don't make users fight what's natural** Since ticking boxes is automatic, people glossed past the required checkbox. Something like money needs a proper confirmation, so people know what they're getting into.
+1. **Design systems pay off** Building tokens and components first felt slow. Once they were in place, new screens came together quickly and the accessibility check was easy to trust.
+2. **Money needs its own step** People tick checkboxes out of habit, so a deposit needs a confirmation step people actually read.
 
 </div>

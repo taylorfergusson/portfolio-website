@@ -3,8 +3,9 @@ import { Link, useParams } from 'react-router-dom'
 import { marked } from 'marked'
 import { projects } from '../projects.js'
 import NotFound from './NotFound.jsx'
+import CaseBanner from '../components/CaseBanner.jsx'
 import { makeCleanLayout } from '../components/cleanLayout.js'
-import { makeGallery, frameImages } from '../components/galleries.js'
+import { makeGallery, frameImages, zoomRows } from '../components/galleries.js'
 import { makePhone } from '../components/phoneFrame.js'
 
 // Loads every .md file in src/case-studies/ as text
@@ -14,24 +15,26 @@ const caseStudies = import.meta.glob('../case-studies/*.md', { query: '?raw', im
 // into a click-to-load Figma prototype. The heavy Figma player only loads when someone clicks.
 //   data-src:    Figma's embed link   data-link: normal prototype link (used on phones and "Open in Figma")
 //   data-poster: screenshot shown before it loads
+//   data-poster-alt: what that screenshot shows (for screen readers)
 //   data-device="phone": for mobile app prototypes (a phone-shaped frame, and it works on phones too)
 function makePrototype(box) {
   if (box.dataset.ready) return
   box.dataset.ready = 'true'
-  const { src, link, poster, device } = box.dataset
+  const { src, link, poster, posterAlt, device } = box.dataset
   const phone = device === 'phone'
   if (phone) box.classList.add('phone')
   box.innerHTML = `
     <div class="prototype-bar" aria-hidden="true"><span></span><span></span><span></span></div>
     <div class="prototype-screen">
-      <img src="${poster}" alt="Home page of the prototype" />
+      <img src="${poster}" alt="" />
       <button type="button" class="prototype-play"><span aria-hidden="true">▶</span> Try the prototype</button>
     </div>
     <p class="prototype-links">
-      <a href="${link}" target="_blank" rel="noreferrer">Open in Figma ↗</a>
+      <a href="${link}" target="_blank" rel="noreferrer">Open in Figma <span aria-hidden="true">↗</span><span class="visually-hidden"> (opens in new tab)</span></a>
       <button type="button" class="prototype-full" hidden>Full screen ⤢</button>
     </p>`
   const screen = box.querySelector('.prototype-screen')
+  screen.querySelector('img').alt = posterAlt || 'Start screen of the prototype'   // set here so quotes in the text can't break the markup
   if (phone) makePhone(screen)   // phone prototypes sit in the site's phone frame
   const full = box.querySelector('.prototype-full')
   box.querySelector('.prototype-play').addEventListener('click', () => {
@@ -139,17 +142,13 @@ export default function CaseStudy() {
         makeGallery(p, (images, index) => setViewer({ images, index }))
       }
     })
-    // A row of shots (<div class="shots">): click any one to see it full size
-    prose.querySelectorAll('.shots').forEach((row) => {
-      const imgs = [...row.querySelectorAll('img')]
-      const images = imgs.map((img) => ({ src: img.getAttribute('src'), alt: img.getAttribute('alt') || '' }))
-      imgs.forEach((img, i) => img.addEventListener('click', () => setViewer({ images, index: i })))
-    })
+    // Rows of shots and before/afters: click any image to flip through its row full size
+    zoomRows(prose, (images, index) => setViewer({ images, index }))
     frameImages(prose)
     prose.querySelectorAll('.prototype').forEach(makePrototype)
     prose.querySelectorAll('.flow-video').forEach(makeVideo)
     prose.querySelectorAll('li > strong').forEach(markCardType)
-    if (project?.theme !== 'classic') makeCleanLayout(prose)
+    makeCleanLayout(prose)
   }, [slug])
 
   // Highlight the section you're currently reading in the side menu
@@ -198,8 +197,6 @@ export default function CaseStudy() {
   if (!project || !markdown) return <NotFound />
 
   const current = viewer && viewer.images[viewer.index]
-  // Every case study uses the clean layout. theme: 'classic' in projects.js brings back the older look.
-  const clean = project.theme !== 'classic'
   // The next project in the list (skipping hidden ones), for the "Next project" link at the end
   const visible = projects.filter((p) => !p.hidden)
   const after = projects.slice(projects.indexOf(project) + 1).find((p) => !p.hidden)
@@ -208,7 +205,7 @@ export default function CaseStudy() {
   // key={slug}: going to another case study (like "Next project") builds the page fresh,
   // so nothing from the last case study is left behind
   return (
-    <article key={slug} className={`case-study container${clean ? ' cs-clean' : ''}`}>
+    <article key={slug} className="case-study container cs-clean">
       {/* Side menu of sections (desktop only) */}
       {sections.length > 0 && (
         <nav ref={navRef} className="cs-nav" aria-label="Case study sections">
@@ -223,15 +220,11 @@ export default function CaseStudy() {
       )}
 
       <div className="cs-main">
-        {clean && (
-          <>
-            <Link to="/case-study" className="cs-back"><span aria-hidden="true">←</span> All projects</Link>
-            <p className="cs-eyebrow reveal">{project.category} · {project.date}</p>
-          </>
-        )}
-        <h1 className="reveal">{clean ? project.title.split(' - ')[0] : project.title}</h1>
-        {clean && <p className="cs-subtitle reveal">{project.summary}</p>}
-        {clean && <img src={project.thumbnail} alt={project.thumbnailAlt || project.title} className="banner reveal" />}
+        <Link to="/case-study" className="cs-back"><span aria-hidden="true">←</span> All projects</Link>
+        <p className="cs-eyebrow reveal">{project.category} · {project.date}</p>
+        <h1 className="reveal">{project.title.split(' - ')[0]}</h1>
+        <p className="cs-subtitle reveal">{project.summary}</p>
+        <CaseBanner project={project} />
         <dl className="details reveal">
           {Object.entries(project.details).map(([label, value]) => (
             <div key={label}>
@@ -240,21 +233,20 @@ export default function CaseStudy() {
             </div>
           ))}
         </dl>
-        {!clean && <img src={project.thumbnail} alt={project.thumbnailAlt || project.title} className="banner reveal" />}
 
         {/* The case study itself, written in Markdown */}
         <div className="prose" ref={proseRef} dangerouslySetInnerHTML={{ __html: marked.parse(markdown) }} />
 
-        {clean && project.link && (
+        {project.link && (
           <section className="cs-end">
             <p className="cs-end-label">{project.linkLabel || 'Live project'}</p>
             <div className="cs-end-body">
               <p>{project.linkText || 'See it for yourself.'}</p>
-              <a className="btn" href={project.link} target="_blank" rel="noreferrer">{project.linkButton || 'Visit site'} ↗</a>
+              <a className="btn" href={project.link} target="_blank" rel="noreferrer">{project.linkButton || 'Visit site'} <span aria-hidden="true">↗</span><span className="visually-hidden"> (opens in new tab)</span></a>
             </div>
           </section>
         )}
-        {clean && next && (
+        {next && (
           <section className="cs-end">
             <p className="cs-end-label">Next project</p>
             <Link to={`/case-study/${next.slug}`} className="cs-next">

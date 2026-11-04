@@ -1,21 +1,13 @@
 import { Link } from 'react-router-dom'
 import HeroTiles from './HeroTiles.jsx'
 import Phone from './Phone.jsx'
+import { lookFor } from '../looks.js'
 import './workCard.css'
 
 // A project card: a tinted panel with the project's screens, under a pane of glass that slides down on hover.
 // Used on the home page and the Projects page.
 
-// How each project's panel looks: the same glass tiles as the home page hero, lit up under the cursor.
-//   tint: the panel colour behind the glass
-//   glow: the two colours the tiles light up in
-const LOOK = {
-  yumgo: { tint: '#DDE8DE', glow: ['#20665F', '#C06234'] },
-  'ciut-upgrade': { tint: '#F3DDD0', glow: ['#C06234', '#BE3A30'] },
-  borrowcircle: { tint: '#F1E9D8', glow: ['#BE3A30', '#C06234'] },   // BorrowCircle's cream and red
-  'soundcloud-study': { tint: '#E3E8EA', glow: ['#C06234', '#20665F'] },   // a cool grey, lit in orange like SoundCloud
-}
-const DEFAULT_LOOK = { tint: '#E8E8ED', glow: ['#20665F', '#C06234'] }
+// Each project's tint and glow colours live in src/looks.js (shared with the case study banners)
 
 const PANEL_GHOST = 0.25   // how visible the tile grid is before you hover (the hero uses 0.15)
 
@@ -63,23 +55,26 @@ function Shots({ project }) {
   return <div className="pcard-shots"><img className="pcard-wide" src={img.src} alt={img.alt} loading="lazy" /></div>
 }
 
-export default function WorkCard({ project }) {
-  const look = LOOK[project.slug] || DEFAULT_LOOK
+// headingLevel: 3 on the home page (under its "Projects" heading), 2 on the Projects page (under its title)
+export default function WorkCard({ project, headingLevel = 3 }) {
+  const look = lookFor(project.slug)
   const name = project.cardTitle || project.title.split(' - ')[0]
   const d = project.details || {}
   const meta = ['Role', 'Team', 'Timeline'].map((k) => d[k] && d[k].split('\n')[0]).filter(Boolean)
+  const Heading = `h${headingLevel}`
+  const id = `card-${project.slug}`   // the link is named by the heading and described by the text under it
 
   return (
     <article className="pcard" style={{ '--tint': look.tint }}>
-      <Link to={`/case-study/${project.slug}`} className="pcard-link" aria-label={`${name} case study`}>
+      <Link to={`/case-study/${project.slug}`} className="pcard-link" aria-labelledby={`${id}-name`} aria-describedby={`${id}-summary${meta.length ? ` ${id}-meta` : ''}`}>
         <div className="pcard-panel">
           <HeroTiles colours={tileColours(look.glow)} base={look.tint} ghost={PANEL_GHOST} />
           <Shots project={project} />
           <div className="pcard-lip" aria-hidden="true" />
         </div>
-        <p className="pcard-eyebrow">{name} <span aria-hidden="true">·</span> {project.category}</p>
-        <p className="pcard-outcome">{project.summary}</p>
-        {meta.length > 0 && <p className="pcard-meta">{meta.join('  ∙  ')}</p>}
+        <Heading className="pcard-eyebrow" id={`${id}-name`}>{name} <span aria-hidden="true">·</span> {project.category}</Heading>
+        <p className="pcard-outcome" id={`${id}-summary`}>{project.summary}</p>
+        {meta.length > 0 && <p className="pcard-meta" id={`${id}-meta`}>{meta.join('  ∙  ')}</p>}
       </Link>
     </article>
   )

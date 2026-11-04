@@ -25,37 +25,21 @@ Everyone on the team finished their own final prototype. Mine reflects the fun o
 <div class="prototype" data-device="phone"
   data-src="https://embed.figma.com/proto/X8Lj3tw4SuO8GV3fsCCiKU/YumGo-Final-Prototype?node-id=2131-13299&starting-point-node-id=2131%3A13299&page-id=2131%3A13129&scaling=scale-down-width&content-scaling=fixed&hide-ui=1&embed-host=share"
   data-link="https://www.figma.com/proto/X8Lj3tw4SuO8GV3fsCCiKU/YumGo-Final-Prototype?node-id=2131-13299&starting-point-node-id=2131%3A13299&page-id=2131%3A13129&scaling=min-zoom&content-scaling=fixed"
-  data-poster="/images/yumgo/r26-home-half.jpg"></div>
-
-<!--
-  PLACEHOLDER: short videos of the app in use. To add one, copy the video file into public/videos/yumgo/,
-  then remove the arrows around the block below and change the file name and caption. Copy the div to add more.
-
-#### See it in action
-
-<div class="flow-video" data-device="phone"
-  data-src="/videos/yumgo/flow-1.mp4"
-  data-caption="Finding a dog-friendly vegan spot and booking a table"></div>
--->
+  data-poster="/images/yumgo/r26-home-half.jpg"
+  data-poster-alt="YumGo home screen: a map of nearby restaurants with a list you can pull up"></div>
 
 #### Every screen, from discovering to dining
 
 ![Home: a map of nearby places, with a list you can pull up](/images/yumgo/r26-home-half.jpg)
 ![Home, list expanded: photos, ratings, distance, price and dietary icons at a glance](/images/yumgo/r26-home-full.jpg)
-![Home, list collapsed: the map takes over](/images/yumgo/r26-home-peek.jpg)
 ![Filters: every icon has a label, plus price and distance sliders](/images/yumgo/r26-filters.jpg)
 ![Restaurant info: real photos, hours, price, and what the restaurant offers](/images/yumgo/r26-restaurant.jpg)
 ![Menu: dishes matching your filters are pinned to the top](/images/yumgo/r26-menu.jpg)
 ![Reviews: the most relevant first, with photos](/images/yumgo/r26-reviews.jpg)
-![Writing a review: rating, text and photos](/images/yumgo/r26-review-overlay.jpg)
 ![Booking: reserve a table without leaving the app](/images/yumgo/r26-booking.jpg)
-![Confirm reservation: check the details before booking](/images/yumgo/r26-confirm.jpg)
 ![Directions: route and arrival time to the restaurant](/images/yumgo/r26-directions.jpg)
-![Wishlist: save places for this trip or the next](/images/yumgo/r26-wishlist.jpg)
 ![Group voting: everyone votes on where to eat](/images/yumgo/r26-voting.jpg)
-![Community: group votes and Discover Toronto in one place](/images/yumgo/r26-community.jpg)
 ![Discover Toronto: dining tips, tipping, and local foods to try](/images/yumgo/r26-discover.jpg)
-![Profile: upcoming reservations and preferences](/images/yumgo/r26-profile.jpg)
 
 #### What came out of it
 
@@ -63,7 +47,7 @@ Everyone on the team finished their own final prototype. Mine reflects the fun o
 
 1. **Every feature tied to research** Insights from interviews led to the menus that list allergens, notes on local customs, restaurant tags, and photos that showcase each place's vibe.
 2. **Filters that finally worked** Inconsistent filter selection stalled our first 2 test participants. After I rebuilt it, all 6 remaining participants finished the task without getting stuck.
-3. **Four designers, one direction** I wrote and maintained a shared brief so all four of us were working from the same findings and the same scope.
+3. **A shared brief for the team** I wrote and maintained a shared brief so all 4 of us were working from the same findings and the same scope.
 
 </div>
 
@@ -118,14 +102,14 @@ Not everyone was ready to let go of the original idea, but I emphasized how it's
 
 ### Travellers wanted to dine with certainty
 
-We ran eight interviews with recent tourists about travel, food, and the apps they use for both travel and food. I co-wrote the screener and interview guide, moderated two interviews, and took notes on two more. Then I ran our affinity mapping session to pull everything together.
+We ran 8 interviews with recent tourists about travel, food, and the apps they use for both travel and food. I co-wrote the screener and interview guide, moderated 2 interviews, and took notes on 2 more. Then I ran our affinity mapping session to pull everything together.
 
-![Affinity map from our interviews](/images/yumgo/research-1.jpg)
-![Interview synthesis table](/images/yumgo/research-2.png)
-![Persona: Pat, the Picky Western Taster](/images/yumgo/research-3.png)
-![Persona: Halsey](/images/yumgo/research-4.png)
-![User flow](/images/yumgo/research-5.png)
-![Early sketches](/images/yumgo/research-6.jpg)
+![Affinity map: how might we notes in columns for personalized results, belonging, trust, and health and safety](/images/yumgo/research-1.jpg)
+![Interview synthesis: 8 participants compared on dining factors, information gaps, cultural barriers, and decision pressure](/images/yumgo/research-2.png)
+![Persona: Pat, the Picky Western Taster, a 34-year-old remote worker from Chicago who needs vegan and peanut-free options](/images/yumgo/research-3.png)
+![Persona: Halsey, the Busy Eastern Foodie, a 22-year-old international student who wants accurate, real-time restaurant info](/images/yumgo/research-4.png)
+![User flow: from the home screen to a restaurant's menu, then save it, book a table, or get directions](/images/yumgo/research-5.png)
+![Early sketches: paper sketches of 8 screens, from home and restaurant details to booking, directions, wishlist, and cultural discovery](/images/yumgo/research-6.jpg)
 
 On the surface, people talked about menus, reviews, and photos, but thematic analysis revealed that they all wanted a sense of familiarity in an unfamiliar place.
 
@@ -149,7 +133,7 @@ We got a little too excited about features to add, so I defined our main user pa
 ![Learn About Toronto](/images/yumgo/wireframe-7.png)
 ![Wishlist](/images/yumgo/wireframe-8.png)
 
-#### Our two rules moving forward
+#### Our 2 rules moving forward
 
 <div class="numbered">
 
@@ -164,7 +148,7 @@ We got a little too excited about features to add, so I defined our main user pa
 
 ### Clarity had to be improved… a lot
 
-I co-wrote our usability test guide, and eight participants tried two tasks in our Figma prototype:
+I co-wrote our usability test guide, and 8 participants tried 2 tasks in our Figma prototype:
 
 1. Book a table somewhere dog-friendly with vegan and gluten-free options
 2. Write a review afterwards
@@ -173,7 +157,7 @@ I co-wrote our usability test guide, and eight participants tried two tasks in o
 
 **MAYDAY**
 
-Task 1 sent people straight to the search filters, which was full of broken toggles, and both of our first two participants got stuck here. OH NO!
+Task 1 sent people straight to the search filters, which was full of broken toggles, and both of our first 2 participants got stuck here. OH NO!
 
 I knew that if we left it, a big portion of testing time would be wasted revealing something we already knew. Since I knew Figma's variables and components best out of the team, I tackled the problem in the couple of hours before the next session. I successfully rebuilt the filters' variables, components, and interactions so that every toggle responded as expected.
 
@@ -225,8 +209,6 @@ All 6 remaining participants used the filters without getting stuck, and the res
 ## Design system
 
 <p class="my-part">Set up the tokens, components and documentation</p>
-
-### Design system
 
 When I polished YumGo for my portfolio, I rebuilt the components and styles on a full design system.
 

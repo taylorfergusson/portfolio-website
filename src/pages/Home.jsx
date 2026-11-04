@@ -9,15 +9,15 @@ import './home.css'
 // The home page: the headline, your photo rolling in with a chat beside it, then the featured projects.
 
 // The hero headline, typed out one letter at a time
-const HEADLINE = "Hi! I'm Taylor, a UX researcher & designer with a background in computer science & psychology"
+const HEADLINE = "Hi! I'm Taylor, a UX designer & researcher with a background in computer science & psychology"
 
 // The chat with visitors. Your bubble starts with the first answer. The other questions show as reply chips
 // under it, like suggested replies in a messaging app: tapping one sends it as the visitor's message,
 // then your bubble types out the answer.
 const CHAT = [
-  { ask: 'What kind of designer?', text: 'I turn complex research into accessible interfaces (and build them too)' },
+  { ask: 'What kind of designer are you?', text: 'I turn complex research into accessible interfaces (and build them too)' },
   { ask: 'What do you care about?', text: 'Invisible, intentional, and accessible design, where every choice traces back to research' },
-  { ask: 'What do you bring?', text: 'Honest, kind feedback, and the extra polish that takes work beyond "good enough"' },
+  { ask: 'What do you bring to teams?', text: 'Honest, kind feedback, and the extra polish that takes work beyond "good enough"' },
   { ask: 'What are you up to?', text: 'Teaching kids to code, studying UX at U of T, and seeking a co-op/internship' },
 ]
 const TYPING = 700   // how long "typing…" shows before the answer, in milliseconds
@@ -31,6 +31,14 @@ const ROW_DELAY = HEADLINE.length * LETTER_DELAY + 0.3   // the photo rolls in j
 // When the reply chips appear, so there's a moment to read the bubble first
 const REPLIES_AFTER_POP = 1.2      // seconds after the bubble pops out (on load)
 const REPLIES_AFTER_ANSWER = 0.5   // seconds after an answer finishes typing
+
+// The intro (typed headline, photo roll) plays on someone's first visit. After that, the home page shows
+// everything right away, even on later visits. This uses localStorage, not a cookie: it stays in this
+// browser and is never sent anywhere. Change localStorage to sessionStorage below to replay the intro
+// once per visit instead (it then resets when the tab closes).
+const INTRO_KEY = 'intro-seen'
+const introSeen = () => { try { return localStorage.getItem(INTRO_KEY) === '1' } catch { return false } }
+const markIntroSeen = () => { try { localStorage.setItem(INTRO_KEY, '1') } catch { /* storage blocked: the intro just plays again */ } }
 
 // One sentence, revealed one letter at a time (the letter animation is in styles.css)
 function Letters({ sentence, delay }) {
@@ -47,6 +55,8 @@ function Letters({ sentence, delay }) {
 }
 
 export default function Home() {
+  const [skipIntro] = useState(introSeen)   // true if the intro already played in this browser
+  useEffect(markIntroSeen, [])
   const [current, setCurrent] = useState(0)   // which answer the bubble shows
   const [asked, setAsked] = useState(0)       // how many questions the visitor has asked (0 = none yet)
   const [typing, setTyping] = useState(false)
@@ -60,7 +70,7 @@ export default function Home() {
     repliesTimer.current = setTimeout(() => setRepliesShown(true), seconds * 1000)
   }
   // When the bubble pops out, give the reader a moment with the first message before the chips appear
-  useEffect(() => { if (impact) showRepliesAfter(REPLIES_AFTER_POP) }, [impact])
+  useEffect(() => { if (impact) showRepliesAfter(skipIntro ? 0.2 : REPLIES_AFTER_POP) }, [impact])
   useEffect(() => () => clearTimeout(repliesTimer.current), [])
 
   // A visitor taps a chip: their question is sent, "typing…" shows, the answer types out,
@@ -82,7 +92,7 @@ export default function Home() {
   useLayoutEffect(() => {
     const box = photoRef.current
     const photo = box?.querySelector('img')
-    if (!box || !photo || window.matchMedia('(prefers-reduced-motion: reduce)').matches) { setImpact(true); return }
+    if (!box || !photo || skipIntro || window.matchMedia('(prefers-reduced-motion: reduce)').matches) { setImpact(true); return }
     const startedAt = performance.now()
     let roll = null
     let cancelled = false
@@ -132,7 +142,7 @@ export default function Home() {
 
   return (
     <div className="home">
-      <section className={`hero container${impact ? ' home-impact' : ''}`} style={{ '--row-delay': `${ROW_DELAY.toFixed(2)}s` }}>
+      <section className={`hero container${impact ? ' home-impact' : ''}${skipIntro ? ' home-skip-intro' : ''}`} style={{ '--row-delay': `${ROW_DELAY.toFixed(2)}s` }}>
         <HeroTiles />
         <div className="hero-inner">
           <h1 className="hero-headline" aria-label={HEADLINE}>
@@ -202,7 +212,7 @@ export default function Home() {
         <h2 className="reveal">
           Need a designer, researcher, developer, or somebody who does all three? I can find the fun in anything. Let's connect!
         </h2>
-        <Link to="/resume" className="btn reveal">View Resume</Link>
+        <Link to="/resume" className="btn reveal">View resume</Link>
       </section>
     </div>
   )

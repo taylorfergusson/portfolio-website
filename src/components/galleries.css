@@ -56,6 +56,9 @@
 .prose .strip figure:has(.phone) figcaption { margin-top: 16px; text-align: center; }
 .strip-bar { display: flex; align-items: center; gap: 16px; margin-top: 18px; font-size: var(--fs-sm); color: var(--muted); }
 .strip-count { font-variant-numeric: tabular-nums; min-width: 3.5em; }
+.strip-button { flex: none; width: 36px; height: 36px; border: 0; border-radius: 50%; background: var(--soft-2); color: var(--ink); font: inherit; font-size: var(--fs-md); line-height: 1; cursor: pointer; transition: background-color var(--fast) var(--ease); }
+.strip-button:hover:not(:disabled) { background: var(--line); }
+.strip-button:disabled { opacity: 0.35; cursor: default; }
 .strip-progress { position: relative; flex: 1; height: 2px; background: var(--line); }
 .strip-progress i { position: absolute; left: 0; top: 0; bottom: 0; background: var(--ink); transition: width 0.15s linear; }
 
@@ -66,7 +69,7 @@
 }
 .prose .phone img, .phone img, .prose :is(.compare, .shots, .strip, .bento) .phone img {
   display: block; width: 100%; height: auto; aspect-ratio: var(--ar); object-fit: cover; object-position: top;
-  padding: 0; border: 0; border-radius: 14.5cqw; background: #fff; box-shadow: none;
+  padding: 0; border: 0; border-radius: 14.5cqw; background: var(--paper); box-shadow: none;
 }
 .prose .strip .has-phone img { height: auto; }
 .prose .bento .has-phone img, .prose .bento figure:hover .phone img { height: auto; transform: none; }
@@ -91,4 +94,28 @@
   .prose .bento.bento-two { grid-auto-rows: 180px; }
   .prose .strip { --strip-height: 360px; gap: 12px; }
   .strip-hint { display: none; }
+}
+
+/* ---------- Process screens: the screen itself, no phone frame (galleries.js adds .plain-screens) ---------- */
+.prose .plain-screens .strip { padding: 8px 6px 32px; margin: -8px -6px -24px; }   /* room for the shadows */
+.prose .plain-screens .strip img { border: 0; border-radius: 16px; box-shadow: var(--shadow-soft); }
+.prose .bento-phone.plain-screens figure:first-child { box-shadow: var(--shadow-soft); border-radius: 16px; overflow: hidden; }
+
+/* ---------- Before / after of phone screens: every screen the same height ----------
+   galleries.js adds .same-height and sets --ar (width / height) on each figure; each takes that share of the row */
+.prose .compare.same-height { display: flex; align-items: flex-start; }
+.prose .compare.same-height figure { flex: var(--ar, 1) 1 0; min-width: 0; margin: 0; }
+.prose .compare.same-height figure img { width: 100%; height: auto; }
+
+/* ---------- Click to enlarge (rows of shots and before/afters, see zoomRows in galleries.js) ---------- */
+.zoom-button { display: block; width: 100%; padding: 0; border: 0; background: none; border-radius: 16px; cursor: zoom-in; }
+.zoom-button img { display: block; width: 100%; height: auto; }
+
+/* The arrow between the steps of a before/after, level with the middle of the screens. Plain, so it doesn't look like a button */
+.compare-arrow {
+  flex: none; align-self: center; margin-top: 30px;   /* 30px: about half the height of the Before / After label */
+  font-size: var(--fs-base); line-height: 1; color: var(--ink);
+}
+@media (max-width: 800px) {
+  .compare-arrow { font-size: var(--fs-sm); }
 }

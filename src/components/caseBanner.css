@@ -1,0 +1,53 @@
+/* =========================================================
+   Case study banner (CaseBanner.jsx): the project's tint with its screens fanned out on it.
+   The screens sit in the vertical middle, getting smaller toward the edges. --pos is each screen's place
+   (0 = middle, negative = left), --dist how far it is from the middle.
+   ========================================================= */
+.case-banner {
+  position: relative; overflow: hidden; margin-top: 56px;
+  height: clamp(320px, 46vw, 580px); border-radius: 28px;   /* the same corners as the project cards */
+  /* the tint, under a faint grid of tiles like the cards' glass */
+  background-color: var(--tint);
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.5) 2px, transparent 2px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.5) 2px, transparent 2px);
+  background-size: 38px 38px; background-position: -1px -1px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.7);
+}
+.case-banner-stage { position: absolute; inset: 0; display: flex; justify-content: center; align-items: center; }   /* screens in the vertical middle */
+.cb-item { position: relative; flex: none; z-index: calc(10 - var(--dist)); }
+
+/* ---------- Phones: side by side, the middle one biggest (screens are never rotated) ---------- */
+.cb-phone {
+  width: calc(21% - var(--dist) * 2.5%);
+  margin-inline: -1.4%;
+  filter: drop-shadow(0 24px 36px rgba(0, 0, 0, 0.18));
+}
+
+/* ---------- Browser windows (websites) ---------- */
+.cb-browser {
+  width: calc(54% - var(--dist) * 10%); margin-inline: -15%;
+  display: flex; flex-direction: column; aspect-ratio: 1.3;
+  border-radius: 12px; overflow: hidden; background: var(--paper);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.16);
+}
+.cb-bar { flex: none; display: flex; align-items: center; gap: 6px; height: 30px; padding: 0 12px; background: var(--soft); border-bottom: 1px solid var(--line); font-size: 12px; color: var(--muted); }
+.cb-bar i { width: 9px; height: 9px; border-radius: 50%; background: var(--line); }
+.cb-bar span { margin-left: 10px; }
+.cb-browser img { display: block; flex: 1; min-height: 0; width: 100%; object-fit: cover; object-position: top; }
+
+/* ---------- Cards (charts, diagrams) ---------- */
+.cb-card {
+  width: 42%; margin-inline: -2%; padding: 24px; box-sizing: border-box;
+  border-radius: 16px; background: var(--paper); box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
+}
+.cb-card img { display: block; width: 100%; height: auto; }
+
+/* ---------- Small screens: three phones, bigger ---------- */
+@media (max-width: 800px) {
+  .case-banner { margin-top: 40px; border-radius: 20px; height: clamp(280px, 80vw, 420px); }
+  .cb-phone { width: calc(34% - var(--dist) * 4%); margin-inline: -3%; }
+  .cb-phone[style*="--dist: 2"] { display: none; }   /* three phones on small screens */
+  .cb-browser { width: calc(80% - var(--dist) * 12%); margin-inline: -20%; }
+  .cb-card { width: 60%; padding: 14px; margin-inline: -8%; }
+}

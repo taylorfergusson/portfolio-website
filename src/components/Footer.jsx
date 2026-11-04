@@ -10,7 +10,7 @@ export default function Footer() {
         <p className="footer-links">
           <a href={`mailto:${email}`}>Email</a>
           <Link to="/resume">Resume</Link>
-          <a href={linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
+          <a href={linkedin} target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span><span className="visually-hidden"> (opens in new tab)</span></a>
         </p>
       </div>
     </footer>

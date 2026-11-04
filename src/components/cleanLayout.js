@@ -1,7 +1,7 @@
 import './cleanLayout.css'
 
 // The case study layout: every section becomes a row, with its small label on the left and its content
-// on the right. It's used for every case study (theme: 'classic' in projects.js brings back the older look).
+// on the right. It's used for every case study.
 // The case study's Markdown doesn't need anything special. The look is in cleanLayout.css.
 export function makeCleanLayout(prose) {
   if (prose.dataset.clean) return

@@ -36,11 +36,11 @@
 .home-reply {
   font: inherit; font-size: var(--fs-sm); font-weight: 500; line-height: 1.2; white-space: nowrap; letter-spacing: normal;
   padding: 8px 14px; border: 0; border-radius: 18px 18px 5px 18px; cursor: pointer;
-  color: var(--ink); background: #EDEDEF;   /* solid, so the glowing tiles don't show through */
+  color: var(--ink); background: var(--soft-2);   /* solid, so the glowing tiles don't show through */
   transition: background-color var(--fast) var(--ease), color var(--fast) var(--ease);
 }
 .home-replies.is-shown .home-reply { animation: home-reply-in 0.4s var(--ease) var(--d, 0s) backwards; }
-.home-reply:hover { background: color-mix(in srgb, var(--accent) 12%, #fff); color: var(--accent); }
+.home-reply:hover { background: color-mix(in srgb, var(--accent) 12%, var(--paper)); color: var(--accent); }
 .home-reply:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 @keyframes home-reply-in { from { opacity: 0; transform: translateY(6px); } }
 /* Narrow laptop windows: the bubble is too narrow for one row, so the chips stack in a right-aligned column */
@@ -57,3 +57,7 @@
   .home-replies.is-shown .home-reply, .home-impact .hero-blurb { animation: none; }
   .home-typing i { animation: none; opacity: 0.6; }
 }
+
+/* Returning to the home page in the same visit: no typing or roll-in, everything is already there (see INTRO_KEY in Home.jsx) */
+.home-skip-intro .hero-letter, .home-skip-intro .hero-photo { opacity: 1; animation: none; }
+.home-skip-intro .hero-blurb { animation: none !important; }

@@ -10,7 +10,7 @@ export default function About() {
         <div>
           <h1 className="reveal">Who, Me?</h1>
           <p className="lead reveal">
-            I'm a multifaceted UX designer and researcher who wants technology to feel easy for everyone.
+            I'm a multifaceted UX designer & researcher who wants technology to feel easy for everyone.
           </p>
           {/* Little tag rows under the intro. Add a row by copying one <p className="tag-row"> block */}
           <p className="tag-row reveal">
@@ -38,14 +38,14 @@ export default function About() {
             <h3>Computer science + psychology at McGill</h3>
             <p>I double majored in computer science and psychology, with a minor in sociology. I learned how to build things, why people do things, and how both computers and humans do what they do.</p>
             <figure className="timeline-figure">
-              <img src="/images/about/mcgill-grad.jpg" alt="Taylor in a graduation gown with his dad at McGill" className="timeline-photo" loading="lazy" />
+              <img src="/images/about/mcgill-grad.jpg" alt="Me in a graduation gown with my dad at McGill" className="timeline-photo" loading="lazy" />
               <figcaption>My dad and I at my graduation (yes I'm wearing cowboy boots)</figcaption>
             </figure>
           </li>
           <li className="reveal">
             <span className="when">2022–now</span>
             <h3>Teaching coding</h3>
-            <p>At Tensor Learning, I teach kids and lead adult workshops in Python, Java, Scratch, C#, and Cybersecurity. It's always been my goal to make coding easy and fun, and I take pride in my ability to get students back on board when they struggle or become disinterested, rebuilding their lessons around what they already love (Pokémon projects, a Kirby fighting game, a silly YouTube comments generator). Once I realized this was all user-centred design, everything clicked.</p>
+            <p>At Tensor Learning, I teach students aged 6 to 35 and lead adult workshops in Python, Java, JavaScript, and Scratch. To maintain my students' interest, I build lessons around what they love, like a Pokémon project or a Kirby fighting game. That's how I realized I'd been doing user-centred design all along.</p>
           </li>
           <li className="reveal">
             <span className="when">Along the way</span>
@@ -57,7 +57,7 @@ export default function About() {
             <h3>UX Design at the University of Toronto</h3>
             <p>Now I'm doing my Master of Information in UX Design, and designing for UDesign, U of T's student design club. Next up: a product design role, where I can help a product grow from early ideas to something people rely on.</p>
             <figure className="timeline-figure">
-              <img src="/images/about/uoft.jpg" alt="Taylor and his sister under the University of Toronto sign" className="timeline-photo" loading="lazy" />
+              <img src="/images/about/uoft.jpg" alt="My sister and me under the University of Toronto sign" className="timeline-photo" loading="lazy" />
               <figcaption>My sister and I at U of T during her visit</figcaption>
             </figure>
           </li>
@@ -70,15 +70,15 @@ export default function About() {
           {/* Polaroid-style snapshots. Add or swap photos in public/images/about/ */}
           <div className="snapshots reveal">
             <figure>
-              <img src="/images/about/on-stage.jpg" alt="Taylor performing on stage at a laptop and mixer" loading="lazy" />
+              <img src="/images/about/on-stage.jpg" alt="Me performing on stage at a laptop and mixer" loading="lazy" />
               <figcaption>Performing electronic music :)</figcaption>
             </figure>
             <figure>
-              <img src="/images/about/selfie.jpg" alt="Selfie of Taylor in a leather jacket and striped scarf under a winter sky" loading="lazy" />
+              <img src="/images/about/selfie.jpg" alt="Selfie of me in a leather jacket and striped scarf under a winter sky" loading="lazy" />
               <figcaption>Prairie winter</figcaption>
             </figure>
             <figure>
-              <img src="/images/about/snow.jpg" alt="Taylor and a friend resting in the snow on a sunny mountain" loading="lazy" />
+              <img src="/images/about/snow.jpg" alt="A friend and me resting in the snow on a sunny mountain" loading="lazy" />
               <figcaption>Skiing in Whitehorse, YT</figcaption>
             </figure>
           </div>

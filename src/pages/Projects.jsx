@@ -6,7 +6,7 @@ export default function Projects() {
   return (
     <section className="pcard-list container">
       <h1 className="reveal">Projects</h1>
-      {projects.filter((p) => !p.hidden).map((p) => <WorkCard key={p.slug} project={p} />)}
+      {projects.filter((p) => !p.hidden).map((p) => <WorkCard key={p.slug} project={p} headingLevel={2} />)}
     </section>
   )
 }

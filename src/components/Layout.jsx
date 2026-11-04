@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import Header from './Header.jsx'
 import Footer from './Footer.jsx'
@@ -20,6 +20,18 @@ export default function Layout() {
     const target = hash && document.getElementById(hash.slice(1))
     if (target) target.scrollIntoView()
     else window.scrollTo(0, 0)
+  }, [pathname, hash])
+
+  // On page change (not the first load): move keyboard and screen reader focus to the new page's title,
+  // so the new page is announced and Tab starts from the top of it
+  const firstLoad = useRef(true)
+  useEffect(() => {
+    if (firstLoad.current) { firstLoad.current = false; return }
+    if (hash) return
+    const title = document.querySelector('main h1')
+    if (!title) return
+    title.setAttribute('tabindex', '-1')
+    title.focus({ preventScroll: true })
   }, [pathname, hash])
 
   // Fade-up animation: anything with class="reveal" (and every block in a

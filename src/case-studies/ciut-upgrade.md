@@ -10,13 +10,13 @@ CIUT 89.5 FM is U of T's campus and community radio station. It has a good heart
 
 - **!The problem** Info on volunteering, donating, and even the shows themselves was missing, misplaced, or buried.
 - **Why it matters** CIUT runs on donations and volunteers. If people can't find how to help, they can't help!
-- **+The solution** An audit of every page, five ranked fixes, a new site structure, and a 12-page redesign that puts them into action.
+- **+The solution** An audit of every page, 5 ranked fixes, a new site structure, and a 12-page redesign that puts them into action.
 
 </div>
 
 ![CIUT website redesign concept](/images/ciut/overview.png)
 
-*This is a content audit and information architecture project. The recommendations come from crawl data, a content review, and peer benchmarking. I didn't interview or test with listeners, so the new structure is a well-grounded starting point, not a validated one.*
+*This is a content audit and information architecture project. The recommendations come from crawl data, a content review, and peer benchmarking. I didn't interview or test with listeners, so the new structure still needs testing with real listeners.*
 
 ## Result
 
@@ -29,7 +29,8 @@ Here's where it ended up. All 12 pages are clickable, so have a look around:
 <div class="prototype"
   data-src="https://embed.figma.com/proto/CVXtM5bAcmKy8SH2V2zSpn/CIUT-Prototype-Revised?node-id=3014-12187&starting-point-node-id=3014%3A12187&page-id=3002%3A7008&scaling=scale-down-width&content-scaling=fixed&hide-ui=1&embed-host=share"
   data-link="https://www.figma.com/proto/CVXtM5bAcmKy8SH2V2zSpn/CIUT-Prototype-Revised?node-id=3014-12187&starting-point-node-id=3014%3A12187&page-id=3002%3A7008&scaling=scale-down&content-scaling=fixed"
-  data-poster="/images/ciut/redesign-home.jpg"></div>
+  data-poster="/images/ciut/redesign-home.jpg"
+  data-poster-alt="Redesigned CIUT home page with an On Air Now banner"></div>
 
 #### What came out of it
 
@@ -74,7 +75,7 @@ It didn't stop there. Info about the station and how to get involved was often m
 
 ### Every page, rated
 
-This started as a two-week content audit for school. I picked CIUT because I actually care about it, and I took it way past what was asked.
+This started as a content audit for school. I picked CIUT because I actually care about it, and I took it way past what was asked.
 
 - ![](/images/ciut/icon-seo-crawl.png) **Phase 1: SEO crawl** Screaming Frog pulled all 155 URLs: every page, image, link, and bit of metadata.
 - ![](/images/ciut/icon-manual-audit.png) **Phase 2: Content audit** I rated content from 1 to 5, including 10 of the 74 show pages in depth, on whether it was:
@@ -108,7 +109,7 @@ This started as a two-week content audit for school. I picked CIUT because I act
 
 ### Five fixes, most important first
 
-Everything I found boiled down to five fixes, ordered so a small volunteer team could start at the top and work down. The rest of the project is me putting them into action.
+Everything I found boiled down to 5 fixes, ordered so a small volunteer team could start at the top and work down. The rest of the project is me putting them into action.
 
 <div class="numbered">
 
@@ -126,7 +127,7 @@ Everything I found boiled down to five fixes, ordered so a small volunteer team 
 
 ### How do other stations do it?
 
-I looked at three stations with similar missions and more polished sites: CJTM (TMU), CKUT (McGill), and n10.as (Montreal). Here's what they had in common:
+I looked at 3 stations with similar missions and more polished sites: CJTM (TMU), CKUT (McGill), and n10.as (Montreal). Here's what they had in common:
 
 - **+Always-there actions** "Listen Live" and "Donate" live in a fixed header
 - **+Schedules vs. shows** Calendar-style schedules, and separate photo grids of shows with filters
@@ -142,7 +143,7 @@ I looked at three stations with similar missions and more polished sites: CJTM (
 
 ![The original site structure](/images/ciut/ia-before.png)
 
-*Before: a flat menu of ten sections, with shows only reachable through the schedule or an alphabetical list.*
+*Before: a flat menu of 10 sections, with shows only reachable through the schedule or an alphabetical list.*
 
 ![The proposed site structure](/images/ciut/ia-after.png)
 
@@ -154,7 +155,7 @@ I looked at three stations with similar missions and more polished sites: CJTM (
 
 ### The fixes, in action
 
-Each change below maps back to one of the five fixes, so the station can see why it's there.
+Each change below maps back to one of the 5 fixes, so the station can see why it's there.
 
 <p class="kicker">Fix 2 · Add context</p>
 
@@ -209,11 +210,15 @@ Each change below maps back to one of the five fixes, so the station can see why
 
 #### Everywhere else
 
+<div class="strip-gallery">
+
 ![Home: a live "On Air Now" banner showing the current show](/images/ciut/redesign-home.jpg)
 ![Schedule: weekly tabs, with the show on air right now highlighted](/images/ciut/redesign-schedule.jpg)
 ![Shows: a photo grid with genres, search, and filters](/images/ciut/redesign-shows.jpg)
 ![News & Events: a new page for the events CIUT already runs](/images/ciut/redesign-news.jpg)
 ![About: walls of text broken into clear, headed sections](/images/ciut/redesign-about.jpg)
+
+</div>
 
 </div>
 

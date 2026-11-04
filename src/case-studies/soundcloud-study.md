@@ -1,6 +1,3 @@
-<!-- TODO (Taylor): the Reflection points are drafts in your voice. Rewrite them so they're really yours.
-     This comment doesn't show on the site. -->
-
 ## Overview
 
 <p class="my-part">Led a team of 5 from test plan to final report</p>
@@ -73,7 +70,7 @@ We wrote 7 tasks covering discovery, social features, organizing music, and uplo
 
 </div>
 
-Every session had four roles: a moderator, a note-taker for task performance, a note-taker for the participant's experience, and a technician. We rotated them across sessions so everyone did every job.
+Every session had 4 roles: a moderator, a note-taker for task performance, a note-taker for the participant's experience, and a technician. We rotated them across sessions so everyone did every job.
 
 ## Testing
 
@@ -85,7 +82,7 @@ We ran the sessions on March 11 and 18, 2026, at the University of Toronto, on S
 - **15 minutes: Tasks** Up to 7 tasks, with the moderator reading each one
 - **10 minutes: Wrap-up** The SUS questionnaire, 3 to 5 product reaction cards, and 3 interview questions
 
-## Task Results
+## Task results
 
 <p class="my-part">Logged success, partial success, and failure for every task</p>
 
@@ -101,14 +98,14 @@ Creating and sharing a playlist was the hardest task by far. Uploading was the o
 
 Issues were rated by severity: high severity meant the issue stopped people finishing a task or seriously confused them, and affected at least half of participants.
 
-- **+Uploading just works** All 6 participants found the Upload button right away, with zero failures
+- **+Uploading was easy** All 6 participants found the Upload button right away, with zero failures
 - **+Following feels familiar** 5 of 6 found the follow button and their following list quickly
-- **+Timestamped comments delight** Participants loved commenting on a specific moment in a song
+- **+Timestamped comments were a favourite** Participants loved commenting on a specific moment in a song
 
 <!-- keeps the lists separate -->
 
 - **!Playlists start in the wrong place** 4 of 6 participants struggled to create and manage playlists
-- **!Songs, albums, and playlists look the same** 3 of 6 added a whole playlist when they meant to add one song
+- **!Songs, albums, and playlists look the same** 2 of 6 added a whole playlist when they meant to add one song
 - **!Comments are hard to find** 5 of 6 had trouble finding the comment button or the comment box
 - **!There's no way to search by genre** 4 of 6 struggled, and 2 couldn't finish the task at all
 
@@ -129,11 +126,11 @@ On Spotify and Apple Music, you make a playlist from your library. On SoundCloud
 > **Participant 5**
 > "Am I dumb? It's not letting me make a new playlist."
 
-<p class="kicker">High severity · 3 of 6 participants</p>
+<p class="kicker">High severity · 2 of 6 participants</p>
 
 #### Songs, albums, and playlists look the same
 
-The home page shows songs, albums, and playlists on near-identical cards, with no label or icon. Worse, an album or playlist card previews its first song, so it looks exactly like that one song. Two participants tried to add what they thought was a single track to their playlist, and added an entire playlist instead. We hadn't predicted it either, so in the moment, even we weren't sure what had happened.
+The home page shows songs, albums, and playlists on near-identical cards, with no label or icon. An album or playlist card also previews its first song, so it looks exactly like that one song. Two participants tried to add what they thought was a single track to their playlist, and added an entire playlist instead. We hadn't predicted it either, so in the moment, even we weren't sure what had happened.
 
 ![A single song card (left) next to a playlist card (right): almost no visual difference](/images/soundcloud-study/content-cards.jpg)
 
@@ -154,7 +151,7 @@ The comment icon is small, sits apart from the like and repost buttons, and disa
 
 *The comment box on a song's page looks nothing like the icon that led there.*
 
-That's a real loss, because timestamped comments were one of the features participants liked most, and nothing like them exists on Spotify or Apple Music.
+This hides a feature participants liked most, and one that Spotify and Apple Music don't have.
 
 <p class="kicker">High severity · 4 of 6 participants</p>
 
@@ -192,9 +189,7 @@ Search results can be filtered by type, but not by genre. Participants who succe
 
 <div class="numbered">
 
-1. **I was a poor stand-in for a new user** I've used SoundCloud for years and always found it intuitive, so the low SUS score surprised me most of all. Our participants came with habits from Spotify and Apple Music, and SoundCloud didn't match them. Knowing a product well can hide exactly what makes it hard to learn.
-2. **A low score doesn't mean nobody finished** Most participants completed most tasks. The SUS score showed what task success alone couldn't: how hard they had to work to get there.
-3. **Strengths are findings too** Reporting what worked, like uploading and following, tells a team what not to break while they fix everything else.
-4. **Know what your sample can't tell you** Our participants were 6 graduate students from one course, all using the free desktop site. That's right for a first round of testing, but the next step is testing on mobile, with paid accounts, and with a wider range of people.
+1. **Knowing a product can hide its problems** I've used SoundCloud for years and found it intuitive, so the low SUS score surprised me. Our participants brought habits from Spotify and Apple Music that SoundCloud didn't match.
+2. **Knowing what the sample can't tell you** Our 6 participants were grad students from one course, all on the free desktop site. Next, I'd test on mobile, with paid accounts, and with a wider range of people.
 
 </div>

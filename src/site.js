@@ -22,15 +22,15 @@ export const defaultShareImage = '/images/share/default.jpg'
 export const pages = {
   '/': {
     title: 'Taylor Fergusson – UX Designer & Researcher',
-    description: 'Taylor Fergusson is a UX designer and researcher in Toronto, exploring how people listen, learn, and understand their world.',
+    description: 'Taylor Fergusson is a UX designer & researcher in Toronto, exploring how people listen, learn, and understand their world.',
   },
   '/about': {
     title: 'About – Taylor Fergusson',
-    description: "I'm a UX designer and researcher who wants technology to feel easy for everyone, not just the people who grew up with it.",
+    description: "I'm a UX designer & researcher who wants technology to feel easy for everyone, not just the people who grew up with it.",
   },
   '/case-study': {
     title: 'Projects – Taylor Fergusson',
-    description: 'UX design, research, and development case studies by Taylor Fergusson: YumGo, SoundCloud, BorrowCircle, CIUT, and SideQuest.',
+    description: 'UX design, research, and development case studies by Taylor Fergusson: YumGo, CIUT, BorrowCircle, and a SoundCloud usability study.',
   },
   '/resume': {
     title: 'Resume – Taylor Fergusson',

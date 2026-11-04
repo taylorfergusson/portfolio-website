@@ -1,7 +1,3 @@
-<!-- TODO (Taylor): add images. Ideally: the opportunity solution tree, a few screens of the app,
-     and a diagram of how events flow in from Ticketmaster and Instagram.
-     The Reflection points are drafts in your voice: rewrite them so they're really yours. These comments don't show on the site. -->
-
 ## Overview
 
 <p class="my-part">Led the backend and API integration, and set up how the team builds</p>
